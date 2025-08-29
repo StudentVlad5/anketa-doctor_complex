@@ -14,3 +14,21 @@ export const listOfPoints = [
     id: "gastrointestinalBleeding",
   },
 ];
+
+export const listOfHospitals = [
+  {
+    case: "Актюбинская областная многопрофильная больница",
+    color: "#972f2f",
+    id: "aktyubinskaya",
+  },
+  {
+    case: "Многопрофильная областная детская больница",
+    color: "#922f97",
+    id: "children's hospital",
+  },
+  {
+    case: "Каргалинская районная больница",
+    color: "#2f972f",
+    id: "kargalinskaya",
+  },
+];

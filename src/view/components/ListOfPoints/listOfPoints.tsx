@@ -1,28 +1,17 @@
-import { useState } from "react";
 import { listOfPoints } from "../../../common/config";
 import { RadioButton } from "../../ui/RadioButton";
 
 import s from "./index.module.scss";
-import { useThunks } from "../../../common/helpers/reduxHook";
-import { QuizThunks } from "../../../store/thunks/quiz.thunks";
 
 const ListOfPoints = ({
   setContainerColor,
+  pointOfCase,
+  setPointOfCase,
 }: {
+  pointOfCase: string;
+  setPointOfCase: (pointOfCase: string) => void;
   setContainerColor: (color: string) => void;
 }) => {
-  const [pointOfCase, setPointOfCase] = useState("");
-  console.log("pointOfCase", pointOfCase);
-  const { addQuizAnswerThunk } = useThunks(QuizThunks);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
   return (
     <ul className={s.wrapListOfPoints}>
       {listOfPoints.map((it) => {
@@ -34,7 +23,6 @@ const ListOfPoints = ({
               value={it.case}
               onChange={(str) => {
                 setPointOfCase(str);
-                onBlurHandler("pointOfCase", str);
                 setContainerColor(it.color);
               }}
               name={"pointOfCase"}

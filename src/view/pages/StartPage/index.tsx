@@ -13,7 +13,8 @@ import { IMaskInput } from "react-imask";
 import { InputNumber } from "../../ui/InputNumber";
 import classNames from "classnames";
 import { baseUrl } from "../../../common/config";
-import ListOfPoints from "../../components/ListOfPoints";
+import ListOfPoints from "../../components/ListOfPoints/listOfPoints";
+import ListOfHospitals from "../../components/ListOfPoints/listOfHospitals";
 
 export const StartPage = () => {
   const navigate = useNavigate();
@@ -23,11 +24,15 @@ export const StartPage = () => {
 
   const [number, setNumber] = useState<string>("");
   const [employeeID, setEmployeeID] = useState<string>("");
-  const [employeeName, setEmployeeName] = useState<string>(" ");
-  // const [employeeNormal, setEmployeeNormal] = useState<boolean>(false);
+  const [employeeName, setEmployeeName] = useState<string>("");
   const [isOpenClue, setIsOpenClue] = useState<boolean>(false);
   const [isOpenClue2, setIsOpenClue2] = useState<boolean>(false);
   const [invalidMessage, setInvalidMessage] = useState("");
+  const [pointOfCase, setPointOfCase] = useState(""); // причина вызова
+  const [pointOfHospital, setPointOfHospital] = useState(
+    "Актюбинская областная многопрофильная больница"
+  ); // выбранная больница
+  console.log("employeeName", employeeName);
 
   useEffect(() => {
     async function getData() {
@@ -39,9 +44,11 @@ export const StartPage = () => {
           return response.json();
         })
         .then((newrData) => {
-          // if(newrData?.normal){setEmployeeNormal(newrData.normal)};
-          if (newrData?.discription) {
-            setEmployeeName(newrData.discription);
+          console.log(newrData.discription === "");
+          if ("discription" in newrData) {
+            newrData.discription === ""
+              ? setEmployeeName("Успешная регистрация без идентификации")
+              : setEmployeeName(newrData.discription);
           }
         })
         .catch((error) => {
@@ -97,7 +104,11 @@ export const StartPage = () => {
           `color${containerColor.slice(1)}`
         )}
       >
-        <ListOfPoints setContainerColor={setContainerColor} />
+        <ListOfPoints
+          setContainerColor={setContainerColor}
+          pointOfCase={pointOfCase}
+          setPointOfCase={setPointOfCase}
+        />
         <div className={s.inputWrapper}>
           <IMaskInput
             className={s.textInput}
@@ -139,8 +150,19 @@ export const StartPage = () => {
         </div>
       </div>
       <p className={s.employeeName}>{employeeName}</p>
+      <ListOfHospitals
+        setPointOfHospital={setPointOfHospital}
+        pointOfHospital={pointOfHospital}
+      />
       <Button
-        disabled={!number || quizIsLoading || !!invalidMessage || !employeeID}
+        disabled={
+          !number ||
+          quizIsLoading ||
+          !!invalidMessage ||
+          !employeeID ||
+          !pointOfHospital ||
+          !pointOfCase
+        }
         onClick={onSubmitFormHandler}
       >
         Заполнить новый чек-лист

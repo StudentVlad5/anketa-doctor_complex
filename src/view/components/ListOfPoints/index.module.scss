@@ -44,3 +44,14 @@
   border-radius: 11px;
   border: 1px solid var(--border-input-primary);
 }
+
+.wrapListOfHospitals {
+  padding: 40px;
+}
+.wrapListOfHospitals li span {
+  @media (max-width: 600px) {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+}
