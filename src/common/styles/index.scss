@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 @import "reset";
 @import "variable";
 
@@ -7,10 +7,10 @@ body {
   min-height: 100vh;
   height: 100%;
 
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
 
-  background-color: #D0CECE;
+  background-color: #d0cece;
 }
 #root {
   width: 100%;
@@ -21,8 +21,35 @@ body {
   display: none;
 }
 
-input, textarea {
-  &:focus, &:active {
-    outline: 2px solid #3800EB;
+input,
+textarea {
+  &:focus,
+  &:active {
+    outline: 2px solid #3800eb;
   }
+}
+
+.color710bff {
+  background-color: #710bff;
+}
+.color2f5597 {
+  background-color: #2f5597;
+}
+.colorffda07 {
+  background-color: #ffda07;
+}
+.colorff7a00 {
+  background-color: #ff7a00;
+}
+.color0fb13c {
+  background-color: #0fb13c;
+}
+.color896008 {
+  background-color: #896008;
+}
+.color0b8dff {
+  background-color: #0b8dff;
+}
+.colorfff {
+  background-color: #fff;
 }
