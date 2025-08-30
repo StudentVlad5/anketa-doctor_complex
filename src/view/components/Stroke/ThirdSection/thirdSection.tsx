@@ -1,47 +1,32 @@
 import s from "./index.module.scss";
+import { CheckBox } from "../../../ui/CheckBox";
 import { Title } from "../../../ui/Title";
-import { useMemo, useState } from "react";
-// import {useDebounce} from "../../../common/helpers/useDebounceHook";
+import { InputTime } from "../../../ui/InputTime";
+import { useState, useEffect } from "react";
 import {
   useAppSelector,
   useThunks,
 } from "../../../../common/helpers/reduxHook";
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
-import { RadioButton } from "../../../ui/RadioButton";
+import {
+  RadioButtonFalse,
+  RadioButtonTrue,
+  RadioButtonUnknow,
+} from "../../../ui/RadioButtonWithoutSpan";
 
 export const ThirdSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 
-  const [bloodSugarLevel, setBloodSugarLevel] = useState(
-    quizList?.bloodSugarLevel ?? ""
-  );
-  const [bodyTemperature, setBodyTemperature] = useState(
-    quizList?.bodyTemperature ?? ""
-  );
-  const [arterialPressureS, setArterialPressureS] = useState(
-    quizList?.arterialPressureS ?? ""
-  );
-  const [arterialPressureD, setArterialPressureD] = useState(
-    quizList?.arterialPressureD ?? ""
-  );
-  const [patientBodyWeight, setPatientBodyWeight] = useState(
-    quizList?.patientBodyWeight ?? ""
-  );
-  const [patientAge, setPatientAge] = useState(quizList?.patientAge ?? "");
-
-  useMemo(() => {
-    if (quizList) {
-      setBloodSugarLevel(quizList?.bloodSugarLevel ?? "");
-      setBodyTemperature(quizList?.bodyTemperature ?? "");
-      setArterialPressureS(quizList?.arterialPressureS ?? "");
-      setArterialPressureD(quizList?.arterialPressureD ?? "");
-      setPatientBodyWeight(quizList?.patientBodyWeight ?? "");
-      setPatientAge(quizList?.patientAge ?? "");
-    }
-  }, [quizList]);
-
+  const [beginStrokeTreatment, setBeginStrokeTreatment] =
+    useState<boolean>(false);
+  const [intravenousAccess, setIntravenousAccess] = useState<any>();
+  const [patientTakingAnticoagulants, setPatientTakingAnticoagulants] =
+    useState<any>();
+  const [deliveryTimeHh, setDeliveryTimeHh] = useState<string>("");
+  const [deliveryTimeMm, setDeliveryTimeMm] = useState<string>("");
+  const [takeECG, setTakeECG] = useState<any>();
   const onBlurHandler = (name: string, value: any) => {
     addQuizAnswerThunk({
       params: {
@@ -50,144 +35,206 @@ export const ThirdSectionStroke = () => {
     });
   };
 
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
+  useEffect(() => {
+    quizList?.beginStrokeTreatment
+      ? setBeginStrokeTreatment(
+          quizList?.beginStrokeTreatment === "true"
+            ? true
+            : quizList?.beginStrokeTreatment === "true"
+            ? false
+            : false
+        )
+      : setBeginStrokeTreatment(false);
+
+    quizList?.intravenousAccess
+      ? setIntravenousAccess(
+          quizList?.intravenousAccess === "true"
+            ? "true"
+            : quizList?.intravenousAccess === "true"
+            ? "false"
+            : "false"
+        )
+      : setIntravenousAccess("");
+
+    quizList?.patientTakingAnticoagulants
+      ? setPatientTakingAnticoagulants(
+          quizList?.patientTakingAnticoagulants === "true"
+            ? "true"
+            : quizList?.patientTakingAnticoagulants === "false"
+            ? "false"
+            : "unknow"
+        )
+      : setPatientTakingAnticoagulants("");
+
+    quizList?.takeECG
+      ? setTakeECG(
+          quizList?.takeECG === "true"
+            ? "true"
+            : quizList?.takeECG === "true"
+            ? "false"
+            : "false"
+        )
+      : setTakeECG("");
+
+    quizList?.deliveryTimeHh
+      ? setDeliveryTimeHh(quizList?.deliveryTimeHh)
+      : setDeliveryTimeHh("");
+
+    quizList?.deliveryTimeMm
+      ? setDeliveryTimeMm(quizList?.deliveryTimeMm)
+      : setDeliveryTimeMm("");
+  }, [
+    quizList?.beginStrokeTreatment,
+    quizList?.intravenousAccess,
+    quizList?.patientTakingAnticoagulants,
+    quizList?.takeECG,
+    quizList?.deliveryTimeHh,
+    quizList?.deliveryTimeMm,
+  ]);
+
   return (
     <div className={s.ThirdSection}>
-      <Title>Раздел 3: Соберите следующую информацию</Title>
+      <Title>Раздел 2: Действия при подозрении на инсульт</Title>
+
       <div className={s.inner}>
-        <div className={s.field}>
-          <span className={s.title}>Содержание сахара в крови</span>
-          <div className={s.inputWrapper}>
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
-              value={bloodSugarLevel}
-              onChange={(e) => setBloodSugarLevel(e.target.value)}
-              onBlur={() => onBlurHandler("bloodSugarLevel", bloodSugarLevel)}
-              onKeyPress={validate}
-            />
+        <CheckBox
+          id={"1"}
+          checked={beginStrokeTreatment}
+          onChange={(e) => {
+            setBeginStrokeTreatment(e.target.checked);
+            onBlurHandler("beginStrokeTreatment", e.target.checked);
+          }}
+        >
+          <div className={s.checkbox}>
+            <span className={s.title}>
+              Начата ли процедура лечения инсульта
+            </span>
           </div>
-          <div className={s.unit}>
-            <span>ммоль/л</span>
-          </div>
-        </div>
+        </CheckBox>
+      </div>
 
-        <div className={s.field}>
-          <span className={s.title}>Температура тела</span>
-          <div className={s.inputWrapper}>
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
-              value={bodyTemperature}
-              onChange={(e) => setBodyTemperature(e.target.value)}
-              onBlur={() => onBlurHandler("bodyTemperature", bodyTemperature)}
-              onKeyPress={validate}
-            />
-          </div>
-          <div className={s.unit}>
-            <span>°C</span>
-          </div>
-        </div>
+      <div className={s.whiteBox}>
+        <InputTime
+          title={"Предполагаемое время доставки пациента в инсультный центр"}
+          valueHh={deliveryTimeHh}
+          valueMm={deliveryTimeMm}
+          onChangeHh={(str) => setDeliveryTimeHh(str)}
+          onChangeMm={(str) => setDeliveryTimeMm(str)}
+          onBlurHh={() =>
+            onBlurHandler("deliveryTimeHh", deliveryTimeHh ?? "00")
+          }
+          onBlurMm={() => {
+            onBlurHandler("deliveryTimeMm", deliveryTimeMm ?? "00");
+          }}
+        />
+      </div>
 
-        <div className={s.field}>
-          <span className={s.title}>Артериальное давление</span>
-          <div className={s.inputWrapper}>
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
-              value={arterialPressureS}
-              onChange={(e) => setArterialPressureS(e.target.value)}
-              onBlur={() =>
-                onBlurHandler("arterialPressureS", arterialPressureS)
-              }
-              onKeyPress={validate}
-            />
-            <span className={s.name}>САД</span>
-          </div>
-          <div className={s.inputWrapper}>
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
-              value={arterialPressureD}
-              onChange={(e) => setArterialPressureD(e.target.value)}
-              onBlur={() =>
-                onBlurHandler("arterialPressureD", arterialPressureD)
-              }
-              onKeyPress={validate}
-            />
-            <span className={s.name}>ДАД</span>
-          </div>
-        </div>
+      <div className={s.inner}>
+        <table>
+          <tbody>
+            <tr className={s.tableRow}>
+              <td className={s.checkbox}>
+                <span className={s.title}>
+                  Установлен <strong>внутривенный доступ</strong>
+                </span>{" "}
+                <br />
+                <span className={s.subtitle}>
+                  (предпочтительно 2 канюли большого диаметра с портом)
+                </span>
+              </td>
+              <td className={s.tdButton}>
+                <RadioButtonTrue
+                  id={"1_1"}
+                  value={"true"}
+                  onChange={(str) => {
+                    setIntravenousAccess(str);
+                    onBlurHandler("intravenousAccess", str);
+                  }}
+                  name={"intravenousAccess"}
+                  currentValue={intravenousAccess}
+                />
+                <RadioButtonFalse
+                  id={"1_2"}
+                  value={"false"}
+                  onChange={(str) => {
+                    setIntravenousAccess(str);
+                    onBlurHandler("intravenousAccess", str);
+                  }}
+                  name={"intravenousAccess"}
+                  currentValue={intravenousAccess}
+                />
+              </td>
+            </tr>
 
-        <div className={s.field}>
-          <span className={s.title}>Масса тела пациента</span>
-          <div className={s.inputWrapper}>
-            <RadioButton
-              id={"patientBodyWeight_1"}
-              value={"50-75"}
-              onChange={(str) => {
-                setPatientBodyWeight(str);
-                onBlurHandler("patientBodyWeight", str);
-              }}
-              name={"patientBodyWeight"}
-              currentValue={patientBodyWeight}
-            />
-            <RadioButton
-              id={"patientBodyWeight_2"}
-              value={"76-100"}
-              onChange={(str) => {
-                setPatientBodyWeight(str);
-                onBlurHandler("patientBodyWeight", str);
-              }}
-              name={"patientBodyWeight"}
-              currentValue={patientBodyWeight}
-            />
-            <RadioButton
-              id={"patientBodyWeight_3"}
-              value={"101+"}
-              onChange={(str) => {
-                setPatientBodyWeight(str);
-                onBlurHandler("patientBodyWeight", str);
-              }}
-              name={"patientBodyWeight"}
-              currentValue={patientBodyWeight}
-            />
-          </div>
-          <div className={s.unit}>
-            <span>кг</span>
-          </div>
-        </div>
+            <tr className={s.tableRow}>
+              <td className={s.checkbox}>
+                <span className={s.title}>
+                  Пациент принимает <strong>антикоагулянты</strong>
+                </span>
+              </td>
+              <td className={s.tdButton}>
+                <RadioButtonTrue
+                  id={"2_1"}
+                  value={"true"}
+                  onChange={(str) => {
+                    setPatientTakingAnticoagulants(str);
+                    onBlurHandler("patientTakingAnticoagulants", str);
+                  }}
+                  name={"patientTakingAnticoagulants"}
+                  currentValue={patientTakingAnticoagulants}
+                />
+                <RadioButtonFalse
+                  id={"2_2"}
+                  value={"false"}
+                  onChange={(str) => {
+                    setPatientTakingAnticoagulants(str);
+                    onBlurHandler("patientTakingAnticoagulants", str);
+                  }}
+                  name={"patientTakingAnticoagulants"}
+                  currentValue={patientTakingAnticoagulants}
+                />
+                <RadioButtonUnknow
+                  id={"2_3"}
+                  value={"unknow"}
+                  onChange={(str) => {
+                    setPatientTakingAnticoagulants(str);
+                    onBlurHandler("patientTakingAnticoagulants", str);
+                  }}
+                  name={"patientTakingAnticoagulants"}
+                  currentValue={patientTakingAnticoagulants}
+                />
+              </td>
+            </tr>
 
-        <div className={s.field}>
-          <span className={s.title}>Возраст пациента</span>
-          <div className={s.inputWrapper}>
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
-              value={patientAge}
-              onChange={(e) => setPatientAge(e.target.value)}
-              onBlur={() => onBlurHandler("patientAge", patientAge)}
-              onKeyPress={validate}
-            />
-          </div>
-          <div className={s.unit}>
-            <span>лет</span>
-          </div>
-        </div>
+            <tr className={s.tableRow}>
+              <td className={s.checkbox}>
+                <span className={s.title}>Снимите ЭКГ у пациента</span>
+              </td>
+              <td className={s.tdButton}>
+                <RadioButtonTrue
+                  id={"3_1"}
+                  value={"true"}
+                  onChange={(str) => {
+                    setTakeECG(str);
+                    onBlurHandler("takeECG", str);
+                  }}
+                  name={"takeECG"}
+                  currentValue={takeECG}
+                />
+                <RadioButtonFalse
+                  id={"3_2"}
+                  value={"false"}
+                  onChange={(str) => {
+                    setTakeECG(str);
+                    onBlurHandler("takeECG", str);
+                  }}
+                  name={"takeECG"}
+                  currentValue={takeECG}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

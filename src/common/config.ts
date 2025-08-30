@@ -3,7 +3,7 @@ export const baseFormUrl = "https://location.medsystem.online";
 
 export const listOfPoints = [
   { case: "Аллерго код", color: "#710bff", id: "alergoCod", maxPage: 9 },
-  { case: "Инсульт", color: "#2f5597", id: "stroke", maxPage: 5 },
+  { case: "Инсульт", color: "#2f5597", id: "stroke", maxPage: 6 },
   { case: "Поли травма", color: "#ffda07", id: "polyOfTrauma", maxPage: 4 },
   { case: "Ожоги", color: "#ff7a00", id: "burns", maxPage: 5 },
   { case: "Беременность", color: "#0fb13c", id: "pregnancy", maxPage: 6 },

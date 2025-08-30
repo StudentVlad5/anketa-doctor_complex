@@ -2,79 +2,60 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  .tableRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    @media (max-width: 800px) {
+      flex-wrap: nowrap;
+    }
+  }
+  .whiteBox {
+    padding: 15px 28px;
+
+    background-color: #fff;
+    border: 1px solid var(--border-input-primary);
+  }
   .inner {
     display: flex;
     flex-direction: column;
     gap: 70px;
     padding: 27px 18px;
   }
-  .field {
-    display: grid;
-    grid-template-columns: minmax(230px, auto) 150px 150px;
-    align-items: center;
-    justify-content: stretch;
-
-    gap: 2vw;
+  .checkbox {
+    width: 70%;
     .title {
       font-size: 28px;
-      font-weight: 400;
-      color: var(--txt-color-primary);
+      strong {
+        font-weight: 600;
+      }
     }
-    .inputWrapper {
-      display: flex;
+    .subtitle {
+      font-size: 22px;
+    }
+  }
+  .tdButton {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: row;
+    gap: 10px;
+    width: 200px;
+    @media (max-width: 800px) {
       flex-direction: column;
-      align-items: center;
-      gap: 5px;
-      input {
-        width: 100%;
-        height: 75px;
-        padding: 5px 10px;
-
-        font-size: 32px;
-        text-align: center;
-
-        background-color: var(--bg-input-primary);
-        border-radius: 11px;
-      }
-      label {
-        font-size: 22px;
-      }
-      .name {
-        font-style: italic;
-        font-size: 28px;
-      }
-    }
-    .inputWrapper > div {
-      justify-content: space-between;
-      width: 100%;
-    }
-    .unit {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--txt-color-primary);
+      width: auto;
     }
   }
   @media (max-width: 800px) {
-    .field {
-      grid-template-columns: minmax(230px, auto) 100px 100px;
+    .checkbox {
       .title {
         font-size: 24px;
       }
-      .inputWrapper {
-        input {
-          font-size: 26px;
-        }
-        .name {
-          font-size: 16px;
-        }
+      .subtitle {
+        font-size: 18px;
       }
-      .unit {
-        font-size: 24px;
-      }
-    }
-  }
-  @media (max-width: 600px) {
-    .field {
     }
   }
 }

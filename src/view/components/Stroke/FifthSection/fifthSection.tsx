@@ -8,32 +8,22 @@ import {
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import {
-  RadioButtonFalse,
   RadioButtonTrue,
+  RadioButtonFalse,
   RadioButtonUnknow,
 } from "../../../ui/RadioButtonWithoutSpan";
-import { Textarea } from "../../../ui/Textarea";
-import { CheckBox } from "../../../ui/CheckBox";
 
 export const FifthSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 
-  const [smallOperations, setSmallOperations] = useState<any>();
-  const [cardiovascularDiseases, setCardiovascularDiseases] = useState<any>();
-  const [acuteInfectiousDisease, setAcuteInfectiousDisease] = useState<any>();
-  const [hemorrhages, setHemorrhages] = useState<any>();
-  const [onmk, setOnmk] = useState<any>();
-  const [convulsions, setConvulsions] = useState<any>();
-  const [hemorrhagicStroke, setHemorrhagicStroke] = useState<boolean>(false);
-  const [SACStroke, setSACStroke] = useState<boolean>(false);
-  const [ischemicStroke, setIschemicStroke] = useState<boolean>(false);
-  const [
-    transient_cerebrovascular_accident,
-    setTransient_cerebrovascular_accident,
-  ] = useState<boolean>(false);
-  const [unknown_accident, setUnknown_accident] = useState<boolean>(false);
-  const [noteChecklistSMP, setNoteChecklistSMP] = useState<string>("");
+  const [intracranialHemorrhages, setIntracranialHemorrhages] = useState<any>();
+  const [majorSurgeriesOrSevereInjuries, setMajorSurgeriesOrSevereInjuries] =
+    useState<any>();
+  const [surgicalInterventions, setSurgicalInterventions] = useState<any>();
+  const [myocardialInfarction, setMyocardialInfarction] = useState<any>();
+  const [stroke, setStroke] = useState<any>();
+  const [arterialPuncture, setArterialPuncture] = useState<any>();
 
   const onBlurHandler = (name: string, value: any) => {
     addQuizAnswerThunk({
@@ -44,170 +34,73 @@ export const FifthSectionStroke = () => {
   };
 
   useEffect(() => {
-    quizList?.smallOperations
-      ? setSmallOperations(
-          quizList?.smallOperations === "true"
+    quizList?.intracranialHemorrhages
+      ? setIntracranialHemorrhages(
+          quizList?.intracranialHemorrhages === "true"
             ? "true"
-            : quizList?.smallOperations === "false"
+            : quizList?.intracranialHemorrhages === "false"
             ? "false"
             : "unknow"
         )
-      : setSmallOperations("");
+      : setIntracranialHemorrhages("");
 
-    quizList?.cardiovascularDiseases
-      ? setCardiovascularDiseases(
-          quizList?.cardiovascularDiseases === "true"
+    quizList?.majorSurgeriesOrSevereInjuries
+      ? setMajorSurgeriesOrSevereInjuries(
+          quizList?.majorSurgeriesOrSevereInjuries === "true"
             ? "true"
-            : quizList?.cardiovascularDiseases === "false"
+            : quizList?.majorSurgeriesOrSevereInjuries === "false"
             ? "false"
             : "unknow"
         )
-      : setCardiovascularDiseases("");
+      : setMajorSurgeriesOrSevereInjuries("");
 
-    quizList?.acuteInfectiousDisease
-      ? setAcuteInfectiousDisease(
-          quizList?.acuteInfectiousDisease === "true"
+    quizList?.surgicalInterventions
+      ? setSurgicalInterventions(
+          quizList?.surgicalInterventions === "true"
             ? "true"
-            : quizList?.acuteInfectiousDisease === "false"
+            : quizList?.surgicalInterventions === "false"
             ? "false"
             : "unknow"
         )
-      : setAcuteInfectiousDisease("");
+      : setSurgicalInterventions("");
 
-    quizList?.hemorrhages
-      ? setHemorrhages(
-          quizList?.hemorrhages === "true"
+    quizList?.myocardialInfarction
+      ? setMyocardialInfarction(
+          quizList?.myocardialInfarction === "true"
             ? "true"
-            : quizList?.hemorrhages === "false"
+            : quizList?.myocardialInfarction === "false"
             ? "false"
             : "unknow"
         )
-      : setHemorrhages("");
+      : setMyocardialInfarction("");
 
-    quizList?.convulsions
-      ? setConvulsions(
-          quizList?.convulsions === "true"
+    quizList?.stroke
+      ? setStroke(
+          quizList?.stroke === "true"
             ? "true"
-            : quizList?.convulsions === "false"
+            : quizList?.stroke === "false"
             ? "false"
             : "unknow"
         )
-      : setConvulsions("");
+      : setStroke("");
 
-    quizList?.onmk
-      ? setOnmk(
-          quizList?.onmk === "true"
+    quizList?.arterialPuncture
+      ? setArterialPuncture(
+          quizList?.arterialPuncture === "true"
             ? "true"
-            : quizList?.onmk === "false"
+            : quizList?.arterialPuncture === "false"
             ? "false"
             : "unknow"
         )
-      : setOnmk("");
-
-    quizList?.hemorrhagicStroke
-      ? setHemorrhagicStroke(
-          quizList?.hemorrhagicStroke === "true"
-            ? true
-            : quizList?.hemorrhagicStroke === "true"
-            ? false
-            : false
-        )
-      : setHemorrhagicStroke(false);
-
-    quizList?.SACStroke
-      ? setSACStroke(
-          quizList?.SACStroke === "true"
-            ? true
-            : quizList?.SACStroke === "true"
-            ? false
-            : false
-        )
-      : setSACStroke(false);
-
-    quizList?.ischemicStroke
-      ? setIschemicStroke(
-          quizList?.ischemicStroke === "true"
-            ? true
-            : quizList?.ischemicStroke === "true"
-            ? false
-            : false
-        )
-      : setIschemicStroke(false);
-
-    quizList?.transient_cerebrovascular_accident
-      ? setTransient_cerebrovascular_accident(
-          quizList?.transient_cerebrovascular_accident === "true"
-            ? true
-            : quizList?.transient_cerebrovascular_accident === "true"
-            ? false
-            : false
-        )
-      : setTransient_cerebrovascular_accident(false);
-    quizList?.unknown_accident
-      ? setUnknown_accident(
-          quizList?.unknown_accident === "true"
-            ? true
-            : quizList?.unknown_accident === "true"
-            ? false
-            : false
-        )
-      : setUnknown_accident(false);
-
-    quizList?.noteChecklistSMP
-      ? setNoteChecklistSMP(quizList?.noteChecklistSMP)
-      : setNoteChecklistSMP("");
+      : setArterialPuncture("");
   }, [
-    quizList?.noteChecklistSMP,
-    quizList?.onmk,
-    quizList?.smallOperations,
-    quizList?.cardiovascularDiseases,
-    quizList?.acuteInfectiousDisease,
-    quizList?.hemorrhages,
-    quizList?.convulsions,
-    quizList?.transient_cerebrovascular_accident,
-    quizList?.unknown_accident,
-    quizList?.hemorrhagicStroke,
-    quizList?.SACStroke,
-    quizList?.ischemicStroke,
+    quizList?.intracranialHemorrhages,
+    quizList?.majorSurgeriesOrSevereInjuries,
+    quizList?.surgicalInterventions,
+    quizList?.myocardialInfarction,
+    quizList?.stroke,
+    quizList?.arterialPuncture,
   ]);
-
-  function handleChangeCheckBox(e: any) {
-    console.log("e.target.id", e.target.id);
-    setHemorrhagicStroke(false);
-    setUnknown_accident(false);
-    setSACStroke(false);
-    setIschemicStroke(false);
-    setTransient_cerebrovascular_accident(false);
-    addQuizAnswerThunk({
-      params: {
-        hemorrhagicStroke: false,
-        SACStroke: false,
-        ischemicStroke: false,
-        transient_cerebrovascular_accident: false,
-        unknown_accident: false,
-        [e.target.id]: [e.target.checked],
-      },
-    });
-    switch (e.target.id) {
-      case "hemorrhagicStroke":
-        setHemorrhagicStroke(e.target.checked);
-        break;
-      case "SACStroke":
-        setSACStroke(e.target.checked);
-        break;
-      case "ischemicStroke":
-        setIschemicStroke(e.target.checked);
-        break;
-      case "transient_cerebrovascular_accident":
-        setTransient_cerebrovascular_accident(e.target.checked);
-        break;
-      case "unknown_accident":
-        setUnknown_accident(e.target.checked);
-        break;
-      default:
-        break;
-    }
-  }
   return (
     <div className={s.FifthSection}>
       <Title>Раздел 4: Соберите анамнез</Title>
@@ -217,41 +110,38 @@ export const FifthSectionStroke = () => {
           <tbody>
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Малые операции или инвазивные вмешательства в последние 10
-                  дней
-                </span>
+                <span className={s.title}>Внутричерепные кровоизлияния</span>
               </td>
               <td className={s.tdButton}>
                 <RadioButtonTrue
                   id={"1_1"}
                   value={"true"}
                   onChange={(str) => {
-                    setSmallOperations(str);
-                    onBlurHandler("smallOperations", str);
+                    setIntracranialHemorrhages(str);
+                    onBlurHandler("intracranialHemorrhages", str);
                   }}
-                  name={"smallOperations"}
-                  currentValue={smallOperations}
+                  name={"intracranialHemorrhages"}
+                  currentValue={intracranialHemorrhages}
                 />
                 <RadioButtonFalse
                   id={"1_2"}
                   value={"false"}
                   onChange={(str) => {
-                    setSmallOperations(str);
-                    onBlurHandler("smallOperations", str);
+                    setIntracranialHemorrhages(str);
+                    onBlurHandler("intracranialHemorrhages", str);
                   }}
-                  name={"smallOperations"}
-                  currentValue={smallOperations}
+                  name={"intracranialHemorrhages"}
+                  currentValue={intracranialHemorrhages}
                 />
                 <RadioButtonUnknow
                   id={"1_3"}
                   value={"unknow"}
                   onChange={(str) => {
-                    setSmallOperations(str);
-                    onBlurHandler("smallOperations", str);
+                    setIntracranialHemorrhages(str);
+                    onBlurHandler("intracranialHemorrhages", str);
                   }}
-                  name={"smallOperations"}
-                  currentValue={smallOperations}
+                  name={"intracranialHemorrhages"}
+                  currentValue={intracranialHemorrhages}
                 />
               </td>
             </tr>
@@ -259,10 +149,7 @@ export const FifthSectionStroke = () => {
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
                 <span className={s.title}>
-                  Сердечно-сосудистые заболевания <br />{" "}
-                  <small>
-                    (подострый бактериальный эндокардит, острый перикардит)
-                  </small>
+                  Большие операции или тяжелые травмы за последние 14 суток
                 </span>
               </td>
               <td className={s.tdButton}>
@@ -270,69 +157,31 @@ export const FifthSectionStroke = () => {
                   id={"2_1"}
                   value={"true"}
                   onChange={(str) => {
-                    setCardiovascularDiseases(str);
-                    onBlurHandler("cardiovascularDiseases", str);
+                    setMajorSurgeriesOrSevereInjuries(str);
+                    onBlurHandler("majorSurgeriesOrSevereInjuries", str);
                   }}
-                  name={"cardiovascularDiseases"}
-                  currentValue={cardiovascularDiseases}
+                  name={"majorSurgeriesOrSevereInjuries"}
+                  currentValue={majorSurgeriesOrSevereInjuries}
                 />
                 <RadioButtonFalse
                   id={"2_2"}
                   value={"false"}
                   onChange={(str) => {
-                    setCardiovascularDiseases(str);
-                    onBlurHandler("cardiovascularDiseases", str);
+                    setMajorSurgeriesOrSevereInjuries(str);
+                    onBlurHandler("majorSurgeriesOrSevereInjuries", str);
                   }}
-                  name={"cardiovascularDiseases"}
-                  currentValue={cardiovascularDiseases}
+                  name={"majorSurgeriesOrSevereInjuries"}
+                  currentValue={majorSurgeriesOrSevereInjuries}
                 />
                 <RadioButtonUnknow
                   id={"2_3"}
                   value={"unknow"}
                   onChange={(str) => {
-                    setCardiovascularDiseases(str);
-                    onBlurHandler("cardiovascularDiseases", str);
+                    setMajorSurgeriesOrSevereInjuries(str);
+                    onBlurHandler("majorSurgeriesOrSevereInjuries", str);
                   }}
-                  name={"cardiovascularDiseases"}
-                  currentValue={cardiovascularDiseases}
-                />
-              </td>
-            </tr>
-
-            <tr className={s.tableRow}>
-              <td className={s.checkbox}>
-                <span className={s.title}>Острое инфекционное заболевание</span>
-              </td>
-              <td className={s.tdButton}>
-                <RadioButtonTrue
-                  id={"3_1"}
-                  value={"true"}
-                  onChange={(str) => {
-                    setAcuteInfectiousDisease(str);
-                    onBlurHandler("acuteInfectiousDisease", str);
-                  }}
-                  name={"acuteInfectiousDisease"}
-                  currentValue={acuteInfectiousDisease}
-                />
-                <RadioButtonFalse
-                  id={"3_2"}
-                  value={"false"}
-                  onChange={(str) => {
-                    setAcuteInfectiousDisease(str);
-                    onBlurHandler("acuteInfectiousDisease", str);
-                  }}
-                  name={"acuteInfectiousDisease"}
-                  currentValue={acuteInfectiousDisease}
-                />
-                <RadioButtonUnknow
-                  id={"3_3"}
-                  value={"unknow"}
-                  onChange={(str) => {
-                    setAcuteInfectiousDisease(str);
-                    onBlurHandler("acuteInfectiousDisease", str);
-                  }}
-                  name={"acuteInfectiousDisease"}
-                  currentValue={acuteInfectiousDisease}
+                  name={"majorSurgeriesOrSevereInjuries"}
+                  currentValue={majorSurgeriesOrSevereInjuries}
                 />
               </td>
             </tr>
@@ -340,8 +189,48 @@ export const FifthSectionStroke = () => {
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
                 <span className={s.title}>
-                  Кровоизлияния в ЖКТ и мочевыводящих путях не позднее 21 дня до
-                  инсульта
+                  Недавние внутричерепные или интраспинальные хирургические
+                  вмешательства
+                </span>
+              </td>
+              <td className={s.tdButton}>
+                <RadioButtonTrue
+                  id={"3_1"}
+                  value={"true"}
+                  onChange={(str) => {
+                    setSurgicalInterventions(str);
+                    onBlurHandler("surgicalInterventions", str);
+                  }}
+                  name={"surgicalInterventions"}
+                  currentValue={surgicalInterventions}
+                />
+                <RadioButtonFalse
+                  id={"3_2"}
+                  value={"false"}
+                  onChange={(str) => {
+                    setSurgicalInterventions(str);
+                    onBlurHandler("surgicalInterventions", str);
+                  }}
+                  name={"surgicalInterventions"}
+                  currentValue={surgicalInterventions}
+                />
+                <RadioButtonUnknow
+                  id={"3_3"}
+                  value={"unknow"}
+                  onChange={(str) => {
+                    setSurgicalInterventions(str);
+                    onBlurHandler("surgicalInterventions", str);
+                  }}
+                  name={"surgicalInterventions"}
+                  currentValue={surgicalInterventions}
+                />
+              </td>
+            </tr>
+
+            <tr className={s.tableRow}>
+              <td className={s.checkbox}>
+                <span className={s.title}>
+                  Инфаркт миокарда в предшествующие инсульту 3 месяца
                 </span>
               </td>
               <td className={s.tdButton}>
@@ -349,31 +238,31 @@ export const FifthSectionStroke = () => {
                   id={"4_1"}
                   value={"true"}
                   onChange={(str) => {
-                    setHemorrhages(str);
-                    onBlurHandler("hemorrhages", str);
+                    setMyocardialInfarction(str);
+                    onBlurHandler("myocardialInfarction", str);
                   }}
-                  name={"hemorrhages"}
-                  currentValue={hemorrhages}
+                  name={"myocardialInfarction"}
+                  currentValue={myocardialInfarction}
                 />
                 <RadioButtonFalse
                   id={"4_2"}
                   value={"false"}
                   onChange={(str) => {
-                    setHemorrhages(str);
-                    onBlurHandler("hemorrhages", str);
+                    setMyocardialInfarction(str);
+                    onBlurHandler("myocardialInfarction", str);
                   }}
-                  name={"hemorrhages"}
-                  currentValue={hemorrhages}
+                  name={"myocardialInfarction"}
+                  currentValue={myocardialInfarction}
                 />
                 <RadioButtonUnknow
                   id={"4_3"}
                   value={"unknow"}
                   onChange={(str) => {
-                    setHemorrhages(str);
-                    onBlurHandler("hemorrhages", str);
+                    setMyocardialInfarction(str);
+                    onBlurHandler("myocardialInfarction", str);
                   }}
-                  name={"hemorrhages"}
-                  currentValue={hemorrhages}
+                  name={"myocardialInfarction"}
+                  currentValue={myocardialInfarction}
                 />
               </td>
             </tr>
@@ -381,9 +270,7 @@ export const FifthSectionStroke = () => {
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
                 <span className={s.title}>
-                  Судорожные приступы в дебюте заболевания
-                  <br />
-                  (имеется связь с острой церебральной ишемией)
+                  Инсульт в предшествующие инсульту 3 месяца
                 </span>
               </td>
               <td className={s.tdButton}>
@@ -391,135 +278,77 @@ export const FifthSectionStroke = () => {
                   id={"5_1"}
                   value={"true"}
                   onChange={(str) => {
-                    setConvulsions(str);
-                    onBlurHandler("convulsions", str);
+                    setStroke(str);
+                    onBlurHandler("stroke", str);
                   }}
-                  name={"convulsions"}
-                  currentValue={convulsions}
+                  name={"stroke"}
+                  currentValue={stroke}
                 />
                 <RadioButtonFalse
                   id={"5_2"}
                   value={"false"}
                   onChange={(str) => {
-                    setConvulsions(str);
-                    onBlurHandler("convulsions", str);
+                    setStroke(str);
+                    onBlurHandler("stroke", str);
                   }}
-                  name={"convulsions"}
-                  currentValue={convulsions}
+                  name={"stroke"}
+                  currentValue={stroke}
                 />
                 <RadioButtonUnknow
                   id={"5_3"}
                   value={"unknow"}
                   onChange={(str) => {
-                    setConvulsions(str);
-                    onBlurHandler("convulsions", str);
+                    setStroke(str);
+                    onBlurHandler("stroke", str);
                   }}
-                  name={"convulsions"}
-                  currentValue={convulsions}
+                  name={"stroke"}
+                  currentValue={stroke}
                 />
               </td>
             </tr>
 
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
-                <span className={s.title}>ОНМК ранее:</span>
+                <span className={s.title}>
+                  Проведена пункция артерии в сложной для компрессии области в
+                  предшествующие инсульту 7 дней
+                </span>
               </td>
               <td className={s.tdButton}>
                 <RadioButtonTrue
                   id={"6_1"}
                   value={"true"}
                   onChange={(str) => {
-                    setOnmk(str);
-                    onBlurHandler("onmk", str);
+                    setArterialPuncture(str);
+                    onBlurHandler("arterialPuncture", str);
                   }}
-                  name={"onmk"}
-                  currentValue={onmk}
+                  name={"arterialPuncture"}
+                  currentValue={arterialPuncture}
                 />
                 <RadioButtonFalse
                   id={"6_2"}
                   value={"false"}
                   onChange={(str) => {
-                    setOnmk(str);
-                    onBlurHandler("onmk", str);
+                    setArterialPuncture(str);
+                    onBlurHandler("arterialPuncture", str);
                   }}
-                  name={"onmk"}
-                  currentValue={onmk}
+                  name={"arterialPuncture"}
+                  currentValue={arterialPuncture}
                 />
                 <RadioButtonUnknow
                   id={"6_3"}
                   value={"unknow"}
-                  //   onChange={(str) => setOnmk(str)}
                   onChange={(str) => {
-                    setOnmk(str);
-                    onBlurHandler("onmk", str);
+                    setArterialPuncture(str);
+                    onBlurHandler("arterialPuncture", str);
                   }}
-                  name={"onmk"}
-                  currentValue={onmk}
+                  name={"arterialPuncture"}
+                  currentValue={arterialPuncture}
                 />
               </td>
             </tr>
           </tbody>
         </table>
-
-        <div className={s.whiteBox}>
-          <span className={s.title}></span>
-          <div className={s.checkboxWrapper}>
-            <CheckBox
-              className={s.check}
-              id={"hemorrhagicStroke"}
-              checked={hemorrhagicStroke}
-              onChange={(e) => handleChangeCheckBox(e)}
-            >
-              Геморрагический инсульт
-            </CheckBox>
-            <CheckBox
-              className={s.check}
-              id={"ischemicStroke"}
-              checked={ischemicStroke}
-              onChange={(e) => handleChangeCheckBox(e)}
-            >
-              Ишемический инсульт
-            </CheckBox>
-            <CheckBox
-              className={s.check}
-              id={"transient_cerebrovascular_accident"}
-              checked={transient_cerebrovascular_accident}
-              onChange={(e) => handleChangeCheckBox(e)}
-            >
-              Преходящее нарушение мозгового кровообращения (ПНМК)
-            </CheckBox>
-            <CheckBox
-              className={s.check}
-              id={"SACStroke"}
-              checked={SACStroke}
-              onChange={(e) => handleChangeCheckBox(e)}
-            >
-              Субарахноидальное кровоизлияние (САК)
-            </CheckBox>
-            <CheckBox
-              className={s.check}
-              id={"unknown_accident"}
-              checked={unknown_accident}
-              onChange={(e) => handleChangeCheckBox(e)}
-            >
-              Другое
-            </CheckBox>
-          </div>
-        </div>
-
-        <div>
-          <Textarea
-            className={s.textarea}
-            title={"Примечание к чек-листу от СМП"}
-            value={noteChecklistSMP}
-            onChange={(e) => setNoteChecklistSMP(e.target.value)}
-            onBlur={() => {
-              onBlurHandler("noteChecklistSMP", noteChecklistSMP ?? "");
-            }}
-          />
-        </div>
-
-        <div className={s.textInputs}></div>
       </div>
     </div>
   );

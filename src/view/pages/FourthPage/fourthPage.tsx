@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import s from "./index.module.scss";
 import { FourthSectionStroke } from "../../components/Stroke/FourthSection/fourthSection";
 import { FourthSectionPregnance } from "../../components/Pregnance/FourthSection/fourthSection";
+import { FourthSectionAlergoCod } from "../../components/AlergoCod/FourthSection/fourthSection";
 
 export const FourthPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -11,6 +12,7 @@ export const FourthPage = ({ pointId }: { pointId: string }) => {
     <div className={s.FourthPage}>
       {pointId === "stroke" && <FourthSectionStroke />}
       {pointId === "pregnancy" && <FourthSectionPregnance />}
+      {pointId === "alergoCod" && <FourthSectionAlergoCod />}
     </div>
   );
 };
