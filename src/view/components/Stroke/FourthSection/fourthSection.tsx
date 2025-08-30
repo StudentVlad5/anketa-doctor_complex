@@ -13,7 +13,7 @@ import {
   RadioButtonUnknow,
 } from "../../../ui/RadioButtonWithoutSpan";
 
-export const FourthSection = () => {
+export const FourthSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 

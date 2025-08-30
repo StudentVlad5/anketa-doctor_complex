@@ -4,6 +4,7 @@ import { SecondPage } from "../SecondPage/secondPage";
 import { ThirdPage } from "../ThirdPage/thirdPage";
 import { FourthPage } from "../FourthPage/fourthPage";
 import { FifthPage } from "../FifthPage/fifthPage";
+import { SixthPage } from "../SixthPage/SixthPage";
 
 const ManagePageRouter = () => {
   const { pointId, pageId } = useParams();
@@ -16,6 +17,7 @@ const ManagePageRouter = () => {
   if (pageId === "3") return <ThirdPage pointId={pointId} />;
   if (pageId === "4") return <FourthPage pointId={pointId} />;
   if (pageId === "5") return <FifthPage pointId={pointId} />;
+  if (pageId === "6") return <SixthPage pointId={pointId} />;
 
   return <div>Page not found</div>;
 };

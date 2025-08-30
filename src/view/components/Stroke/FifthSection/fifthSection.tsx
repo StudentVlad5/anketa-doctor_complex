@@ -15,7 +15,7 @@ import {
 import { Textarea } from "../../../ui/Textarea";
 import { CheckBox } from "../../../ui/CheckBox";
 
-export const FifthSection = () => {
+export const FifthSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 

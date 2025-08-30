@@ -10,7 +10,7 @@ import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButton } from "../../../ui/RadioButton";
 
-export const ThirdSection = () => {
+export const ThirdSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 

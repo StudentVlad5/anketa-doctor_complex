@@ -1,6 +1,7 @@
-import s from "./index.module.scss";
-import { FourthSection } from "../../components/Stroke/FourthSection";
 import { useEffect } from "react";
+import s from "./index.module.scss";
+import { FourthSectionStroke } from "../../components/Stroke/FourthSection/fourthSection";
+import { FourthSectionPregnance } from "../../components/Pregnance/FourthSection/fourthSection";
 
 export const FourthPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -8,7 +9,8 @@ export const FourthPage = ({ pointId }: { pointId: string }) => {
   }, []);
   return (
     <div className={s.FourthPage}>
-      {pointId === "stroke" && <FourthSection />}
+      {pointId === "stroke" && <FourthSectionStroke />}
+      {pointId === "pregnancy" && <FourthSectionPregnance />}
     </div>
   );
 };
