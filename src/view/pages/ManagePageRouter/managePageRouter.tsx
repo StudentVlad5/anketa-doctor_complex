@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
-import { FirstPage } from "../FirstPage/index";
-import { SecondPage } from "../SecondPage/index";
+import { FirstPage } from "../FirstPage/firstPage";
+import { SecondPage } from "../SecondPage/secondPage";
+import { ThirdPage } from "../ThirdPage/thirdPage";
+import { FourthPage } from "../FourthPage/fourthPage";
+import { FifthPage } from "../FifthPage/fifthPage";
 
 const ManagePageRouter = () => {
   const { pointId, pageId } = useParams();
@@ -9,26 +12,10 @@ const ManagePageRouter = () => {
 
   // Общие страницы
   if (pageId === "1") return <FirstPage />;
-  if (pageId === "2") return <SecondPage />;
-
-  // Индивидуальные страницы
-  if (pointId === "alergoCod") {
-    switch (pageId) {
-      case "3":
-        return <p>Case 3</p>;
-      case "4":
-        return <p>Case 4</p>;
-      // ...
-    }
-  }
-
-  //   if (pointId === "2") {
-  //     switch (pageId) {
-  //       case "3":
-  //         return <Case2Page3 />;
-  //       // ...
-  //     }
-  //   }
+  if (pageId === "2") return <SecondPage pointId={pointId} />;
+  if (pageId === "3") return <ThirdPage pointId={pointId} />;
+  if (pageId === "4") return <FourthPage pointId={pointId} />;
+  if (pageId === "5") return <FifthPage pointId={pointId} />;
 
   return <div>Page not found</div>;
 };

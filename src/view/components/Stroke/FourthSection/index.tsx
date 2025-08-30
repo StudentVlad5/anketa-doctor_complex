@@ -1,14 +1,17 @@
 import s from "./index.module.scss";
-import { Title } from "../../ui/Title";
+import { Title } from "../../../ui/Title";
 import { useEffect, useState } from "react";
-import { useAppSelector, useThunks } from "../../../common/helpers/reduxHook";
-import { QuizThunks } from "../../../store/thunks/quiz.thunks";
-import { QuizState } from "../../../store/reducers/quiz.reducer";
+import {
+  useAppSelector,
+  useThunks,
+} from "../../../../common/helpers/reduxHook";
+import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
+import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import {
   RadioButtonTrue,
   RadioButtonFalse,
   RadioButtonUnknow,
-} from "../../ui/RadioButtonWithoutSpan";
+} from "../../../ui/RadioButtonWithoutSpan";
 
 export const FourthSection = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);

@@ -1,25 +1,57 @@
 import s from "./index.module.scss";
 import { Button } from "../../ui/Button";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMemo, useState } from "react";
 import { useThunks } from "../../../common/helpers/reduxHook";
 import { QuizThunks } from "../../../store/thunks/quiz.thunks";
 import { Modal } from "../../ui/Modal";
+import { listOfPoints } from "../../../common/config";
 
 export const Footer = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
   const [isOpenModal, setIsOpenModal] = useState(false);
-
+  const [maxPagesLen, setMaxPagesLen] = useState(5);
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
+  const { pointId, pageId } = useParams();
+
+  console.log(pointId, pageId);
+  useMemo(() => {
+    if (pointId) {
+      const maxLength = listOfPoints.find((it) => it.id === pointId);
+      if (maxLength) setMaxPagesLen(maxLength.maxPage);
+    }
+  }, [pointId]);
 
   const onClickNextBtnHandler = () => {
-    navigate(`/${+location.pathname[1] + 1}`);
+    if (pageId) navigate(`/${pointId}/${+pageId + 1}`);
   };
 
   const onClickPrevBtnHandler = () => {
-    navigate(`/${+location.pathname[1] - 1}`);
+    if (pageId) navigate(`/${pointId}/${+pageId - 1}`);
+  };
+
+  const cleanLocalStorage = () => {
+    localStorage.removeItem("application_number");
+    localStorage.removeItem("id");
+    localStorage.removeItem("start_time");
+    localStorage.removeItem("start_time_auto");
+    localStorage.removeItem("firstTime");
+    localStorage.removeItem("pointOfCase");
+    localStorage.removeItem("pointOfHospital");
+    localStorage.removeItem("pointOfRouter");
+    localStorage.removeItem("sex");
+    // удаляем данные формы
+    localStorage.removeItem("cars");
+    localStorage.removeItem("form_id");
+    // localStorage.removeItem("car");
+    localStorage.removeItem("latitude");
+    localStorage.removeItem("longitude");
+    // localStorage.removeItem("organization");
+    localStorage.removeItem("organizations");
+    localStorage.removeItem("travel_time");
+    localStorage.removeItem("status");
+    localStorage.removeItem("transmitted");
   };
 
   const onClickFinishBtnHandler = () => {
@@ -28,22 +60,7 @@ export const Footer = () => {
         endTime: `${new Date().getHours()}:${new Date().getMinutes()}`,
       },
     });
-    localStorage.removeItem("application_number");
-    localStorage.removeItem("id");
-    localStorage.removeItem("start_time");
-    localStorage.removeItem("start_time_auto");
-    localStorage.removeItem("firstTime");
-    // удаляем данные формы
-    localStorage.removeItem("cars");
-    localStorage.removeItem("form_id");
-    // localStorage.removeItem("car");
-    localStorage.removeItem("latitude");
-    localStorage.removeItem("longitude");
-    // localStorage.removeItem("organization");
-    localStorage.removeItem("organizations");
-    localStorage.removeItem("travel_time");
-    localStorage.removeItem("status");
-    localStorage.removeItem("transmitted");
+    cleanLocalStorage();
     setIsOpenModal(true);
   };
 
@@ -52,42 +69,29 @@ export const Footer = () => {
     setIsOpenModal(false);
   };
 
-  const resetChecklist = () =>{
+  const resetChecklist = () => {
     addQuizAnswerThunk({
       params: {
-        anketaStatus: 'canceled',
+        anketaStatus: "canceled",
       },
     });
-    localStorage.removeItem("application_number");
-    localStorage.removeItem("id");
-    localStorage.removeItem("start_time");
-    localStorage.removeItem("start_time_auto");
-    localStorage.removeItem("firstTime");
-    // удаляем данные формы
-    localStorage.removeItem("cars");
-    localStorage.removeItem("form_id");
-    // localStorage.removeItem("car");
-    localStorage.removeItem("latitude");
-    localStorage.removeItem("longitude");
-    // localStorage.removeItem("organization");
-    localStorage.removeItem("organizations");
-    localStorage.removeItem("travel_time");
-    localStorage.removeItem("status");
-    localStorage.removeItem("transmitted");
+    cleanLocalStorage();
     navigate("/");
-  }
+  };
 
   return (
     <footer className={s.Footer}>
-      {location.pathname !== "/1" ? (
+      {pageId !== "1" ? (
         <Button onClick={onClickPrevBtnHandler} classname={s.prevBtn}>
           Назад
         </Button>
       ) : (
-        <div style={{ width: "100%" }}></div>
+        <div className={s.emptyContainer}></div>
       )}
-      <div className={s.page}>{location.pathname[1]}/5</div>
-      {location.pathname !== "/5" ? (
+      <div className={s.page}>
+        {pageId}/{maxPagesLen}
+      </div>
+      {Number(pageId) !== +maxPagesLen ? (
         <Button onClick={onClickNextBtnHandler} classname={s.nextBtn}>
           Дальше
         </Button>
@@ -97,8 +101,10 @@ export const Footer = () => {
             Пациент передан
           </Button>
 
-          <div  className={s.btnBox}>
-            <Button classname={s.resetCheckList} onClick={resetChecklist}>Аннулировать чек-лист</Button>
+          <div className={s.btnBox}>
+            <Button classname={s.resetCheckList} onClick={resetChecklist}>
+              Аннулировать чек-лист
+            </Button>
           </div>
         </>
       )}
@@ -107,7 +113,11 @@ export const Footer = () => {
         notClose={true}
         content={<p>Чек-лист успешно заполнен и отправлен</p>}
         footer={
-          <button className={s.successBtn} onClick={onClickSuccessButton}>
+          <button
+            type="button"
+            className={s.successBtn}
+            onClick={onClickSuccessButton}
+          >
             Ок
           </button>
         }

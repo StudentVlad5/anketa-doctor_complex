@@ -1,26 +1,29 @@
 import s from "./index.module.scss";
-import { CheckBox } from "../../ui/CheckBox";
-import { Title } from "../../ui/Title";
-import { InputTime } from "../../ui/InputTime";
+import { CheckBox } from "../../../ui/CheckBox";
+import { Title } from "../../../ui/Title";
+import { InputTime } from "../../../ui/InputTime";
 import { useState, useEffect } from "react";
-import { useAppSelector, useThunks } from "../../../common/helpers/reduxHook";
-import { QuizThunks } from "../../../store/thunks/quiz.thunks";
-// import { useDebounce } from "../../../common/helpers/useDebounceHook";
-import { QuizState } from "../../../store/reducers/quiz.reducer";
+import {
+  useAppSelector,
+  useThunks,
+} from "../../../../common/helpers/reduxHook";
+import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
+import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import {
   RadioButtonFalse,
   RadioButtonTrue,
   RadioButtonUnknow,
-} from "../../ui/RadioButtonWithoutSpan";
+} from "../../../ui/RadioButtonWithoutSpan";
 
 export const SecondSection = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 
-  const [beginStrokeTreatment, setBeginStrokeTreatment] = useState<boolean>(false);
-  const [intravenousAccess, setIntravenousAccess] =
+  const [beginStrokeTreatment, setBeginStrokeTreatment] =
+    useState<boolean>(false);
+  const [intravenousAccess, setIntravenousAccess] = useState<any>();
+  const [patientTakingAnticoagulants, setPatientTakingAnticoagulants] =
     useState<any>();
-  const [patientTakingAnticoagulants, setPatientTakingAnticoagulants] = useState<any>();
   const [deliveryTimeHh, setDeliveryTimeHh] = useState<string>("");
   const [deliveryTimeMm, setDeliveryTimeMm] = useState<string>("");
   const [takeECG, setTakeECG] = useState<any>();
@@ -160,7 +163,6 @@ export const SecondSection = () => {
                   name={"intravenousAccess"}
                   currentValue={intravenousAccess}
                 />
-                {/* <RadioButtonUnknow id={'1_3'} value={"unknow"} onChange={(str) => setIntravenousAccessEstablished(str)} name={"intravenousAccessEstablished"} currentValue={intravenousAccessEstablished}/> */}
               </td>
             </tr>
 
@@ -229,7 +231,6 @@ export const SecondSection = () => {
                   name={"takeECG"}
                   currentValue={takeECG}
                 />
-                {/* <RadioButtonUnknow id={'3_3'} value={"unknow"} onChange={(str) => setTakeECG(str)} name={"takeECG"} currentValue={takeECG}/> */}
               </td>
             </tr>
           </tbody>

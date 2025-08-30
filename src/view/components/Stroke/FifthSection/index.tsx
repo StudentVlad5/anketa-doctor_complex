@@ -1,16 +1,19 @@
 import s from "./index.module.scss";
-import { Title } from "../../ui/Title";
+import { Title } from "../../../ui/Title";
 import { useEffect, useState } from "react";
-import { useAppSelector, useThunks } from "../../../common/helpers/reduxHook";
-import { QuizThunks } from "../../../store/thunks/quiz.thunks";
-import { QuizState } from "../../../store/reducers/quiz.reducer";
+import {
+  useAppSelector,
+  useThunks,
+} from "../../../../common/helpers/reduxHook";
+import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
+import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import {
   RadioButtonFalse,
   RadioButtonTrue,
   RadioButtonUnknow,
-} from "../../ui/RadioButtonWithoutSpan";
-import { Textarea } from "../../ui/Textarea";
-import { CheckBox } from "../../ui/CheckBox";
+} from "../../../ui/RadioButtonWithoutSpan";
+import { Textarea } from "../../../ui/Textarea";
+import { CheckBox } from "../../../ui/CheckBox";
 
 export const FifthSection = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
@@ -25,7 +28,10 @@ export const FifthSection = () => {
   const [hemorrhagicStroke, setHemorrhagicStroke] = useState<boolean>(false);
   const [SACStroke, setSACStroke] = useState<boolean>(false);
   const [ischemicStroke, setIschemicStroke] = useState<boolean>(false);
-  const [transient_cerebrovascular_accident, setTransient_cerebrovascular_accident] = useState<boolean>(false);
+  const [
+    transient_cerebrovascular_accident,
+    setTransient_cerebrovascular_accident,
+  ] = useState<boolean>(false);
   const [unknown_accident, setUnknown_accident] = useState<boolean>(false);
   const [noteChecklistSMP, setNoteChecklistSMP] = useState<string>("");
 
@@ -36,7 +42,7 @@ export const FifthSection = () => {
       },
     });
   };
- 
+
   useEffect(() => {
     quizList?.smallOperations
       ? setSmallOperations(
@@ -98,7 +104,7 @@ export const FifthSection = () => {
         )
       : setOnmk("");
 
-       quizList?.hemorrhagicStroke
+    quizList?.hemorrhagicStroke
       ? setHemorrhagicStroke(
           quizList?.hemorrhagicStroke === "true"
             ? true
@@ -150,46 +156,64 @@ export const FifthSection = () => {
     quizList?.noteChecklistSMP
       ? setNoteChecklistSMP(quizList?.noteChecklistSMP)
       : setNoteChecklistSMP("");
-  }, [quizList?.noteChecklistSMP, quizList?.onmk, quizList?.smallOperations, quizList?.cardiovascularDiseases, quizList?.acuteInfectiousDisease, quizList?.hemorrhages, quizList?.convulsions, quizList?.transient_cerebrovascular_accident, quizList?.unknown_accident, quizList?.hemorrhagicStroke, quizList?.SACStroke, quizList?.ischemicStroke]);
+  }, [
+    quizList?.noteChecklistSMP,
+    quizList?.onmk,
+    quizList?.smallOperations,
+    quizList?.cardiovascularDiseases,
+    quizList?.acuteInfectiousDisease,
+    quizList?.hemorrhages,
+    quizList?.convulsions,
+    quizList?.transient_cerebrovascular_accident,
+    quizList?.unknown_accident,
+    quizList?.hemorrhagicStroke,
+    quizList?.SACStroke,
+    quizList?.ischemicStroke,
+  ]);
 
-  function handleChangeCheckBox  (e: any) {
-    console.log("e.target.id", e.target.id)
-      setHemorrhagicStroke(false);
-      setUnknown_accident(false);
-      setSACStroke(false);
-      setIschemicStroke(false);
-      setTransient_cerebrovascular_accident(false);
-      addQuizAnswerThunk({
+  function handleChangeCheckBox(e: any) {
+    console.log("e.target.id", e.target.id);
+    setHemorrhagicStroke(false);
+    setUnknown_accident(false);
+    setSACStroke(false);
+    setIschemicStroke(false);
+    setTransient_cerebrovascular_accident(false);
+    addQuizAnswerThunk({
       params: {
-        "hemorrhagicStroke": false,
-        "SACStroke": false,
-        "ischemicStroke": false,
-        "transient_cerebrovascular_accident": false,
-        "unknown_accident": false,
-        [e.target.id]: [e.target.checked]
+        hemorrhagicStroke: false,
+        SACStroke: false,
+        ischemicStroke: false,
+        transient_cerebrovascular_accident: false,
+        unknown_accident: false,
+        [e.target.id]: [e.target.checked],
       },
     });
     switch (e.target.id) {
-        case 'hemorrhagicStroke' : setHemorrhagicStroke(e.target.checked); 
-          break;
-        case 'SACStroke' : setSACStroke(e.target.checked);
-          break;
-        case 'ischemicStroke' : setIschemicStroke(e.target.checked);
-          break;
-        case 'transient_cerebrovascular_accident' : setTransient_cerebrovascular_accident(e.target.checked);
-          break;
-        case 'unknown_accident' : setUnknown_accident(e.target.checked);
-          break;      
-        default:
-          break;
-      }
+      case "hemorrhagicStroke":
+        setHemorrhagicStroke(e.target.checked);
+        break;
+      case "SACStroke":
+        setSACStroke(e.target.checked);
+        break;
+      case "ischemicStroke":
+        setIschemicStroke(e.target.checked);
+        break;
+      case "transient_cerebrovascular_accident":
+        setTransient_cerebrovascular_accident(e.target.checked);
+        break;
+      case "unknown_accident":
+        setUnknown_accident(e.target.checked);
+        break;
+      default:
+        break;
+    }
   }
   return (
     <div className={s.FifthSection}>
       <Title>Раздел 4: Соберите анамнез</Title>
 
       <div className={s.inner}>
-          <table>
+        <table>
           <tbody>
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
@@ -357,8 +381,9 @@ export const FifthSection = () => {
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
                 <span className={s.title}>
-                Судорожные приступы в дебюте заболевания 
-                <br/>(имеется связь с острой церебральной ишемией)
+                  Судорожные приступы в дебюте заболевания
+                  <br />
+                  (имеется связь с острой церебральной ишемией)
                 </span>
               </td>
               <td className={s.tdButton}>
@@ -443,8 +468,7 @@ export const FifthSection = () => {
               className={s.check}
               id={"hemorrhagicStroke"}
               checked={hemorrhagicStroke}
-              onChange={(e) => handleChangeCheckBox(e)
-              }
+              onChange={(e) => handleChangeCheckBox(e)}
             >
               Геморрагический инсульт
             </CheckBox>
@@ -452,8 +476,7 @@ export const FifthSection = () => {
               className={s.check}
               id={"ischemicStroke"}
               checked={ischemicStroke}
-              onChange={(e) => handleChangeCheckBox(e)
-              }
+              onChange={(e) => handleChangeCheckBox(e)}
             >
               Ишемический инсульт
             </CheckBox>
@@ -461,8 +484,7 @@ export const FifthSection = () => {
               className={s.check}
               id={"transient_cerebrovascular_accident"}
               checked={transient_cerebrovascular_accident}
-              onChange={(e) => handleChangeCheckBox(e)
-              }
+              onChange={(e) => handleChangeCheckBox(e)}
             >
               Преходящее нарушение мозгового кровообращения (ПНМК)
             </CheckBox>
@@ -470,8 +492,7 @@ export const FifthSection = () => {
               className={s.check}
               id={"SACStroke"}
               checked={SACStroke}
-              onChange={(e) => handleChangeCheckBox(e)
-              }
+              onChange={(e) => handleChangeCheckBox(e)}
             >
               Субарахноидальное кровоизлияние (САК)
             </CheckBox>
@@ -479,12 +500,10 @@ export const FifthSection = () => {
               className={s.check}
               id={"unknown_accident"}
               checked={unknown_accident}
-              onChange={(e) => handleChangeCheckBox(e)
-              }
+              onChange={(e) => handleChangeCheckBox(e)}
             >
               Другое
             </CheckBox>
-           
           </div>
         </div>
 
@@ -500,8 +519,7 @@ export const FifthSection = () => {
           />
         </div>
 
-        <div className={s.textInputs}>
-        </div>
+        <div className={s.textInputs}></div>
       </div>
     </div>
   );
