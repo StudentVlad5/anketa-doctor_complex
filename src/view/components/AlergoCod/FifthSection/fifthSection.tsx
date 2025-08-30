@@ -7,81 +7,164 @@ import {
 } from "../../../../common/helpers/reduxHook";
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
-import { CheckBox } from "../../../ui/CheckBox";
 
-export const FifthSectionPregnance = () => {
+export const FifthSectionAlergoCod = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 
-  const [firstNifedipineInjection, setFirstNifedipineInjection] =
-    useState<boolean>(false);
-  const [secondNifedipineInjection, setSecondNifedipineInjection] =
-    useState<boolean>(false);
+  const [ad, setAd] = useState(quizList?.ad ?? "");
+  const [pulse, setPulse] = useState(quizList?.pulse ?? "");
+  const [breathingRate, setBreathingRate] = useState(
+    quizList?.breathingRate ?? ""
+  );
+  const [saturation, setSaturation] = useState(quizList?.saturation ?? "");
+  const [temperature, setTemperature] = useState(quizList?.temperature ?? "");
+  const [glucoseLevel, setGlucoseLevel] = useState(
+    quizList?.glucoseLevel ?? ""
+  );
 
   useEffect(() => {
-    quizList?.firstNifedipineInjection
-      ? setFirstNifedipineInjection(
-          quizList?.firstNifedipineInjection === "true"
-            ? true
-            : quizList?.firstNifedipineInjection === "true"
-            ? false
-            : false
-        )
-      : setFirstNifedipineInjection(false);
+    if (quizList) {
+      setAd(quizList?.ad ?? "");
+      setPulse(quizList?.pulse ?? "");
+      setBreathingRate(quizList?.breathingRate ?? "");
+      setSaturation(quizList?.saturation ?? "");
+      setTemperature(quizList?.temperature ?? "");
+      setGlucoseLevel(quizList?.glucoseLevel ?? "");
+    }
+  }, [quizList]);
 
-    quizList?.secondNifedipineInjection
-      ? setSecondNifedipineInjection(
-          quizList?.secondNifedipineInjection === "true"
-            ? true
-            : quizList?.secondNifedipineInjection === "true"
-            ? false
-            : false
-        )
-      : setSecondNifedipineInjection(false);
-  }, [quizList?.firstNifedipineInjection, quizList?.secondNifedipineInjection]);
-
-  function handleChangeCheckBox(e: any) {
+  const onBlurHandler = (name: string, value: any) => {
     addQuizAnswerThunk({
       params: {
-        [e.target.id]: [e.target.checked],
+        [name]: value,
       },
     });
-    switch (e.target.id) {
-      case "firstNifedipineInjection":
-        setFirstNifedipineInjection(e.target.checked);
-        break;
-      case "secondNifedipineInjection":
-        setSecondNifedipineInjection(e.target.checked);
-        break;
-      default:
-        break;
+  };
+
+  function validate(evt: any) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode(key);
+    var regex = /[0-9]|\.|,/;
+    if (!regex.test(key)) {
+      theEvent.returnValue = false;
+      if (theEvent.preventDefault) theEvent.preventDefault();
     }
   }
+
   return (
     <div className={s.FifthSection}>
-      <Title>Раздел 5: Гипотензивное лечение</Title>
+      <Title>Раздел 4: Витальные показатели</Title>
+      <div className={s.inner}>
+        <div className={s.field}>
+          <span className={s.title}>А / Д</span>
+          <div className={s.inputWrapper}>
+            <input
+              type="text"
+              placeholder={"_ _"}
+              inputMode={"numeric"}
+              value={ad}
+              onChange={(e) => setAd(e.target.value)}
+              onBlur={() => onBlurHandler("ad", ad)}
+              onKeyPress={validate}
+            />
+          </div>
+          <div className={s.unit}>
+            <span>мм рт ст</span>
+          </div>
+        </div>
 
-      <div className={s.whiteBox}>
-        <span className={s.title}>
-          Если АД ≥160/110 мм рт.ст- нифедипин 10 мг каждые 20 минут
-        </span>
-        <div className={s.checkboxWrapper}>
-          <CheckBox
-            className={s.check}
-            id={"firstNifedipineInjection"}
-            checked={firstNifedipineInjection}
-            onChange={(e) => handleChangeCheckBox(e)}
-          >
-            нифедипин 10 мг - первая инъекция
-          </CheckBox>
-          <CheckBox
-            className={s.check}
-            id={"secondNifedipineInjection"}
-            checked={secondNifedipineInjection}
-            onChange={(e) => handleChangeCheckBox(e)}
-          >
-            нифедипин 10 мг - вторая инъекция
-          </CheckBox>
+        <div className={s.field}>
+          <span className={s.title}>Пульс</span>
+          <div className={s.inputWrapper}>
+            <input
+              type="text"
+              placeholder={"_ _"}
+              inputMode={"numeric"}
+              value={pulse}
+              onChange={(e) => setPulse(e.target.value)}
+              onBlur={() => onBlurHandler("pulse", pulse)}
+              onKeyPress={validate}
+            />
+          </div>
+          <div className={s.unit}>
+            <span>уд в 1 минуту</span>
+          </div>
+        </div>
+
+        <div className={s.field}>
+          <span className={s.title}>Частота дыхания</span>
+          <div className={s.inputWrapper}>
+            <input
+              type="text"
+              placeholder={"_ _"}
+              inputMode={"numeric"}
+              value={breathingRate}
+              onChange={(e) => setBreathingRate(e.target.value)}
+              onBlur={() => onBlurHandler("breathingRate", breathingRate)}
+              onKeyPress={validate}
+            />
+          </div>
+          <div className={s.unit}>
+            <span className={s.name}>мин</span>
+          </div>
+        </div>
+
+        <div className={s.field}>
+          <span className={s.title}>Сатурация SpO₂</span>
+          <div className={s.inputWrapper}>
+            <input
+              type="text"
+              placeholder={"_ _"}
+              inputMode={"numeric"}
+              value={saturation}
+              onChange={(e) => setSaturation(e.target.value)}
+              onBlur={() => onBlurHandler("saturation", saturation)}
+              onKeyPress={validate}
+            />
+          </div>
+          <div className={s.unit}>
+            <span className={s.name}>% (с O₂ / без)</span>
+          </div>
+        </div>
+
+        <div className={s.field}>
+          <span className={s.title}>Температура</span>
+          <div className={s.inputWrapper}>
+            <input
+              type="text"
+              placeholder={"_ _"}
+              inputMode={"numeric"}
+              value={temperature}
+              onChange={(e) => setTemperature(e.target.value)}
+              onBlur={() => onBlurHandler("temperature", temperature)}
+              onKeyPress={validate}
+            />
+          </div>
+          <div className={s.unit}>
+            <span>°C</span>
+          </div>
+        </div>
+
+        <div className={s.field}>
+          <span className={s.title}>
+            Уровень глюкозы (при наличии глюкометра)
+          </span>
+          <div className={s.inputWrapper}>
+            <input
+              type="text"
+              placeholder={"_ _"}
+              inputMode={"numeric"}
+              value={glucoseLevel}
+              onChange={(e) => setGlucoseLevel(e.target.value)}
+              onBlur={() => onBlurHandler("glucoseLevel", glucoseLevel)}
+              onKeyPress={validate}
+            />
+          </div>
+          <div className={s.unit}>
+            <span>ммоль/л</span>
+          </div>
         </div>
       </div>
     </div>

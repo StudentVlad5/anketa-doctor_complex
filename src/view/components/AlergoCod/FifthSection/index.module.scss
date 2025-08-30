@@ -2,109 +2,75 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 27px 18px;
-  .tableRow {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    @media (max-width: 800px) {
-      flex-wrap: nowrap;
-    }
-  }
-  .whiteBox {
-    padding: 20px 10px;
-
-    background-color: #f9f9f9;
-    //border: 1px solid var(--border-input-primary);
-    .title {
-      display: inline-block;
-      margin-bottom: 30px;
-
-      font-size: 28px;
-      color: var(--txt-color-primary);
-      font-weight: 400;
-    }
-    .checkboxWrapper {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 40px;
-      text-align: center;
-    }
-    .check {
-      display: flex;
-      flex-direction: row-reverse;
-      width: 100%;
-      justify-content: space-between;
-    }
-  }
-  .textInputs {
-    display: flex;
-    gap: 10vw;
-    align-items: end;
-    .inputWrapper {
-      .title {
-        font-size: 20px;
-        font-weight: 400;
-        color: var(--txt-color-primary);
-        .invalidMessage {
-          font-size: 14px;
-          color: var(--txt-color-error);
-        }
-      }
-    }
-  }
   .inner {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 70px;
     padding: 27px 18px;
   }
-  .checkbox {
+  .field {
+    display: grid;
+    grid-template-columns: minmax(230px, auto) 150px 150px;
+    align-items: center;
+    justify-content: stretch;
+
+    gap: 2vw;
     .title {
       font-size: 28px;
-      strong {
-        font-weight: 600;
+      font-weight: 400;
+      color: var(--txt-color-primary);
+    }
+    .inputWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      input {
+        width: 100%;
+        height: 75px;
+        padding: 5px 10px;
+
+        font-size: 32px;
+        text-align: center;
+
+        background-color: var(--bg-input-primary);
+        border-radius: 11px;
+      }
+      label {
+        font-size: 22px;
+      }
+      .name {
+        font-style: italic;
+        font-size: 28px;
       }
     }
-    .subtitle {
-      font-size: 22px;
+    .inputWrapper > div {
+      justify-content: space-between;
+      width: 100%;
     }
-  }
-  .tdButton {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    @media (max-width: 800px) {
-      flex-direction: column;
+    .unit {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--txt-color-primary);
     }
   }
   @media (max-width: 800px) {
-    .checkbox {
+    .field {
+      grid-template-columns: minmax(230px, auto) 100px 100px;
       .title {
         font-size: 24px;
       }
-      .subtitle {
-        font-size: 18px;
+      .inputWrapper {
+        input {
+          font-size: 26px;
+        }
+        .name {
+          font-size: 16px;
+        }
       }
-    }
-    .whiteBox {
-      .title {
+      .unit {
         font-size: 24px;
       }
     }
-  }
-  @media (max-width: 600px) {
-    .whiteBox {
-      .checkboxWrapper {
-        flex-direction: column;
-        // align-items: center;
-      }
-    }
-  }
-  .textarea {
-    height: 166px;
   }
 }

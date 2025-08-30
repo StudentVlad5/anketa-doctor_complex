@@ -2,6 +2,7 @@ import s from "./index.module.scss";
 import { useEffect } from "react";
 import { SixthSectionPregnance } from "../../components/Pregnance/SixthSection/sixthSection";
 import { SixthSectionStroke } from "../../components/Stroke/SixthSection/sixthSection";
+import { SixthSectionAlergoCod } from "../../components/AlergoCod/SixthSection/sixthSection";
 
 export const SixthPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -11,6 +12,7 @@ export const SixthPage = ({ pointId }: { pointId: string }) => {
     <div className={s.SixthPage}>
       {pointId === "stroke" && <SixthSectionStroke />}
       {pointId === "pregnancy" && <SixthSectionPregnance />}
+      {pointId === "alergoCod" && <SixthSectionAlergoCod />}
     </div>
   );
 };
