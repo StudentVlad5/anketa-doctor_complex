@@ -1,5 +1,5 @@
 import s from './index.module.scss';
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 export const Title = ({
     children,
@@ -8,7 +8,7 @@ export const Title = ({
 }) => {
     return (
         <div className={s.Title}>
-            <span>{ children }</span>
+            <span>{children}</span>
         </div>
     );
 };
