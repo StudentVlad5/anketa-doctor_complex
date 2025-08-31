@@ -3,6 +3,7 @@ import { SecondSectionStroke } from "../../components/Stroke/SecondSection/secon
 import { SecondSectionPregnance } from "../../components/Pregnance/SecondSection/secondSection";
 import s from "./index.module.scss";
 import { SecondSectionAlergoCod } from "../../components/AlergoCod/SecondSection/secondSection";
+import { SecondSectionBurns } from "../../components/Burns/SecondSection/secondSection";
 
 export const SecondPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -13,6 +14,7 @@ export const SecondPage = ({ pointId }: { pointId: string }) => {
       {pointId === "stroke" && <SecondSectionStroke />}
       {pointId === "pregnancy" && <SecondSectionPregnance />}
       {pointId === "alergoCod" && <SecondSectionAlergoCod />}
+      {pointId === "burns" && <SecondSectionBurns />}
     </div>
   );
 };
