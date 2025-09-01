@@ -1,9 +1,8 @@
-.ThirdSection {
+.FourthSection {
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 30px;
   padding: 27px 18px;
-  padding-bottom: 50px;
 
   .field {
     display: flex;
@@ -26,6 +25,9 @@
       flex-direction: row;
       flex-wrap: nowrap;
       align-items: end;
+      min-width: 250px;
+      padding-left: calc(100% / 2 - 40px);
+
       div {
         border-radius: 50%;
       }
@@ -41,7 +43,6 @@
       gap: 20px;
       max-width: 500px;
       justify-content: center;
-      padding-left: calc(100% / 7);
 
       input {
         width: 100%;
@@ -51,13 +52,6 @@
         text-align: center;
         background-color: var(--bg-input-primary);
         border-radius: 11px;
-      }
-
-      .chooseButton {
-        border-radius: 16px;
-        font-weight: 400;
-        font-size: 28px;
-        height: 75px;
       }
     }
   }
@@ -70,11 +64,18 @@
       .title {
         min-width: 250px;
       }
-
+      .subtitleBn {
+        padding-left: 0;
+      }
       .inputWrapper {
         flex: 1;
-        padding-left: 0;
       }
     }
   }
+}
+.whiteBox {
+  padding: 15px 28px;
+
+  background-color: #fff;
+  border: 1px solid var(--border-input-primary);
 }

@@ -1,26 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { X } from "lucide-react";
+import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
+import { useThunks } from "../../../../common/helpers/reduxHook";
 import "./bodyModal.css";
 
 interface BodyModalProps {
   isOpen: boolean;
+  selectedZones: string[];
+  setSelectedZones: React.Dispatch<React.SetStateAction<string[]>>;
   onClose: () => void;
-  onSave: (selected: string[]) => void;
 }
 
 const zones = [
-  { id: "A", top: "7%", left: "50%" },
-  { id: "13", top: "25%", left: "50%" },
-  { id: "1", top: "35%", left: "28%" },
-  { id: "1i", top: "35%", left: "72%" },
-  { id: "2", top: "50%", left: "28%" },
-  { id: "2i", top: "50%", left: "72%" },
-  { id: "B", top: "60%", left: "50%" },
-  { id: "C", top: "80%", left: "50%" },
+  { id: "A", top: "7%", left: "47%" },
+  { id: "13", top: "25%", left: "47%" },
+  { id: "1", top: "11%", left: "20%" },
+  { id: "1½", top: "35%", left: "78%" },
+  { id: "2", top: "11%", left: "73%" },
+  { id: "2½", top: "64%", left: "72%" },
+  { id: "B", top: "64%", left: "47%" },
+  { id: "C", top: "80%", left: "47%" },
 ];
 
-const BodyModal: React.FC<BodyModalProps> = ({ isOpen, onClose, onSave }) => {
-  const [selectedZones, setSelectedZones] = useState<string[]>([]);
+const BodyModal: React.FC<BodyModalProps> = ({
+  isOpen,
+  selectedZones,
+  setSelectedZones,
+  onClose,
+}) => {
+  const { addQuizAnswerThunk } = useThunks(QuizThunks);
 
   if (!isOpen) return null;
 
@@ -30,8 +38,15 @@ const BodyModal: React.FC<BodyModalProps> = ({ isOpen, onClose, onSave }) => {
     );
   };
 
+  const onBlurHandler = (name: string, value: any) => {
+    addQuizAnswerThunk({
+      params: { [name]: value },
+    });
+  };
+
+  console.log("selectedZones", selectedZones);
   const handleSave = () => {
-    onSave(selectedZones);
+    onBlurHandler("selectedZones", selectedZones);
     onClose();
   };
 
