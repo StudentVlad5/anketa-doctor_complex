@@ -23,7 +23,7 @@ export const SecondSectionKnifeWounds = () => {
   ] = useState<boolean>(false);
   // const [unknown_accident, setUnknown_accident] = useState<boolean>(false);
 
-  const [ad, setAd] = useState(quizList?.Ad ?? "");
+  const [ad, setAd] = useState(quizList?.ad ?? "");
   const [pulse, setPulse] = useState(
     quizList?.pulse ?? ""
   );
@@ -33,7 +33,7 @@ export const SecondSectionKnifeWounds = () => {
 
   useMemo(() => {
     if (quizList) {
-      setAd(quizList?.Ad ?? "");
+      setAd(quizList?.ad ?? "");
       setPulse(quizList?.pulse ?? "");
       setSaturation(quizList?.saturation ?? "");
     }
@@ -59,7 +59,6 @@ export const SecondSectionKnifeWounds = () => {
   }
 
   function handleChangeCheckBox(e: any) {
-    console.log("e.target.id", e.target.id);
     setClearConsciousness(false);
     // setUnknown_accident(false);
     setComa(false);

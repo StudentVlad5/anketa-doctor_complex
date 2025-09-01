@@ -28,8 +28,8 @@ export const FourthSectionPolyOfTrauma = () => {
     quizList?.infusion ?? ""
   );
 
-  const [timeOfApplOfTourniquetHh, setTimeOfApplOfTourniquetHh] = useState<string>("00");
-  const [timeOfApplOfTourniquetMm, setTimeOfApplOfTourniquetMm] = useState<string>("00");
+  const [timeOfAppOfTourniquetPolyHh, setTimeOfAppOfTourniquetPolyHh] = useState<string>("00");
+  const [timeOfAppOfTourniquetPolyMm, setTimeOfAppOfTourniquetPolyMm] = useState<string>("00");
   const [pressureBandage, setPressureBandage] = useState<any>(
     quizList?.pressureBandage ?? ""
   );
@@ -53,6 +53,7 @@ export const FourthSectionPolyOfTrauma = () => {
             : "другое"
       )
       : setAnesthesia("");
+
     quizList?.instalOfPeripheralCatheter
       ? setInstalOfPeripheralCatheter(
         quizList?.instalOfPeripheralCatheter === "да"
@@ -62,6 +63,7 @@ export const FourthSectionPolyOfTrauma = () => {
             : "другое"
       )
       : setInstalOfPeripheralCatheter("");
+
     quizList?.infusion
       ? setInfusion(
         quizList?.infusion === "глюкоза 5%"
@@ -78,12 +80,12 @@ export const FourthSectionPolyOfTrauma = () => {
       )
       : setInfusion("");
 
-    quizList?.timeOfCallingHh
-      ? setTimeOfApplOfTourniquetHh(quizList?.timeOfApplOfTourniquetHh)
-      : setTimeOfApplOfTourniquetHh("00");
-    quizList?.timeOfCallingMm
-      ? setTimeOfApplOfTourniquetMm(quizList?.timeOfApplOfTourniquetMm)
-      : setTimeOfApplOfTourniquetMm("00");
+    quizList?.setTimeOfAppOfTourniquetPolyHh
+      ? setTimeOfAppOfTourniquetPolyHh(quizList?.timeOfAppOfTourniquetPolyHh)
+      : setTimeOfAppOfTourniquetPolyHh("00");
+    quizList?.setTimeOfAppOfTourniquetPolyMm
+      ? setTimeOfAppOfTourniquetPolyMm(quizList?.timeOfAppOfTourniquetPolyMm)
+      : setTimeOfAppOfTourniquetPolyMm("00");
 
     quizList?.pressureBandage
       ? setPressureBandage(
@@ -91,7 +93,7 @@ export const FourthSectionPolyOfTrauma = () => {
           ? "true"
           : quizList?.pressureBandage === "false"
             ? "false"
-            : "false") :
+            : "true") :
       setPressureBandage("");
 
   }, [quizList]);
@@ -152,28 +154,28 @@ export const FourthSectionPolyOfTrauma = () => {
             <div className={s.whiteBox}>
               <InputTime
                 title={""}
-                valueHh={timeOfApplOfTourniquetHh}
-                valueMm={timeOfApplOfTourniquetMm}
-                onChangeHh={(str) => setTimeOfApplOfTourniquetHh(str)}
-                onChangeMm={(str) => setTimeOfApplOfTourniquetMm(str)}
+                valueHh={timeOfAppOfTourniquetPolyHh}
+                valueMm={timeOfAppOfTourniquetPolyMm}
+                onChangeHh={(str) => setTimeOfAppOfTourniquetPolyHh(str)}
+                onChangeMm={(str) => setTimeOfAppOfTourniquetPolyMm(str)}
                 onBlurHh={() =>
                   onBlurHandler(
-                    "timeOfApplOfTourniquetHh",
-                    !timeOfApplOfTourniquetHh
+                    "timeOfAppOfTourniquetPolyHh",
+                    !timeOfAppOfTourniquetPolyHh
                       ? "00"
-                      : timeOfApplOfTourniquetHh.length === 1
-                        ? `0${timeOfApplOfTourniquetHh}`
-                        : timeOfApplOfTourniquetHh
+                      : timeOfAppOfTourniquetPolyHh.length === 1
+                        ? `0${timeOfAppOfTourniquetPolyHh}`
+                        : timeOfAppOfTourniquetPolyHh
                   )
                 }
                 onBlurMm={() => {
                   onBlurHandler(
-                    "timeOfApplOfTourniquetMm",
-                    !timeOfApplOfTourniquetMm
+                    "timeOfAppOfTourniquetPolyMm",
+                    !timeOfAppOfTourniquetPolyMm
                       ? "00"
-                      : timeOfApplOfTourniquetMm.length === 1
-                        ? `0${timeOfApplOfTourniquetMm}`
-                        : timeOfApplOfTourniquetMm
+                      : timeOfAppOfTourniquetPolyMm.length === 1
+                        ? `0${timeOfAppOfTourniquetPolyMm}`
+                        : timeOfAppOfTourniquetPolyMm
                   );
                 }}
               />
@@ -182,7 +184,7 @@ export const FourthSectionPolyOfTrauma = () => {
             <span className={s.title}>Давящая повязка</span>
             <div className={s.checkboxRadio}>
               <RadioButtonTrue
-                id={"1_1"}
+                id={"pressureBandage_1"}
                 value={"true"}
                 onChange={(str) => {
                   setPressureBandage(str);
@@ -192,7 +194,7 @@ export const FourthSectionPolyOfTrauma = () => {
                 currentValue={pressureBandage}
               />
               <RadioButtonFalse
-                id={"1_2"}
+                id={"pressureBandage_2"}
                 value={"false"}
                 onChange={(str) => {
                   setPressureBandage(str);
@@ -254,7 +256,7 @@ export const FourthSectionPolyOfTrauma = () => {
               <td className={s.tdButton}>
                 <RadioButton
                   id={"infusion"}
-                  value={"глюкоза  5%"}
+                  value={"глюкоза 5%"}
                   onChange={(str) => {
                     setInfusion(str);
                     onBlurHandler("infusion", str);

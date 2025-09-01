@@ -10,7 +10,7 @@ import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 
 
-export const SecondSectionPolyOfTrauma = () => {
+export const SecondSectionGastroIntestinalBleeding = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 

@@ -6,6 +6,7 @@ import { SecondSectionAlergoCod } from "../../components/AlergoCod/SecondSection
 import { SecondSectionKnifeWounds } from "../../components/KnifeWounds/SecondSection/secondSection";
 import { SecondSectionPolyOfTrauma } from "../../components/PolyOfTrauma/SecondSection/secondSection";
 import { SecondSectionBurns } from "../../components/Burns/SecondSection/secondSection";
+import { SecondSectionGastroIntestinalBleeding } from "../../components/GastroIntestinalBleeding/SecondSection/secondSection";
 
 
 export const SecondPage = ({ pointId }: { pointId: string }) => {
@@ -20,6 +21,7 @@ export const SecondPage = ({ pointId }: { pointId: string }) => {
       {pointId === "knifeWounds" && <SecondSectionKnifeWounds />}
       {pointId === "polyOfTrauma" && <SecondSectionPolyOfTrauma />}
       {pointId === "burns" && <SecondSectionBurns />}
+      {pointId === "gastrointestinalBleeding" && <SecondSectionGastroIntestinalBleeding />}
 
     </div>
   );
