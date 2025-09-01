@@ -5,7 +5,9 @@ import { FourthSectionPregnance } from "../../components/Pregnance/FourthSection
 import { FourthSectionAlergoCod } from "../../components/AlergoCod/FourthSection/fourthSection";
 import { FourthSectionKnifeWounds } from "../../components/KnifeWounds/FourthSection/fourthSection";
 import { FourthSectionPolyOfTrauma } from "../../components/PolyOfTrauma/FourthSection/fourthSection";
+import { FourthSectionBurns } from "../../components/Burns/FourthSection/fourthSection";
 import { FourthSectionGastroIntestinalBleeding } from "../../components/GastroIntestinalBleeding/FourthSection/fourthSection";
+
 
 export const FourthPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -18,6 +20,7 @@ export const FourthPage = ({ pointId }: { pointId: string }) => {
       {pointId === "alergoCod" && <FourthSectionAlergoCod />}
       {pointId === "knifeWounds" && <FourthSectionKnifeWounds />}
       {pointId === "polyOfTrauma" && <FourthSectionPolyOfTrauma />}
+      {pointId === "burns" && <FourthSectionBurns />}
       {pointId === "gastrointestinalBleeding" && <FourthSectionGastroIntestinalBleeding />}
     </div>
   );
