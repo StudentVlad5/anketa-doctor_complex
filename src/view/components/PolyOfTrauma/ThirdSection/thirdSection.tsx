@@ -66,11 +66,11 @@ export const ThirdSectionPolyOfTrauma = () => {
 
     quizList?.bloodLossCheck
       ? setBloodLossCheck(
-        quizList?.bloodLossCheck === "открытая рана"
-          ? "открытая рана"
-          : quizList?.bloodLossCheck === "закрытая рана"
-            ? "закрытая рана"
-            : "открытая рана"
+        quizList?.bloodLossCheck === "да"
+          ? "да"
+          : quizList?.bloodLossCheck === "нет"
+            ? "нет"
+            : "да"
       )
       : setBloodLossCheck("");
 

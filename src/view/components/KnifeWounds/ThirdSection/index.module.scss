@@ -27,7 +27,7 @@
     padding: 15px 28px;
 
     background-color: #fff;
-    border: 1px solid var(--border-input-primary);
+    // border: 1px solid var(--border-input-primary);
   }
 
   .checkbox {
@@ -57,7 +57,7 @@
 
     @media (max-width: 800px) {
       flex-direction: column;
-      width: auto;
+      // width: auto;
     }
   }
 
