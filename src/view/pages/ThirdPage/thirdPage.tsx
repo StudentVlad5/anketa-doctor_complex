@@ -5,6 +5,7 @@ import { ThirdSectionPregnance } from "../../components/Pregnance/ThirdSection/t
 import { ThirdSectionAlergoCod } from "../../components/AlergoCod/ThirdSection/thirdSection";
 import { ThirdSectionKnifeWounds } from "../../components/KnifeWounds/ThirdSection/thirdSection";
 import { ThirdSectionPolyOfTrauma } from "../../components/PolyOfTrauma/ThirdSection/thirdSection";
+import { ThirdSectionBurns } from "../../components/Burns/ThirdSection/thirdSection";
 
 export const ThirdPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -17,6 +18,7 @@ export const ThirdPage = ({ pointId }: { pointId: string }) => {
       {pointId === "alergoCod" && <ThirdSectionAlergoCod />}
       {pointId === "knifeWounds" && <ThirdSectionKnifeWounds />}
       {pointId === "polyOfTrauma" && <ThirdSectionPolyOfTrauma />}
+      {pointId === "burns" && <ThirdSectionBurns />}
     </div>
   );
 };

@@ -33,3 +33,18 @@ export const listOfHospitals = [
     id: "kargalinskaya",
   },
 ];
+
+// ожоги
+export const CONSCIOUSNESS_STATES = [
+  { id: "1_1", label: "Ясное", name: "isClearConsciousness" },
+  { id: "1_2", label: "Оглушение", name: "isStunning" },
+  { id: "1_3", label: "Сопор", name: "isSopor" },
+  { id: "1_4", label: "Кома", name: "isComa" },
+];
+
+export const BURN_TYPES = [
+  { id: "2_1", label: "Термический", name: "isThermalBurn" },
+  { id: "2_2", label: "Химический", name: "isChemicalBurn" },
+  { id: "2_3", label: "Ингаляционный", name: "isInhalationBurn" },
+  { id: "2_4", label: "Электрический", name: "isElectricBurn" },
+];
