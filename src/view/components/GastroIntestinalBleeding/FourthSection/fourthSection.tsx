@@ -28,8 +28,8 @@ export const FourthSectionGastroIntestinalBleeding = () => {
     quizList?.infusion ?? ""
   );
 
-  const [timeOfApplOfTourniquetHh, setTimeOfApplOfTourniquetHh] = useState<string>("00");
-  const [timeOfApplOfTourniquetMm, setTimeOfApplOfTourniquetMm] = useState<string>("00");
+  const [timeOfAppOfTourniquetGastroHh, setTimeOfAppOfTourniquetGastroHh] = useState<string>("00");
+  const [timeOfAppOfTourniquetGastroMm, setTimeOfAppOfTourniquetGastroMm] = useState<string>("00");
   const [pressureBandage, setPressureBandage] = useState<any>(
     quizList?.pressureBandage ?? ""
   );
@@ -53,6 +53,7 @@ export const FourthSectionGastroIntestinalBleeding = () => {
             : "другое"
       )
       : setAnesthesia("");
+
     quizList?.instalOfPeripheralCatheter
       ? setInstalOfPeripheralCatheter(
         quizList?.instalOfPeripheralCatheter === "да"
@@ -62,6 +63,7 @@ export const FourthSectionGastroIntestinalBleeding = () => {
             : "другое"
       )
       : setInstalOfPeripheralCatheter("");
+
     quizList?.infusion
       ? setInfusion(
         quizList?.infusion === "глюкоза 5%"
@@ -78,12 +80,12 @@ export const FourthSectionGastroIntestinalBleeding = () => {
       )
       : setInfusion("");
 
-    quizList?.timeOfCallingHh
-      ? setTimeOfApplOfTourniquetHh(quizList?.timeOfApplOfTourniquetHh)
-      : setTimeOfApplOfTourniquetHh("00");
-    quizList?.timeOfCallingMm
-      ? setTimeOfApplOfTourniquetMm(quizList?.timeOfApplOfTourniquetMm)
-      : setTimeOfApplOfTourniquetMm("00");
+    quizList?.setTimeOfAppOfTourniquetGastroHh
+      ? setTimeOfAppOfTourniquetGastroHh(quizList?.timeOfAppOfTourniquetGastroHh)
+      : setTimeOfAppOfTourniquetGastroHh("00");
+    quizList?.setTimeOfAppOfTourniquetGastroMm
+      ? setTimeOfAppOfTourniquetGastroMm(quizList?.timeOfAppOfTourniquetGastroMm)
+      : setTimeOfAppOfTourniquetGastroMm("00");
 
     quizList?.pressureBandage
       ? setPressureBandage(
@@ -152,28 +154,28 @@ export const FourthSectionGastroIntestinalBleeding = () => {
             <div className={s.whiteBox}>
               <InputTime
                 title={""}
-                valueHh={timeOfApplOfTourniquetHh}
-                valueMm={timeOfApplOfTourniquetMm}
-                onChangeHh={(str) => setTimeOfApplOfTourniquetHh(str)}
-                onChangeMm={(str) => setTimeOfApplOfTourniquetMm(str)}
+                valueHh={timeOfAppOfTourniquetGastroHh}
+                valueMm={timeOfAppOfTourniquetGastroMm}
+                onChangeHh={(str) => setTimeOfAppOfTourniquetGastroHh(str)}
+                onChangeMm={(str) => setTimeOfAppOfTourniquetGastroMm(str)}
                 onBlurHh={() =>
                   onBlurHandler(
-                    "timeOfApplOfTourniquetHh",
-                    !timeOfApplOfTourniquetHh
+                    "timeOfAppOfTourniquetGastroHh",
+                    !timeOfAppOfTourniquetGastroHh
                       ? "00"
-                      : timeOfApplOfTourniquetHh.length === 1
-                        ? `0${timeOfApplOfTourniquetHh}`
-                        : timeOfApplOfTourniquetHh
+                      : timeOfAppOfTourniquetGastroHh.length === 1
+                        ? `0${timeOfAppOfTourniquetGastroHh}`
+                        : timeOfAppOfTourniquetGastroHh
                   )
                 }
                 onBlurMm={() => {
                   onBlurHandler(
-                    "timeOfApplOfTourniquetMm",
-                    !timeOfApplOfTourniquetMm
+                    "timeOfAppOfTourniquetGastroMm",
+                    !timeOfAppOfTourniquetGastroMm
                       ? "00"
-                      : timeOfApplOfTourniquetMm.length === 1
-                        ? `0${timeOfApplOfTourniquetMm}`
-                        : timeOfApplOfTourniquetMm
+                      : timeOfAppOfTourniquetGastroMm.length === 1
+                        ? `0${timeOfAppOfTourniquetGastroMm}`
+                        : timeOfAppOfTourniquetGastroMm
                   );
                 }}
               />
@@ -182,7 +184,7 @@ export const FourthSectionGastroIntestinalBleeding = () => {
             <span className={s.title}>Давящая повязка</span>
             <div className={s.checkboxRadio}>
               <RadioButtonTrue
-                id={"1_1"}
+                id={"pressureBandage_1"}
                 value={"true"}
                 onChange={(str) => {
                   setPressureBandage(str);
@@ -192,7 +194,7 @@ export const FourthSectionGastroIntestinalBleeding = () => {
                 currentValue={pressureBandage}
               />
               <RadioButtonFalse
-                id={"1_2"}
+                id={"pressureBandage_2"}
                 value={"false"}
                 onChange={(str) => {
                   setPressureBandage(str);
@@ -254,7 +256,7 @@ export const FourthSectionGastroIntestinalBleeding = () => {
               <td className={s.tdButton}>
                 <RadioButton
                   id={"infusion"}
-                  value={"глюкоза  5%"}
+                  value={"глюкоза 5%"}
                   onChange={(str) => {
                     setInfusion(str);
                     onBlurHandler("infusion", str);

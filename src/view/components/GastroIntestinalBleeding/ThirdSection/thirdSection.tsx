@@ -49,7 +49,7 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
       ? setSymptomOfPaleSpot(
         quizList?.symptomOfPaleSpot === "менее 5 сек"
           ? "менее 5 сек"
-          : quizList?.symptomOfPaleSpot === "менее 5 сек"
+          : quizList?.symptomOfPaleSpot === "более 5 сек"
             ? "более 5 сек"
             : "менее 5 сек"
       )
@@ -57,9 +57,9 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
 
     quizList?.localizationOfGastroIntestinalBleeding
       ? setLocalizationOfGastroIntestinalBleeding(
-        quizList?.GastroIntestinalBleeding === "желудок"
+        quizList?.localizationOfGastroIntestinalBleeding === "желудок"
           ? "желудок"
-          : quizList?.GastroIntestinalBleeding === "кишечник"
+          : quizList?.localizationOfGastroIntestinalBleeding === "кишечник"
             ? "кишечник"
             : "желудок"
       )

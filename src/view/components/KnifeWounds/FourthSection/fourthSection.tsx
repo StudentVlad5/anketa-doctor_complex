@@ -28,8 +28,8 @@ export const FourthSectionKnifeWounds = () => {
     quizList?.infusion ?? ""
   );
 
-  const [timeOfApplOfTourniquetHh, setTimeOfApplOfTourniquetHh] = useState<string>("00");
-  const [timeOfApplOfTourniquetMm, setTimeOfApplOfTourniquetMm] = useState<string>("00");
+  const [timeOfAppOfTourniquetKnifeHh, setTimeOfAppOfTourniquetKnifeHh] = useState<string>("00");
+  const [timeOfAppOfTourniquetKnifeMm, setTimeOfAppOfTourniquetKnifeMm] = useState<string>("00");
   const [pressureBandage, setPressureBandage] = useState<any>(
     quizList?.pressureBandage ?? ""
   );
@@ -53,6 +53,7 @@ export const FourthSectionKnifeWounds = () => {
             : "другое"
       )
       : setAnesthesia("");
+
     quizList?.instalOfPeripheralCatheter
       ? setInstalOfPeripheralCatheter(
         quizList?.instalOfPeripheralCatheter === "да"
@@ -62,6 +63,7 @@ export const FourthSectionKnifeWounds = () => {
             : "другое"
       )
       : setInstalOfPeripheralCatheter("");
+
     quizList?.infusion
       ? setInfusion(
         quizList?.infusion === "глюкоза 5%"
@@ -78,12 +80,12 @@ export const FourthSectionKnifeWounds = () => {
       )
       : setInfusion("");
 
-    quizList?.timeOfCallingHh
-      ? setTimeOfApplOfTourniquetHh(quizList?.timeOfApplOfTourniquetHh)
-      : setTimeOfApplOfTourniquetHh("00");
-    quizList?.timeOfCallingMm
-      ? setTimeOfApplOfTourniquetMm(quizList?.timeOfApplOfTourniquetMm)
-      : setTimeOfApplOfTourniquetMm("00");
+    quizList?.setTimeOfAppOfTourniquetKnifeHh
+      ? setTimeOfAppOfTourniquetKnifeHh(quizList?.timeOfAppOfTourniquetKnifeHh)
+      : setTimeOfAppOfTourniquetKnifeHh("00");
+    quizList?.setTimeOfAppOfTourniquetKnifeMm
+      ? setTimeOfAppOfTourniquetKnifeMm(quizList?.timeOfAppOfTourniquetKnifeMm)
+      : setTimeOfAppOfTourniquetKnifeMm("00");
 
     quizList?.pressureBandage
       ? setPressureBandage(
@@ -152,28 +154,28 @@ export const FourthSectionKnifeWounds = () => {
             <div className={s.whiteBox}>
               <InputTime
                 title={""}
-                valueHh={timeOfApplOfTourniquetHh}
-                valueMm={timeOfApplOfTourniquetMm}
-                onChangeHh={(str) => setTimeOfApplOfTourniquetHh(str)}
-                onChangeMm={(str) => setTimeOfApplOfTourniquetMm(str)}
+                valueHh={timeOfAppOfTourniquetKnifeHh}
+                valueMm={timeOfAppOfTourniquetKnifeMm}
+                onChangeHh={(str) => setTimeOfAppOfTourniquetKnifeHh(str)}
+                onChangeMm={(str) => setTimeOfAppOfTourniquetKnifeMm(str)}
                 onBlurHh={() =>
                   onBlurHandler(
-                    "timeOfApplOfTourniquetHh",
-                    !timeOfApplOfTourniquetHh
+                    "timeOfAppOfTourniquetKnifeHh",
+                    !timeOfAppOfTourniquetKnifeHh
                       ? "00"
-                      : timeOfApplOfTourniquetHh.length === 1
-                        ? `0${timeOfApplOfTourniquetHh}`
-                        : timeOfApplOfTourniquetHh
+                      : timeOfAppOfTourniquetKnifeHh.length === 1
+                        ? `0${timeOfAppOfTourniquetKnifeHh}`
+                        : timeOfAppOfTourniquetKnifeHh
                   )
                 }
                 onBlurMm={() => {
                   onBlurHandler(
-                    "timeOfApplOfTourniquetMm",
-                    !timeOfApplOfTourniquetMm
+                    "timeOfAppOfTourniquetKnifeMm",
+                    !timeOfAppOfTourniquetKnifeMm
                       ? "00"
-                      : timeOfApplOfTourniquetMm.length === 1
-                        ? `0${timeOfApplOfTourniquetMm}`
-                        : timeOfApplOfTourniquetMm
+                      : timeOfAppOfTourniquetKnifeMm.length === 1
+                        ? `0${timeOfAppOfTourniquetKnifeMm}`
+                        : timeOfAppOfTourniquetKnifeMm
                   );
                 }}
               />
@@ -182,7 +184,7 @@ export const FourthSectionKnifeWounds = () => {
             <span className={s.title}>Давящая повязка</span>
             <div className={s.checkboxRadio}>
               <RadioButtonTrue
-                id={"1_1"}
+                id={"pressureBandage_1"}
                 value={"true"}
                 onChange={(str) => {
                   setPressureBandage(str);
@@ -192,7 +194,7 @@ export const FourthSectionKnifeWounds = () => {
                 currentValue={pressureBandage}
               />
               <RadioButtonFalse
-                id={"1_2"}
+                id={"pressureBandage_2"}
                 value={"false"}
                 onChange={(str) => {
                   setPressureBandage(str);
@@ -254,7 +256,7 @@ export const FourthSectionKnifeWounds = () => {
               <td className={s.tdButton}>
                 <RadioButton
                   id={"infusion"}
-                  value={"глюкоза  5%"}
+                  value={"глюкоза 5%"}
                   onChange={(str) => {
                     setInfusion(str);
                     onBlurHandler("infusion", str);
