@@ -42,7 +42,7 @@ export const ThirdSectionKnifeWounds = () => {
       ? setSymptomOfPaleSpot(
         quizList?.symptomOfPaleSpot === "менее 5 сек"
           ? "менее 5 сек"
-          : quizList?.symptomOfPaleSpot === "менее 5 сек"
+          : quizList?.symptomOfPaleSpot === "более 5 сек"
             ? "более 5 сек"
             : "менее 5 сек"
       )

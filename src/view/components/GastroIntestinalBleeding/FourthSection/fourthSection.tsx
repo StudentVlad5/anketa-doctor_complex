@@ -14,7 +14,7 @@ import {
   RadioButtonTrue,
 } from "../../../ui/RadioButtonWithoutSpan";
 
-export const FourthSectionKnifeWounds = () => {
+export const FourthSectionGastroIntestinalBleeding = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
 
@@ -28,8 +28,8 @@ export const FourthSectionKnifeWounds = () => {
     quizList?.infusion ?? ""
   );
 
-  const [timeOfAppOfTourniquetKnifeHh, setTimeOfAppOfTourniquetKnifeHh] = useState<string>("00");
-  const [timeOfAppOfTourniquetKnifeMm, setTimeOfAppOfTourniquetKnifeMm] = useState<string>("00");
+  const [timeOfAppOfTourniquetGastroHh, setTimeOfAppOfTourniquetGastroHh] = useState<string>("00");
+  const [timeOfAppOfTourniquetGastroMm, setTimeOfAppOfTourniquetGastroMm] = useState<string>("00");
   const [pressureBandage, setPressureBandage] = useState<any>(
     quizList?.pressureBandage ?? ""
   );
@@ -80,12 +80,12 @@ export const FourthSectionKnifeWounds = () => {
       )
       : setInfusion("");
 
-    quizList?.setTimeOfAppOfTourniquetKnifeHh
-      ? setTimeOfAppOfTourniquetKnifeHh(quizList?.timeOfAppOfTourniquetKnifeHh)
-      : setTimeOfAppOfTourniquetKnifeHh("00");
-    quizList?.setTimeOfAppOfTourniquetKnifeMm
-      ? setTimeOfAppOfTourniquetKnifeMm(quizList?.timeOfAppOfTourniquetKnifeMm)
-      : setTimeOfAppOfTourniquetKnifeMm("00");
+    quizList?.setTimeOfAppOfTourniquetGastroHh
+      ? setTimeOfAppOfTourniquetGastroHh(quizList?.timeOfAppOfTourniquetGastroHh)
+      : setTimeOfAppOfTourniquetGastroHh("00");
+    quizList?.setTimeOfAppOfTourniquetGastroMm
+      ? setTimeOfAppOfTourniquetGastroMm(quizList?.timeOfAppOfTourniquetGastroMm)
+      : setTimeOfAppOfTourniquetGastroMm("00");
 
     quizList?.pressureBandage
       ? setPressureBandage(
@@ -154,28 +154,28 @@ export const FourthSectionKnifeWounds = () => {
             <div className={s.whiteBox}>
               <InputTime
                 title={""}
-                valueHh={timeOfAppOfTourniquetKnifeHh}
-                valueMm={timeOfAppOfTourniquetKnifeMm}
-                onChangeHh={(str) => setTimeOfAppOfTourniquetKnifeHh(str)}
-                onChangeMm={(str) => setTimeOfAppOfTourniquetKnifeMm(str)}
+                valueHh={timeOfAppOfTourniquetGastroHh}
+                valueMm={timeOfAppOfTourniquetGastroMm}
+                onChangeHh={(str) => setTimeOfAppOfTourniquetGastroHh(str)}
+                onChangeMm={(str) => setTimeOfAppOfTourniquetGastroMm(str)}
                 onBlurHh={() =>
                   onBlurHandler(
-                    "timeOfAppOfTourniquetKnifeHh",
-                    !timeOfAppOfTourniquetKnifeHh
+                    "timeOfAppOfTourniquetGastroHh",
+                    !timeOfAppOfTourniquetGastroHh
                       ? "00"
-                      : timeOfAppOfTourniquetKnifeHh.length === 1
-                        ? `0${timeOfAppOfTourniquetKnifeHh}`
-                        : timeOfAppOfTourniquetKnifeHh
+                      : timeOfAppOfTourniquetGastroHh.length === 1
+                        ? `0${timeOfAppOfTourniquetGastroHh}`
+                        : timeOfAppOfTourniquetGastroHh
                   )
                 }
                 onBlurMm={() => {
                   onBlurHandler(
-                    "timeOfAppOfTourniquetKnifeMm",
-                    !timeOfAppOfTourniquetKnifeMm
+                    "timeOfAppOfTourniquetGastroMm",
+                    !timeOfAppOfTourniquetGastroMm
                       ? "00"
-                      : timeOfAppOfTourniquetKnifeMm.length === 1
-                        ? `0${timeOfAppOfTourniquetKnifeMm}`
-                        : timeOfAppOfTourniquetKnifeMm
+                      : timeOfAppOfTourniquetGastroMm.length === 1
+                        ? `0${timeOfAppOfTourniquetGastroMm}`
+                        : timeOfAppOfTourniquetGastroMm
                   );
                 }}
               />

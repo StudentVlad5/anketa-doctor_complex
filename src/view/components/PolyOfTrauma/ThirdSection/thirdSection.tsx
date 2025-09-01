@@ -48,7 +48,7 @@ export const ThirdSectionPolyOfTrauma = () => {
       ? setSymptomOfPaleSpot(
         quizList?.symptomOfPaleSpot === "менее 5 сек"
           ? "менее 5 сек"
-          : quizList?.symptomOfPaleSpot === "менее 5 сек"
+          : quizList?.symptomOfPaleSpot === "более 5 сек"
             ? "более 5 сек"
             : "менее 5 сек"
       )
@@ -66,11 +66,11 @@ export const ThirdSectionPolyOfTrauma = () => {
 
     quizList?.bloodLossCheck
       ? setBloodLossCheck(
-        quizList?.bloodLossCheck === "открытая рана"
-          ? "открытая рана"
-          : quizList?.bloodLossCheck === "закрытая рана"
-            ? "закрытая рана"
-            : "открытая рана"
+        quizList?.bloodLossCheck === "да"
+          ? "да"
+          : quizList?.bloodLossCheck === "нет"
+            ? "нет"
+            : "да"
       )
       : setBloodLossCheck("");
 
