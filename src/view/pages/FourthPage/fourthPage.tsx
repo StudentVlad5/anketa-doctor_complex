@@ -3,6 +3,8 @@ import s from "./index.module.scss";
 import { FourthSectionStroke } from "../../components/Stroke/FourthSection/fourthSection";
 import { FourthSectionPregnance } from "../../components/Pregnance/FourthSection/fourthSection";
 import { FourthSectionAlergoCod } from "../../components/AlergoCod/FourthSection/fourthSection";
+import { FourthSectionKnifeWounds } from "../../components/KnifeWounds/FourthSection/fourthSection";
+import { FourthSectionPolyOfTrauma } from "../../components/PolyOfTrauma/FourthSection/fourthSection";
 
 export const FourthPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -13,6 +15,8 @@ export const FourthPage = ({ pointId }: { pointId: string }) => {
       {pointId === "stroke" && <FourthSectionStroke />}
       {pointId === "pregnancy" && <FourthSectionPregnance />}
       {pointId === "alergoCod" && <FourthSectionAlergoCod />}
+      {pointId === "knifeWounds" && <FourthSectionKnifeWounds />}
+      {pointId === "polyOfTrauma" && <FourthSectionPolyOfTrauma />}
     </div>
   );
 };
