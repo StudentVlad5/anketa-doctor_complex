@@ -8,6 +8,7 @@ export const listOfPoints = [
   { case: "Ожоги", color: "#ff7a00", id: "burns", maxPage: 4 },
   { case: "Беременность", color: "#0fb13c", id: "pregnancy", maxPage: 6 },
   { case: "Ножевые ранения", color: "#896008", id: "knifeWounds", maxPage: 4 },
+  { case: "Код Кардио", color: "#f15a5a", id: "codeCardio", maxPage: 6 },
   {
     case: "Желудочно-кишечные кровотечения",
     color: "#0b8dff",

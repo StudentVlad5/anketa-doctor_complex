@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { SixthSectionPregnance } from "../../components/Pregnance/SixthSection/sixthSection";
 import { SixthSectionStroke } from "../../components/Stroke/SixthSection/sixthSection";
 import { SixthSectionAlergoCod } from "../../components/AlergoCod/SixthSection/sixthSection";
+import { SixthSectionCodeCardio } from "../../components/CodeCardio/SixthSection/sixthSection";
 
 export const SixthPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -13,6 +14,7 @@ export const SixthPage = ({ pointId }: { pointId: string }) => {
       {pointId === "stroke" && <SixthSectionStroke />}
       {pointId === "pregnancy" && <SixthSectionPregnance />}
       {pointId === "alergoCod" && <SixthSectionAlergoCod />}
+      {pointId === "codeCardio" && <SixthSectionCodeCardio />}
     </div>
   );
 };

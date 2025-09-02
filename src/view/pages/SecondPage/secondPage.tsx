@@ -7,7 +7,7 @@ import { SecondSectionKnifeWounds } from "../../components/KnifeWounds/SecondSec
 import { SecondSectionPolyOfTrauma } from "../../components/PolyOfTrauma/SecondSection/secondSection";
 import { SecondSectionBurns } from "../../components/Burns/SecondSection/secondSection";
 import { SecondSectionGastroIntestinalBleeding } from "../../components/GastroIntestinalBleeding/SecondSection/secondSection";
-
+import { SecondSectionCodeCardio } from "../../components/CodeCardio/SecondSection/secondSection";
 
 export const SecondPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -21,8 +21,10 @@ export const SecondPage = ({ pointId }: { pointId: string }) => {
       {pointId === "knifeWounds" && <SecondSectionKnifeWounds />}
       {pointId === "polyOfTrauma" && <SecondSectionPolyOfTrauma />}
       {pointId === "burns" && <SecondSectionBurns />}
-      {pointId === "gastrointestinalBleeding" && <SecondSectionGastroIntestinalBleeding />}
-
+      {pointId === "codeCardio" && <SecondSectionCodeCardio />}
+      {pointId === "gastrointestinalBleeding" && (
+        <SecondSectionGastroIntestinalBleeding />
+      )}
     </div>
   );
 };

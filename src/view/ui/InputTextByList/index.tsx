@@ -1,9 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import s from './index.module.scss';
-import classNames from 'classnames';
-import { InputHTMLAttributes } from 'react';
+import React, { useEffect, useState, useRef } from "react";
+import s from "./index.module.scss";
+import classNames from "classnames";
+import { InputHTMLAttributes } from "react";
 
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'onSubmit'>;
+type HTMLInputProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "value" | "onChange" | "onSubmit"
+>;
 
 interface InputTextByListProps extends HTMLInputProps {
   className?: string;
@@ -25,7 +28,6 @@ export const InputTextByList = ({
   onSubmit,
   ...otherProps
 }: InputTextByListProps) => {
-
   const [filteredLists, setFilteredList] = useState<string[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -34,16 +36,18 @@ export const InputTextByList = ({
     const newValue = e.target.value;
     setValue && setValue(newValue);
     setFilteredList(
-        listValue.filter(it => it.toLowerCase().includes(newValue.toLowerCase()))
+      listValue.filter((it) =>
+        it.toLowerCase().includes(newValue.toLowerCase())
+      )
     );
   };
 
   const toggleDropdown = () => {
     if (showDropdown) {
       setShowDropdown(false);
-      setFilteredList([])
+      setFilteredList([]);
     } else {
-      setFilteredList(listValue); // показує всі номери
+      setFilteredList(listValue);
       setShowDropdown(true);
     }
   };
@@ -51,7 +55,7 @@ export const InputTextByList = ({
   const handleSelect = (item: string) => {
     setValue && setValue(item);
     setFilteredList([]);
-    setShowDropdown(false)
+    setShowDropdown(false);
   };
 
   // Debounce submission
@@ -63,7 +67,9 @@ export const InputTextByList = ({
     }
 
     timeoutRef.current = setTimeout(() => {
-      if(onSubmit){onSubmit(true)};
+      if (onSubmit) {
+        onSubmit(true);
+      }
     }, 4000);
 
     return () => {
@@ -88,14 +94,14 @@ export const InputTextByList = ({
           onChange={handleChange}
           {...otherProps}
         />
-          <button
-            type="button"
-            className={s.iconButton}
-            onClick={toggleDropdown}
-            aria-label="Toggle list"
-          >
-           {showDropdown ? "▲": "▼" }
-          </button>
+        <button
+          type="button"
+          className={s.iconButton}
+          onClick={toggleDropdown}
+          aria-label="Toggle list"
+        >
+          {showDropdown ? "▲" : "▼"}
+        </button>
       </div>
       {(showDropdown || filteredLists.length > 0) && (
         <ul className={s.dropdown}>

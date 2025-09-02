@@ -3,6 +3,7 @@ import { FifthSectionStroke } from "../../components/Stroke/FifthSection/fifthSe
 import { useEffect } from "react";
 import { FifthSectionPregnance } from "../../components/Pregnance/FifthSection/fifthSection";
 import { FifthSectionAlergoCod } from "../../components/AlergoCod/FifthSection/fifthSection";
+import { FifthSectionCodeCardio } from "../../components/CodeCardio/FifthSection/fifthSection";
 
 export const FifthPage = ({ pointId }: { pointId: string }) => {
   useEffect(() => {
@@ -13,6 +14,7 @@ export const FifthPage = ({ pointId }: { pointId: string }) => {
       {pointId === "stroke" && <FifthSectionStroke />}
       {pointId === "pregnancy" && <FifthSectionPregnance />}
       {pointId === "alergoCod" && <FifthSectionAlergoCod />}
+      {pointId === "codeCardio" && <FifthSectionCodeCardio />}
     </div>
   );
 };
