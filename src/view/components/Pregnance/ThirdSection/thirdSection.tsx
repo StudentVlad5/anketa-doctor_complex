@@ -1,6 +1,6 @@
 import s from "./index.module.scss";
 import { Title } from "../../../ui/Title";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useAppSelector,
   useThunks,
@@ -13,10 +13,12 @@ import {
 } from "../../../ui/RadioButtonWithoutSpan";
 import { CheckBox } from "../../../ui/CheckBox";
 import { Textarea } from "../../../ui/Textarea";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const ThirdSectionPregnance = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [ad, setAd] = useState<string>(quizList?.ad ?? "");
   const [headPain, setHeadPain] = useState<string>(quizList?.headPain ?? "");
@@ -40,7 +42,7 @@ export const ThirdSectionPregnance = () => {
   const [other, setOther] = useState<boolean>(false);
   const [noteToOther, setNoteToOther] = useState<string>("");
 
-  useMemo(() => {
+  useEffect(() => {
     if (quizList) {
       setAd(quizList?.ad ?? "");
       setHeadPain(quizList?.headPain ?? "");
@@ -81,14 +83,6 @@ export const ThirdSectionPregnance = () => {
         : setOther(false);
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   function handleChangeCheckBox(e: any) {
     addQuizAnswerThunk({

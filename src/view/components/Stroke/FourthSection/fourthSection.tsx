@@ -1,6 +1,6 @@
 import s from "./index.module.scss";
 import { Title } from "../../../ui/Title";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 // import {useDebounce} from "../../../common/helpers/useDebounceHook";
 import {
   useAppSelector,
@@ -9,10 +9,13 @@ import {
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButton } from "../../../ui/RadioButton";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
+import { validate } from "../../../../common/helpers/validate";
 
 export const FourthSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [bloodSugarLevel, setBloodSugarLevel] = useState(
     quizList?.bloodSugarLevel ?? ""
@@ -31,7 +34,7 @@ export const FourthSectionStroke = () => {
   );
   const [patientAge, setPatientAge] = useState(quizList?.patientAge ?? "");
 
-  useMemo(() => {
+  useEffect(() => {
     if (quizList) {
       setBloodSugarLevel(quizList?.bloodSugarLevel ?? "");
       setBodyTemperature(quizList?.bodyTemperature ?? "");
@@ -42,24 +45,6 @@ export const FourthSectionStroke = () => {
     }
   }, [quizList]);
 
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
   return (
     <div className={s.FourthSection}>
       <Title>Раздел 3: Соберите следующую информацию</Title>

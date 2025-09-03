@@ -14,10 +14,12 @@ import {
   RadioButtonTrue,
   RadioButtonUnknow,
 } from "../../../ui/RadioButtonWithoutSpan";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const ThirdSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [beginStrokeTreatment, setBeginStrokeTreatment] =
     useState<boolean>(false);
@@ -27,13 +29,6 @@ export const ThirdSectionStroke = () => {
   const [deliveryTimeHh, setDeliveryTimeHh] = useState<string>("");
   const [deliveryTimeMm, setDeliveryTimeMm] = useState<string>("");
   const [takeECG, setTakeECG] = useState<any>();
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   useEffect(() => {
     quizList?.beginStrokeTreatment
@@ -116,15 +111,30 @@ export const ThirdSectionStroke = () => {
       <div className={s.whiteBox}>
         <InputTime
           title={"Предполагаемое время доставки пациента в инсультный центр"}
+          placeholder="00"
           valueHh={deliveryTimeHh}
           valueMm={deliveryTimeMm}
           onChangeHh={(str) => setDeliveryTimeHh(str)}
           onChangeMm={(str) => setDeliveryTimeMm(str)}
           onBlurHh={() =>
-            onBlurHandler("deliveryTimeHh", deliveryTimeHh ?? "00")
+            onBlurHandler(
+              "deliveryTimeHh",
+              !deliveryTimeHh
+                ? "00"
+                : deliveryTimeHh.length === 1
+                ? `0${deliveryTimeHh}`
+                : deliveryTimeHh
+            )
           }
           onBlurMm={() => {
-            onBlurHandler("deliveryTimeMm", deliveryTimeMm ?? "00");
+            onBlurHandler(
+              "deliveryTimeMm",
+              !deliveryTimeMm
+                ? "00"
+                : deliveryTimeMm.length === 1
+                ? `0${deliveryTimeMm}`
+                : deliveryTimeMm
+            );
           }}
         />
       </div>

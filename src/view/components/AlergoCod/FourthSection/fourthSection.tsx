@@ -11,10 +11,12 @@ import {
   RadioButtonFalse,
   RadioButtonTrue,
 } from "../../../ui/RadioButtonWithoutSpan";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const FourthSectionAlergoCod = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [painInTheStomach, setPainInTheStomach] = useState("");
   const [pressureReduction, setPressureReduction] = useState("");
@@ -37,14 +39,6 @@ export const FourthSectionAlergoCod = () => {
       quizList?.cyanosis ? setCyanosis(quizList?.cyanosis) : setCyanosis("");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   return (
     <div className={s.ThirdSection}>

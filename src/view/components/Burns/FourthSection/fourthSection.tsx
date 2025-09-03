@@ -12,10 +12,12 @@ import {
   RadioButtonTrue,
 } from "../../../ui/RadioButtonWithoutSpan";
 import { InputTime } from "../../../ui/InputTime";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const FourthSectionBurns = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [analgesia, setAnalgesia] = useState("");
   const [pressureBandage, setPressureBandage] = useState("");
@@ -34,12 +36,6 @@ export const FourthSectionBurns = () => {
       setInfusion(quizList?.infusion ?? "");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: { [name]: value },
-    });
-  };
 
   return (
     <div className={s.FourthSection}>

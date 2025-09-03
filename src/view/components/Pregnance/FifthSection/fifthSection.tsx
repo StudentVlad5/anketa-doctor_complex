@@ -57,6 +57,7 @@ export const FifthSectionPregnance = () => {
         break;
     }
   }
+
   return (
     <div className={s.FifthSection}>
       <Title>Раздел 5: Гипотензивное лечение</Title>

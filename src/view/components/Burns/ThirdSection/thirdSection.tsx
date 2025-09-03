@@ -10,10 +10,13 @@ import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
 import { Button } from "../../../ui/Button";
 import BodyModal from "./bodyModal";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const ThirdSectionBurns = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
+
   const [isOpen, setIsOpen] = useState(false);
   const [symptomPaleSpots, setSymptomPaleSpots] = useState("");
   const [localizationOfPlaces, setLocalizationOfPlaces] = useState("");
@@ -26,12 +29,6 @@ export const ThirdSectionBurns = () => {
       setSelectedZones(quizList?.selectedZones ?? []);
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: { [name]: value },
-    });
-  };
 
   return (
     <div className={s.ThirdSection}>

@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { useThunks } from "../../../../common/helpers/reduxHook";
 import "./bodyModal.css";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 interface BodyModalProps {
   isOpen: boolean;
@@ -29,7 +30,7 @@ const BodyModal: React.FC<BodyModalProps> = ({
   onClose,
 }) => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
-
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
   if (!isOpen) return null;
 
   const toggleZone = (zone: string) => {
@@ -38,13 +39,6 @@ const BodyModal: React.FC<BodyModalProps> = ({
     );
   };
 
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: { [name]: value },
-    });
-  };
-
-  console.log("selectedZones", selectedZones);
   const handleSave = () => {
     onBlurHandler("selectedZones", selectedZones);
     onClose();
@@ -67,7 +61,7 @@ const BodyModal: React.FC<BodyModalProps> = ({
           <X size={24} />
         </button>
 
-        <h2 className="modal-title">Оберіть уражені області</h2>
+        <h2 className="modal-title">Выберите пораженные области</h2>
 
         <div className="image-wrapper">
           <img src="/doctor_burn.jpg" alt="Body zones" className="body-img" />
@@ -95,7 +89,7 @@ const BodyModal: React.FC<BodyModalProps> = ({
             className="save-btn"
             onClick={handleSave}
           >
-            Зберегти
+            Сохранить
           </button>
           <button
             type="button"
@@ -103,7 +97,7 @@ const BodyModal: React.FC<BodyModalProps> = ({
             className="reset-btn"
             onClick={handleReset}
           >
-            Скинути
+            Очистить все
           </button>
         </div>
       </div>

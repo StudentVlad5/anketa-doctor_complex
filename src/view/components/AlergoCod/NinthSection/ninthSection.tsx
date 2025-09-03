@@ -11,10 +11,13 @@ import {
   RadioButtonFalse,
   RadioButtonTrue,
 } from "../../../ui/RadioButtonWithoutSpan";
+import { validate } from "../../../../common/helpers/validate";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const NinthSectionAlergoCod = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [adBefore, setAdBefore] = useState(quizList?.adBefore ?? "");
   const [adAfter, setAdAfter] = useState(quizList?.adAfter ?? "");
@@ -53,25 +56,6 @@ export const NinthSectionAlergoCod = () => {
       setConsciousnessAfter(quizList?.consciousnessAfter ?? "");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
 
   return (
     <div className={s.NinthSection}>

@@ -8,11 +8,12 @@ import { QuizThunks } from "../../../store/thunks/quiz.thunks";
 // import {useDebounce} from "../../../common/helpers/useDebounceHook";
 import { QuizState } from "../../../store/reducers/quiz.reducer";
 import { InputDate } from "../../ui/InputDate";
-
+import { useOnBlurHandler } from "../../../common/helpers/useOnBlurHandler";
 
 export const MethodologyFAST = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [saggingFace, setSaggingFace] = useState(false);
   const [handDisplacement, setHandDisplacement] = useState(false);
@@ -27,8 +28,6 @@ export const MethodologyFAST = () => {
     useState(false);
   const [firstSymptomsDate_unknown, setFirstSymptomsDate_unknown] =
     useState(false);
-  // const start_time_auto = localStorage.getItem("start_time_auto");
-  // const start_date_auto = new Date(Number(localStorage.getItem("id"))).toLocaleDateString().split(".").reverse().join('-');
 
   const onChangeHandler = (e: any, setValue: any) => {
     setValue(e.target.checked);
@@ -81,14 +80,6 @@ export const MethodologyFAST = () => {
     quizList?.firstSymptomsTime_unknown,
     quizList?.firstSymptomsDate_unknown,
   ]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   return (
     <div className={s.MethodologyFAST}>
@@ -157,6 +148,7 @@ export const MethodologyFAST = () => {
         <div className={s.timeBlock}>
           <InputTime
             title={"Введите дату и время появления первых симптомов"}
+            placeholder="00"
             valueHh={firstSymptomsTimeHh}
             valueMm={firstSymptomsTimeMm}
             onChangeHh={(str) => setFirstSymptomsTimeHh(str)}
@@ -166,19 +158,34 @@ export const MethodologyFAST = () => {
                 "start_time",
                 `${firstSymptomsTimeHh ?? "00"}:${firstSymptomsTimeMm ?? "00"}`
               );
-              onBlurHandler("firstSymptomsTimeHh", firstSymptomsTimeHh ?? "00");
+              onBlurHandler(
+                "firstSymptomsTimeHh",
+                !firstSymptomsTimeHh
+                  ? "00"
+                  : firstSymptomsTimeHh.length === 1
+                  ? `0${firstSymptomsTimeHh}`
+                  : firstSymptomsTimeHh
+              );
             }}
             onBlurMm={() => {
               localStorage.setItem(
                 "start_time",
                 `${firstSymptomsTimeHh ?? "00"}:${firstSymptomsTimeMm ?? "00"}`
               );
-              onBlurHandler("firstSymptomsTimeMm", firstSymptomsTimeMm ?? "00");
+              onBlurHandler(
+                "firstSymptomsTimeMm",
+                !firstSymptomsTimeMm
+                  ? "00"
+                  : firstSymptomsTimeMm.length === 1
+                  ? `0${firstSymptomsTimeMm}`
+                  : firstSymptomsTimeMm
+              );
             }}
           />
 
           <InputDate
             valueDate={firstSymptomsDate}
+            max={new Date().toISOString().split("T")[0]}
             onChangeDate={(e) => setFirstSymptomsDate(e.target.value)}
             onBlur={() => {
               onBlurHandler("firstSymptomsDate", firstSymptomsDate ?? "");
@@ -193,12 +200,7 @@ export const MethodologyFAST = () => {
             checked={firstSymptomsTime_unknown}
             onChange={(e) => {
               onChangeHandler(e, setFirstSymptomsTime_unknown);
-              // localStorage.setItem(
-              //   "start_time", "00:00");
-              // onBlurHandler("firstSymptomsTimeHh", "00");
-              // onBlurHandler("firstSymptomsTimeMm", "00");
               onBlurHandler("firstSymptomsTime_unknown", e.target.checked);
-              // firstSymptomsTime_unknown && onBlurHandler("firstSymptomsDate_unknown", false);
             }}
           >
             <span className={s.title}>время не известно</span>
@@ -210,15 +212,6 @@ export const MethodologyFAST = () => {
             onChange={(e) => {
               onChangeHandler(e, setFirstSymptomsDate_unknown);
               onBlurHandler("firstSymptomsDate_unknown", e.target.checked);
-              // !firstSymptomsDate_unknown ? localStorage.setItem(
-              //   "start_time", `${start_time_auto}`) : localStorage.setItem(
-              //   "start_time", `${firstSymptomsTimeHh}:${firstSymptomsTimeMm}`);
-              //   !firstSymptomsDate_unknown &&  setFirstSymptomsDate(start_date_auto);
-              //   !firstSymptomsDate_unknown && onBlurHandler("firstSymptomsDate", start_date_auto);
-              //   !firstSymptomsDate_unknown && onBlurHandler("firstSymptomsTime_unknown", true);
-              //   !firstSymptomsDate_unknown && onBlurHandler("firstSymptomsTimeHh", `${localStorage.getItem("start_time")?.split(":")[0]}`);
-              //   !firstSymptomsDate_unknown && onBlurHandler("firstSymptomsTimeMm", `${localStorage.getItem("start_time")?.split(":")[1]}`);
-
             }}
           >
             <span className={s.title}>дата не известна</span>

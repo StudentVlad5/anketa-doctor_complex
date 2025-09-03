@@ -10,65 +10,59 @@ import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { InputTime } from "../../../ui/InputTime";
 import { InputDate } from "../../../ui/InputDate";
 import { InputText } from "../../../ui/InputText";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const SecondSectionAlergoCod = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [startTimeOfSimptomsHh, setStartTimeOfSimptomsHh] =
     useState<string>("00");
   const [startTimeOfSimptomsMm, setStartTimeOfSimptomsMm] =
     useState<string>("00");
 
-  const [timeOfCallingHh, setTimeOfCallingHh] = useState<string>("00");
-  const [timeOfCallingMm, setTimeOfCallingMm] = useState<string>("00");
+  const [timeOfCallingHh, setTimeOfCallingHh] = useState<string>("");
+  const [timeOfCallingMm, setTimeOfCallingMm] = useState<string>("");
 
-  const [timeOfArrivingHh, setTimeOfArrivingHh] = useState<string>("00");
-  const [timeOfArrivingMm, setTimeOfArrivingMm] = useState<string>("00");
+  const [timeOfArrivingHh, setTimeOfArrivingHh] = useState<string>("");
+  const [timeOfArrivingMm, setTimeOfArrivingMm] = useState<string>("");
 
   const [dateOfReview, setDateOfReview] = useState<string>("");
-  const [timeOfReviewHh, setTimeOfReviewHh] = useState<string>("00");
-  const [timeOfReviewMm, setTimeOfReviewMm] = useState<string>("00");
+  const [timeOfReviewHh, setTimeOfReviewHh] = useState<string>("");
+  const [timeOfReviewMm, setTimeOfReviewMm] = useState<string>("");
   const [nameOfParamedic, setNameOfParamedic] = useState<string>("");
   const [numberOfBrigade, setNumberOfBrigade] = useState<string>("");
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   useEffect(() => {
     if (quizList) {
       quizList?.startTimeOfSimptomsHh
         ? setStartTimeOfSimptomsHh(quizList?.startTimeOfSimptomsHh)
-        : setStartTimeOfSimptomsHh("00");
+        : setStartTimeOfSimptomsHh("");
       quizList?.startTimeOfSimptomsMm
         ? setStartTimeOfSimptomsMm(quizList?.startTimeOfSimptomsMm)
-        : setStartTimeOfSimptomsMm("00");
+        : setStartTimeOfSimptomsMm("");
       quizList?.timeOfCallingHh
         ? setTimeOfCallingHh(quizList?.timeOfCallingHh)
-        : setTimeOfCallingHh("00");
+        : setTimeOfCallingHh("");
       quizList?.timeOfCallingMm
         ? setTimeOfCallingMm(quizList?.timeOfCallingMm)
-        : setTimeOfCallingMm("00");
+        : setTimeOfCallingMm("");
       quizList?.timeOfArrivingHh
         ? setTimeOfArrivingHh(quizList?.timeOfArrivingHh)
-        : setTimeOfArrivingHh("00");
+        : setTimeOfArrivingHh("");
       quizList?.timeOfArrivingMm
         ? setTimeOfArrivingMm(quizList?.timeOfArrivingMm)
-        : setTimeOfArrivingMm("00");
+        : setTimeOfArrivingMm("");
       quizList?.dateOfReview
         ? setDateOfReview(quizList?.dateOfReview)
         : setDateOfReview("");
       quizList?.timeOfReviewHh
         ? setTimeOfReviewHh(quizList?.timeOfReviewHh)
-        : setTimeOfReviewHh("00");
+        : setTimeOfReviewHh("");
       quizList?.timeOfReviewMm
         ? setTimeOfReviewMm(quizList?.timeOfReviewMm)
-        : setTimeOfReviewMm("00");
+        : setTimeOfReviewMm("");
       quizList?.nameOfParamedic
         ? setNameOfParamedic(quizList?.nameOfParamedic)
         : setNameOfParamedic("");
@@ -86,6 +80,7 @@ export const SecondSectionAlergoCod = () => {
           <div className={s.whiteBox}>
             <InputTime
               title={"Время начала симптомов"}
+              placeholder={"00"}
               valueHh={startTimeOfSimptomsHh}
               valueMm={startTimeOfSimptomsMm}
               onChangeHh={(str) => setStartTimeOfSimptomsHh(str)}
@@ -115,6 +110,7 @@ export const SecondSectionAlergoCod = () => {
           <div className={s.whiteBox}>
             <InputTime
               title={"Время поступления вызова"}
+              placeholder={"00"}
               valueHh={timeOfCallingHh}
               valueMm={timeOfCallingMm}
               onChangeHh={(str) => setTimeOfCallingHh(str)}
@@ -144,6 +140,7 @@ export const SecondSectionAlergoCod = () => {
           <div className={s.whiteBox}>
             <InputTime
               title={"Время прибытия на место"}
+              placeholder={"00"}
               valueHh={timeOfArrivingHh}
               valueMm={timeOfArrivingMm}
               onChangeHh={(str) => setTimeOfArrivingHh(str)}
@@ -188,6 +185,7 @@ export const SecondSectionAlergoCod = () => {
               title={""}
               valueHh={timeOfReviewHh}
               valueMm={timeOfReviewMm}
+              placeholder={"00"}
               onChangeHh={(str) => setTimeOfReviewHh(str)}
               onChangeMm={(str) => setTimeOfReviewMm(str)}
               onBlurHh={() =>

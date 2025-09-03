@@ -14,10 +14,12 @@ import {
 } from "../../../ui/RadioButtonWithoutSpan";
 import { Textarea } from "../../../ui/Textarea";
 import { CheckBox } from "../../../ui/CheckBox";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const SixthSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [smallOperations, setSmallOperations] = useState<any>();
   const [cardiovascularDiseases, setCardiovascularDiseases] = useState<any>();
@@ -34,14 +36,6 @@ export const SixthSectionStroke = () => {
   ] = useState<boolean>(false);
   const [unknown_accident, setUnknown_accident] = useState<boolean>(false);
   const [noteChecklistSMP, setNoteChecklistSMP] = useState<string>("");
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   useEffect(() => {
     quizList?.smallOperations

@@ -9,10 +9,12 @@ import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
 import { InputText } from "../../../ui/InputText";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const SecondSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [isChestPain, setIsChestPain] = useState("");
   const [natureChestPain, setNatureChestPain] = useState("");
@@ -37,12 +39,6 @@ export const SecondSectionCodeCardio = () => {
       setIsLossOfConsciousness(quizList?.isLossOfConsciousness ?? "");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: { [name]: value },
-    });
-  };
 
   return (
     <div className={s.SecondSection}>

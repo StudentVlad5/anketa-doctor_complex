@@ -1,6 +1,6 @@
 import s from "./index.module.scss";
 import { Title } from "../../../ui/Title";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useAppSelector,
   useThunks,
@@ -11,10 +11,12 @@ import {
   RadioButtonTrue,
   RadioButtonFalse,
 } from "../../../ui/RadioButtonWithoutSpan";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const FourthSectionPregnance = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [startingDose, setStartingDose] = useState<string>(
     quizList?.startingDose ?? ""
@@ -23,20 +25,12 @@ export const FourthSectionPregnance = () => {
     quizList?.maintenanceDose ?? ""
   );
 
-  useMemo(() => {
+  useEffect(() => {
     if (quizList) {
       setStartingDose(quizList?.startingDose ?? "");
       setMaintenanceDose(quizList?.maintenanceDose ?? "");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   return (
     <div className={s.FourthSection}>

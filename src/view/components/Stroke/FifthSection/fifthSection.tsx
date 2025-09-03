@@ -12,10 +12,12 @@ import {
   RadioButtonFalse,
   RadioButtonUnknow,
 } from "../../../ui/RadioButtonWithoutSpan";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const FifthSectionStroke = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [intracranialHemorrhages, setIntracranialHemorrhages] = useState<any>();
   const [majorSurgeriesOrSevereInjuries, setMajorSurgeriesOrSevereInjuries] =
@@ -24,14 +26,6 @@ export const FifthSectionStroke = () => {
   const [myocardialInfarction, setMyocardialInfarction] = useState<any>();
   const [stroke, setStroke] = useState<any>();
   const [arterialPuncture, setArterialPuncture] = useState<any>();
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   useEffect(() => {
     quizList?.intracranialHemorrhages

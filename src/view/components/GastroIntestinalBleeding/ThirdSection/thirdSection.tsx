@@ -8,14 +8,22 @@ import {
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButton } from "../../../ui/RadioButton";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
+import { validate } from "../../../../common/helpers/validate";
 
 export const ThirdSectionGastroIntestinalBleeding = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [symptomOfPaleSpot, setSymptomOfPaleSpot] = useState<any>();
-  const [localizationOfGastroIntestinalBleeding, setLocalizationOfGastroIntestinalBleeding] = useState<string>(
-    quizList?.localizationOfGastroIntestinalBleeding ? quizList.localizationOfGastroIntestinalBleeding : ""
+  const [
+    localizationOfGastroIntestinalBleeding,
+    setLocalizationOfGastroIntestinalBleeding,
+  ] = useState<string>(
+    quizList?.localizationOfGastroIntestinalBleeding
+      ? quizList.localizationOfGastroIntestinalBleeding
+      : ""
   );
   const [vomitingBlood, setVomitingBlood] = useState<any>(
     quizList?.vomitingBlood ?? ""
@@ -26,17 +34,7 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
   const [colorOfBlood, setColorOfBlood] = useState<any>(
     quizList?.colorOfBlood ?? ""
   );
-  const [bloodLoss, setBloodLoss] = useState<any>(
-    quizList?.bloodLoss ?? ""
-  );
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
+  const [bloodLoss, setBloodLoss] = useState<any>(quizList?.bloodLoss ?? "");
 
   useMemo(() => {
     if (quizList) {
@@ -47,67 +45,54 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
   useEffect(() => {
     quizList?.symptomOfPaleSpot
       ? setSymptomOfPaleSpot(
-        quizList?.symptomOfPaleSpot === "менее 5 сек"
-          ? "менее 5 сек"
-          : quizList?.symptomOfPaleSpot === "более 5 сек"
+          quizList?.symptomOfPaleSpot === "менее 5 сек"
+            ? "менее 5 сек"
+            : quizList?.symptomOfPaleSpot === "более 5 сек"
             ? "более 5 сек"
             : "менее 5 сек"
-      )
+        )
       : setSymptomOfPaleSpot("");
 
     quizList?.localizationOfGastroIntestinalBleeding
       ? setLocalizationOfGastroIntestinalBleeding(
-        quizList?.localizationOfGastroIntestinalBleeding === "желудок"
-          ? "желудок"
-          : quizList?.localizationOfGastroIntestinalBleeding === "кишечник"
+          quizList?.localizationOfGastroIntestinalBleeding === "желудок"
+            ? "желудок"
+            : quizList?.localizationOfGastroIntestinalBleeding === "кишечник"
             ? "кишечник"
             : "желудок"
-      )
+        )
       : setLocalizationOfGastroIntestinalBleeding("");
 
     quizList?.vomitingBlood
       ? setVomitingBlood(
-        quizList?.vomitingBlood === "да"
-          ? "да"
-          : quizList?.vomitingBlood === "нет"
+          quizList?.vomitingBlood === "да"
+            ? "да"
+            : quizList?.vomitingBlood === "нет"
             ? "нет"
             : "да"
-      )
+        )
       : setVomitingBlood("");
 
     quizList?.stoolWithBlood
       ? setStoolWithBlood(
-        quizList?.stoolWithBlood === "да"
-          ? "да"
-          : quizList?.stoolWithBlood === "нет"
+          quizList?.stoolWithBlood === "да"
+            ? "да"
+            : quizList?.stoolWithBlood === "нет"
             ? "нет"
             : "да"
-      )
+        )
       : setStoolWithBlood("");
 
     quizList?.colorOfBlood
       ? setColorOfBlood(
-        quizList?.colorOfBlood === "темная"
-          ? "темная"
-          : quizList?.colorOfBlood === "алая"
+          quizList?.colorOfBlood === "темная"
+            ? "темная"
+            : quizList?.colorOfBlood === "алая"
             ? "алая"
             : "темная"
-      )
+        )
       : setColorOfBlood("");
-  }, [
-    quizList
-  ]);
-
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
+  }, [quizList]);
 
   return (
     <div className={s.ThirdSection}>
@@ -116,11 +101,9 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
       <div className={s.inner}>
         <table>
           <tbody>
-            <tr className={s.tableRow} >
+            <tr className={s.tableRow}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Симптом бледного пятна
-                </span>
+                <span className={s.title}>Симптом бледного пятна</span>
               </td>
               <td className={s.tdButton}>
                 <RadioButton
@@ -158,7 +141,10 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
                   value={"желудок"}
                   onChange={(str) => {
                     setLocalizationOfGastroIntestinalBleeding(str);
-                    onBlurHandler("localizationOfGastroIntestinalBleeding", str);
+                    onBlurHandler(
+                      "localizationOfGastroIntestinalBleeding",
+                      str
+                    );
                   }}
                   name={"localizationOfGastroIntestinalBleeding"}
                   currentValue={localizationOfGastroIntestinalBleeding}
@@ -168,7 +154,10 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
                   value={"кишечник"}
                   onChange={(str) => {
                     setLocalizationOfGastroIntestinalBleeding(str);
-                    onBlurHandler("localizationOfGastroIntestinalBleeding", str);
+                    onBlurHandler(
+                      "localizationOfGastroIntestinalBleeding",
+                      str
+                    );
                   }}
                   name={"localizationOfGastroIntestinalBleeding"}
                   currentValue={localizationOfGastroIntestinalBleeding}
@@ -278,7 +267,8 @@ export const ThirdSectionGastroIntestinalBleeding = () => {
 
                   <div className={s.unit}>
                     <span>мл</span>
-                  </div></div>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>

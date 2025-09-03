@@ -1,6 +1,6 @@
 import s from "./index.module.scss";
 import { Title } from "../../../ui/Title";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import {
   useAppSelector,
   useThunks,
@@ -9,10 +9,13 @@ import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButton } from "../../../ui/RadioButton";
 import { InputText } from "../../../ui/InputText";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
+import { validate } from "../../../../common/helpers/validate";
 
 export const ThirdSectionPolyOfTrauma = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [symptomOfPaleSpot, setSymptomOfPaleSpot] = useState<any>();
   const [localizationOfWound, setLocalizationOfWound] = useState<string>(
@@ -21,22 +24,12 @@ export const ThirdSectionPolyOfTrauma = () => {
   const [wound, setWound] = useState<any>(
     quizList?.wound ? quizList.wound : ""
   );
-  const [bloodLoss, setBloodLoss] = useState<any>(
-    quizList?.bloodLoss ?? ""
-  );
+  const [bloodLoss, setBloodLoss] = useState<any>(quizList?.bloodLoss ?? "");
   const [bloodLossCheck, setBloodLossCheck] = useState<any>(
     quizList?.bloodLoss ?? ""
   );
 
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
-  useMemo(() => {
+  useEffect(() => {
     if (quizList) {
       setLocalizationOfWound(quizList?.localizationOfWound ?? "");
       setBloodLoss(quizList?.bloodLoss ?? "");
@@ -46,48 +39,34 @@ export const ThirdSectionPolyOfTrauma = () => {
   useEffect(() => {
     quizList?.symptomOfPaleSpot
       ? setSymptomOfPaleSpot(
-        quizList?.symptomOfPaleSpot === "менее 5 сек"
-          ? "менее 5 сек"
-          : quizList?.symptomOfPaleSpot === "более 5 сек"
+          quizList?.symptomOfPaleSpot === "менее 5 сек"
+            ? "менее 5 сек"
+            : quizList?.symptomOfPaleSpot === "более 5 сек"
             ? "более 5 сек"
             : "менее 5 сек"
-      )
+        )
       : setSymptomOfPaleSpot("");
 
     quizList?.wound
       ? setWound(
-        quizList?.wound === "открытая рана"
-          ? "открытая рана"
-          : quizList?.wound === "закрытая рана"
+          quizList?.wound === "открытая рана"
+            ? "открытая рана"
+            : quizList?.wound === "закрытая рана"
             ? "закрытая рана"
             : "открытая рана"
-      )
+        )
       : setWound("");
 
     quizList?.bloodLossCheck
       ? setBloodLossCheck(
-        quizList?.bloodLossCheck === "да"
-          ? "да"
-          : quizList?.bloodLossCheck === "нет"
+          quizList?.bloodLossCheck === "да"
+            ? "да"
+            : quizList?.bloodLossCheck === "нет"
             ? "нет"
             : "да"
-      )
+        )
       : setBloodLossCheck("");
-
-  }, [
-    quizList
-  ]);
-
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
+  }, [quizList]);
 
   return (
     <div className={s.ThirdSection}>
@@ -98,9 +77,7 @@ export const ThirdSectionPolyOfTrauma = () => {
           <tbody>
             <tr className={s.tableRow} style={{ alignItems: "flex-start" }}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Симптом бледного пятна
-                </span>
+                <span className={s.title}>Симптом бледного пятна</span>
               </td>
               <td className={s.tdButton}>
                 <RadioButton
@@ -128,18 +105,21 @@ export const ThirdSectionPolyOfTrauma = () => {
 
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Локализация ранения
-                </span>
+                <span className={s.title}>Локализация ранения</span>
               </td>
               <td className={s.tdButton}>
                 <InputText
                   onChange={(e) => setLocalizationOfWound(e.target.value)}
                   value={localizationOfWound}
-                  onBlur={() => onBlurHandler("localizationOfWound", localizationOfWound)}
+                  onBlur={() =>
+                    onBlurHandler("localizationOfWound", localizationOfWound)
+                  }
                 />
               </td>
-              <td className={s.tdButton} style={{ marginLeft: "auto", marginTop: "30px" }}>
+              <td
+                className={s.tdButton}
+                style={{ marginLeft: "auto", marginTop: "30px" }}
+              >
                 <RadioButton
                   id={"wound_1"}
                   value={"открытая рана"}
@@ -181,9 +161,13 @@ export const ThirdSectionPolyOfTrauma = () => {
 
                   <div className={s.unit}>
                     <span>мл</span>
-                  </div></div>
+                  </div>
+                </div>
               </td>
-              <td className={s.tdButton} style={{ marginLeft: "auto", marginTop: "30px" }}>
+              <td
+                className={s.tdButton}
+                style={{ marginLeft: "auto", marginTop: "30px" }}
+              >
                 <RadioButton
                   id={"bloodLossCheck_1"}
                   value={"да"}

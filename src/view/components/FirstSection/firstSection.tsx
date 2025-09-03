@@ -9,10 +9,12 @@ import { InputNumber } from "../../ui/InputNumber";
 import { QuizState } from "../../../store/reducers/quiz.reducer";
 import { InputDate } from "../../ui/InputDate";
 import { RadioButton } from "../../ui/RadioButton";
+import { useOnBlurHandler } from "../../../common/helpers/useOnBlurHandler";
 
 export const FirstSection = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [patientFullName, setPatientFullName] = useState<string>(
     quizList?.patientFullName ? quizList.patientFullName : ""
@@ -33,13 +35,6 @@ export const FirstSection = () => {
   const [invalidMessage, setInvalidMessage] = useState("");
   const [sex, setSex] = useState("");
 
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
   useEffect(() => {
     if (!quizList?.userLocation) {
       if (navigator.geolocation) {

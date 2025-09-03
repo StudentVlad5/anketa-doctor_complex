@@ -9,10 +9,12 @@ import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { CheckBox } from "../../../ui/CheckBox";
 import { InputText } from "../../../ui/InputText";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const SeventhSectionAlergoCod = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [isAdrenaline, setIsAdrenaline] = useState<boolean>(false);
   const [isDexamethasone, setIsDexamethasone] = useState<boolean>(false);
@@ -77,14 +79,6 @@ export const SeventhSectionAlergoCod = () => {
       default:
         break;
     }
-  };
-
-  const onBlurHandler = (name: string, value: string) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
   };
 
   return (

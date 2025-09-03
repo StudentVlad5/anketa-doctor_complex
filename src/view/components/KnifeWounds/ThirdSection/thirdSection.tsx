@@ -1,6 +1,6 @@
 import s from "./index.module.scss";
 import { Title } from "../../../ui/Title";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import {
   useAppSelector,
   useThunks,
@@ -9,28 +9,21 @@ import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButton } from "../../../ui/RadioButton";
 import { InputText } from "../../../ui/InputText";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
+import { validate } from "../../../../common/helpers/validate";
 
 export const ThirdSectionKnifeWounds = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [symptomOfPaleSpot, setSymptomOfPaleSpot] = useState<any>();
   const [localizationOfWound, setLocalizationOfWound] = useState<string>(
     quizList?.localizationOfWound ? quizList.localizationOfWound : ""
   );
-  const [bloodLoss, setBloodLoss] = useState<any>(
-    quizList?.bloodLoss ?? ""
-  );
+  const [bloodLoss, setBloodLoss] = useState<any>(quizList?.bloodLoss ?? "");
 
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
-  useMemo(() => {
+  useEffect(() => {
     if (quizList) {
       setLocalizationOfWound(quizList?.localizationOfWound ?? "");
       setBloodLoss(quizList?.bloodLoss ?? "");
@@ -40,28 +33,14 @@ export const ThirdSectionKnifeWounds = () => {
   useEffect(() => {
     quizList?.symptomOfPaleSpot
       ? setSymptomOfPaleSpot(
-        quizList?.symptomOfPaleSpot === "менее 5 сек"
-          ? "менее 5 сек"
-          : quizList?.symptomOfPaleSpot === "более 5 сек"
+          quizList?.symptomOfPaleSpot === "менее 5 сек"
+            ? "менее 5 сек"
+            : quizList?.symptomOfPaleSpot === "более 5 сек"
             ? "более 5 сек"
             : "менее 5 сек"
-      )
+        )
       : setSymptomOfPaleSpot("");
-
-  }, [
-    quizList?.symptomOfPaleSpot,
-  ]);
-
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
+  }, [quizList?.symptomOfPaleSpot]);
 
   return (
     <div className={s.ThirdSection}>
@@ -72,9 +51,7 @@ export const ThirdSectionKnifeWounds = () => {
           <tbody>
             <tr className={s.tableRow} style={{ alignItems: "flex-start" }}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Симптом бледного пятна
-                </span>
+                <span className={s.title}>Симптом бледного пятна</span>
               </td>
               <td className={s.tdButton}>
                 <RadioButton
@@ -102,15 +79,15 @@ export const ThirdSectionKnifeWounds = () => {
 
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Локализация ранения
-                </span>
+                <span className={s.title}>Локализация ранения</span>
               </td>
               <td className={s.tdButton}>
                 <InputText
                   onChange={(e) => setLocalizationOfWound(e.target.value)}
                   value={localizationOfWound}
-                  onBlur={() => onBlurHandler("localizationOfWound", localizationOfWound)}
+                  onBlur={() =>
+                    onBlurHandler("localizationOfWound", localizationOfWound)
+                  }
                 />
               </td>
             </tr>
@@ -133,7 +110,8 @@ export const ThirdSectionKnifeWounds = () => {
 
                   <div className={s.unit}>
                     <span>мл</span>
-                  </div></div>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import s from "./index.module.scss";
 import { Title } from "../../../ui/Title";
 import { CheckBox } from "../../../ui/CheckBox";
@@ -8,69 +8,46 @@ import {
 } from "../../../../common/helpers/reduxHook";
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
-
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
+import { validate } from "../../../../common/helpers/validate";
 
 export const SecondSectionKnifeWounds = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
-  const [clearConsciousness, setClearConsciousness] = useState<boolean>(false);
-  const [coma, setComa] = useState<boolean>(false);
-  const [stupor, setStupor] = useState<boolean>(false);
-  const [
-    sopor,
-    setSopor,
-  ] = useState<boolean>(false);
-  // const [unknown_accident, setUnknown_accident] = useState<boolean>(false);
+  const [clearConsciousness, setClearConsciousness] = useState<string>("");
+  const [coma, setComa] = useState<string>("");
+  const [stupor, setStupor] = useState<string>("");
+  const [sopor, setSopor] = useState<string>("");
 
   const [ad, setAd] = useState(quizList?.ad ?? "");
-  const [pulse, setPulse] = useState(
-    quizList?.pulse ?? ""
-  );
-  const [saturation, setSaturation] = useState(
-    quizList?.saturation ?? ""
-  );
+  const [pulse, setPulse] = useState(quizList?.pulse ?? "");
+  const [saturation, setSaturation] = useState(quizList?.saturation ?? "");
 
-  useMemo(() => {
+  useEffect(() => {
     if (quizList) {
+      setClearConsciousness(quizList?.clearConsciousness ?? "");
+      setComa(quizList?.coma ?? "");
+      setStupor(quizList?.stupor ?? "");
+      setSopor(quizList?.sopor ?? "");
       setAd(quizList?.ad ?? "");
       setPulse(quizList?.pulse ?? "");
       setSaturation(quizList?.saturation ?? "");
     }
   }, [quizList]);
 
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
-
   function handleChangeCheckBox(e: any) {
-    setClearConsciousness(false);
-    // setUnknown_accident(false);
-    setComa(false);
-    setStupor(false);
-    setSopor(false);
+    setClearConsciousness("false");
+    setComa("false");
+    setStupor("false");
+    setSopor("false");
     addQuizAnswerThunk({
       params: {
-        clearConsciousness: false,
-        coma: false,
-        stupor: false,
-        sopor: false,
-        // unknown_accident: false,
+        clearConsciousness: "false",
+        coma: "false",
+        stupor: "false",
+        sopor: "false",
         [e.target.id]: [e.target.checked],
       },
     });
@@ -87,9 +64,6 @@ export const SecondSectionKnifeWounds = () => {
       case "sopor":
         setSopor(e.target.checked);
         break;
-      // case "unknown_accident":
-      //   setUnknown_accident(e.target.checked);
-      //   break;
       default:
         break;
     }
@@ -105,7 +79,7 @@ export const SecondSectionKnifeWounds = () => {
             <CheckBox
               className={s.check}
               id={"clearConsciousness"}
-              checked={clearConsciousness}
+              checked={clearConsciousness === "true"}
               onChange={(e) => handleChangeCheckBox(e)}
             >
               <span className={s.title}>Ясное</span>
@@ -113,7 +87,7 @@ export const SecondSectionKnifeWounds = () => {
             <CheckBox
               className={s.check}
               id={"stupor"}
-              checked={stupor}
+              checked={stupor === "true"}
               onChange={(e) => handleChangeCheckBox(e)}
             >
               <span className={s.title}> Оглушение</span>
@@ -121,7 +95,7 @@ export const SecondSectionKnifeWounds = () => {
             <CheckBox
               className={s.check}
               id={"sopor"}
-              checked={sopor}
+              checked={sopor === "true"}
               onChange={(e) => handleChangeCheckBox(e)}
             >
               <span className={s.title}>Сопор</span>
@@ -129,19 +103,11 @@ export const SecondSectionKnifeWounds = () => {
             <CheckBox
               className={s.check}
               id={"coma"}
-              checked={coma}
+              checked={coma === "true"}
               onChange={(e) => handleChangeCheckBox(e)}
             >
               <span className={s.title}>Кома</span>
             </CheckBox>
-            {/* <CheckBox
-              className={s.check}
-              id={"unknown_accident"}
-              checked={unknown_accident}
-              onChange={(e) => handleChangeCheckBox(e)}
-            >
-              <span className={s.title}>Другое</span>
-            </CheckBox> */}
           </div>
         </div>
         <div className={s.primaryBox}>
@@ -157,10 +123,10 @@ export const SecondSectionKnifeWounds = () => {
                 onBlur={() => onBlurHandler("ad", ad)}
                 onKeyPress={validate}
               />
-
               <div className={s.unit}>
                 <span>мм рт ст</span>
-              </div> </div>
+              </div>{" "}
+            </div>
           </div>
           <div className={s.field}>
             <span className={s.title}>Пульс</span>
@@ -177,7 +143,8 @@ export const SecondSectionKnifeWounds = () => {
 
               <div className={s.unit}>
                 <span>уд в 1 минуту</span>
-              </div></div>
+              </div>
+            </div>
           </div>
           <div className={s.field}>
             <span className={s.title}>Сатурация</span>
@@ -193,9 +160,13 @@ export const SecondSectionKnifeWounds = () => {
               />
 
               <div className={s.unit}>
-                <span>P<small>SO2</small></span>
-              </div></div>
-          </div></div>
+                <span>
+                  P<small>SO2</small>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

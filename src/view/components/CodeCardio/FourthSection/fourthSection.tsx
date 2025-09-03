@@ -8,10 +8,12 @@ import {
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const FourthSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [isECCarriedOut, setIsECCarriedOut] = useState("");
   const [isElevation, setIsElevation] = useState("");
@@ -26,12 +28,6 @@ export const FourthSectionCodeCardio = () => {
       setIsFibrillation(quizList?.isFibrillation ?? "");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: { [name]: value },
-    });
-  };
 
   return (
     <div className={s.FourthSection}>

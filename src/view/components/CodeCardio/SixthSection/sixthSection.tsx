@@ -9,10 +9,13 @@ import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
 import { InputTime } from "../../../ui/InputTime";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
+import { validate } from "../../../../common/helpers/validate";
 
 export const SixthSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [timeOfBuginOfSymptomsHh, setTimeOfBuginOfSymptomsHh] = useState("");
   const [timeOfBuginOfSymptomsMm, setTimeOfBuginOfSymptomsMm] = useState("");
@@ -27,23 +30,6 @@ export const SixthSectionCodeCardio = () => {
       setIsVenousAccess(quizList?.isVenousAccess ?? "");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: { [name]: value },
-    });
-  };
-
-  function validate(evt: any) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    var regex = /[0-9]|\.|,/;
-    if (!regex.test(key)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
 
   return (
     <div className={s.SixthSection}>

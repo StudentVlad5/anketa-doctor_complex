@@ -10,10 +10,13 @@ import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
 import { BURN_TYPES, CONSCIOUSNESS_STATES } from "../../../../common/config";
 import classNames from "classnames";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
+import { validate } from "../../../../common/helpers/validate";
 
 export const SecondSectionBurns = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [consciousness, setConsciousness] = useState("");
   const [burnType, setBurnType] = useState("");
@@ -33,25 +36,6 @@ export const SecondSectionBurns = () => {
       if (foundBurn) setBurnType(foundBurn.name);
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
-  function validate(evt: any) {
-    const theEvent = evt || window.event;
-    const key = theEvent.keyCode || theEvent.which;
-    const keyChar = String.fromCharCode(key);
-    const regex = /[0-9]|\.|,/;
-    if (!regex.test(keyChar)) {
-      theEvent.returnValue = false;
-      if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-  }
 
   return (
     <div className={s.SecondSection}>

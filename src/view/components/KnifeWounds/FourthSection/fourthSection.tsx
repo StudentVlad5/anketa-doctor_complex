@@ -13,89 +13,79 @@ import {
   RadioButtonFalse,
   RadioButtonTrue,
 } from "../../../ui/RadioButtonWithoutSpan";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const FourthSectionKnifeWounds = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
-  const [anesthesia, setAnesthesia] = useState<any>(
-    quizList?.anesthesia ?? ""
-  );
-  const [instalOfPeripheralCatheter, setInstalOfPeripheralCatheter] = useState<any>(
-    quizList?.instalOfPeripheralCatheter ?? ""
-  );
-  const [infusion, setInfusion] = useState<any>(
-    quizList?.infusion ?? ""
-  );
+  const [anesthesia, setAnesthesia] = useState<any>(quizList?.anesthesia ?? "");
+  const [instalOfPeripheralCatheter, setInstalOfPeripheralCatheter] =
+    useState<any>(quizList?.instalOfPeripheralCatheter ?? "");
+  const [infusion, setInfusion] = useState<any>(quizList?.infusion ?? "");
 
-  const [timeOfAppOfTourniquetKnifeHh, setTimeOfAppOfTourniquetKnifeHh] = useState<string>("00");
-  const [timeOfAppOfTourniquetKnifeMm, setTimeOfAppOfTourniquetKnifeMm] = useState<string>("00");
+  const [timeOfAppOfTourniquetKnifeHh, setTimeOfAppOfTourniquetKnifeHh] =
+    useState<string>("");
+  const [timeOfAppOfTourniquetKnifeMm, setTimeOfAppOfTourniquetKnifeMm] =
+    useState<string>("");
   const [pressureBandage, setPressureBandage] = useState<any>(
     quizList?.pressureBandage ?? ""
   );
 
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
-
   useEffect(() => {
     quizList?.anesthesia
       ? setAnesthesia(
-        quizList?.anesthesia === "наркотическое"
-          ? "наркотическое"
-          : quizList?.anesthesia === "ненаркотическое"
+          quizList?.anesthesia === "наркотическое"
+            ? "наркотическое"
+            : quizList?.anesthesia === "ненаркотическое"
             ? "ненаркотическое"
             : "другое"
-      )
+        )
       : setAnesthesia("");
 
     quizList?.instalOfPeripheralCatheter
       ? setInstalOfPeripheralCatheter(
-        quizList?.instalOfPeripheralCatheter === "да"
-          ? "да"
-          : quizList?.instalOfPeripheralCatheter === "нет"
+          quizList?.instalOfPeripheralCatheter === "да"
+            ? "да"
+            : quizList?.instalOfPeripheralCatheter === "нет"
             ? "нет"
             : "другое"
-      )
+        )
       : setInstalOfPeripheralCatheter("");
 
     quizList?.infusion
       ? setInfusion(
-        quizList?.infusion === "глюкоза 5%"
-          ? "глюкоза 5%"
-          : quizList?.infusion === "физ раствор 0,9%"
+          quizList?.infusion === "глюкоза 5%"
+            ? "глюкоза 5%"
+            : quizList?.infusion === "физ раствор 0,9%"
             ? "физ раствор 0,9%"
             : quizList?.infusion === "полиглюкин"
-              ? "полиглюкин"
-              : quizList?.infusion === "аминокапроновая"
-                ? "аминокапроновая"
-                : quizList?.infusion === "кислота 5%"
-                  ? "кислота 5%"
-                  : "другое"
-      )
+            ? "полиглюкин"
+            : quizList?.infusion === "аминокапроновая"
+            ? "аминокапроновая"
+            : quizList?.infusion === "кислота 5%"
+            ? "кислота 5%"
+            : "другое"
+        )
       : setInfusion("");
 
-    quizList?.setTimeOfAppOfTourniquetKnifeHh
+    quizList?.timeOfAppOfTourniquetKnifeHh
       ? setTimeOfAppOfTourniquetKnifeHh(quizList?.timeOfAppOfTourniquetKnifeHh)
-      : setTimeOfAppOfTourniquetKnifeHh("00");
-    quizList?.setTimeOfAppOfTourniquetKnifeMm
+      : setTimeOfAppOfTourniquetKnifeHh("");
+    quizList?.timeOfAppOfTourniquetKnifeMm
       ? setTimeOfAppOfTourniquetKnifeMm(quizList?.timeOfAppOfTourniquetKnifeMm)
-      : setTimeOfAppOfTourniquetKnifeMm("00");
+      : setTimeOfAppOfTourniquetKnifeMm("");
 
     quizList?.pressureBandage
       ? setPressureBandage(
-        quizList?.pressureBandage === "true"
-          ? "true"
-          : quizList?.pressureBandage === "false"
+          quizList?.pressureBandage === "true"
+            ? "true"
+            : quizList?.pressureBandage === "false"
             ? "false"
-            : "false") :
-      setPressureBandage("");
-
+            : "false"
+        )
+      : setPressureBandage("");
   }, [quizList]);
 
   return (
@@ -107,9 +97,7 @@ export const FourthSectionKnifeWounds = () => {
           <tbody>
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Обезболивание
-                </span>
+                <span className={s.title}>Обезболивание</span>
               </td>
               <td className={s.tdButton}>
                 <RadioButton
@@ -154,6 +142,7 @@ export const FourthSectionKnifeWounds = () => {
             <div className={s.whiteBox}>
               <InputTime
                 title={""}
+                placeholder="00"
                 valueHh={timeOfAppOfTourniquetKnifeHh}
                 valueMm={timeOfAppOfTourniquetKnifeMm}
                 onChangeHh={(str) => setTimeOfAppOfTourniquetKnifeHh(str)}
@@ -164,8 +153,8 @@ export const FourthSectionKnifeWounds = () => {
                     !timeOfAppOfTourniquetKnifeHh
                       ? "00"
                       : timeOfAppOfTourniquetKnifeHh.length === 1
-                        ? `0${timeOfAppOfTourniquetKnifeHh}`
-                        : timeOfAppOfTourniquetKnifeHh
+                      ? `0${timeOfAppOfTourniquetKnifeHh}`
+                      : timeOfAppOfTourniquetKnifeHh
                   )
                 }
                 onBlurMm={() => {
@@ -174,12 +163,13 @@ export const FourthSectionKnifeWounds = () => {
                     !timeOfAppOfTourniquetKnifeMm
                       ? "00"
                       : timeOfAppOfTourniquetKnifeMm.length === 1
-                        ? `0${timeOfAppOfTourniquetKnifeMm}`
-                        : timeOfAppOfTourniquetKnifeMm
+                      ? `0${timeOfAppOfTourniquetKnifeMm}`
+                      : timeOfAppOfTourniquetKnifeMm
                   );
                 }}
               />
-            </div></div>
+            </div>
+          </div>
           <div className={s.wrapper}>
             <span className={s.title}>Давящая повязка</span>
             <div className={s.checkboxRadio}>
@@ -249,9 +239,7 @@ export const FourthSectionKnifeWounds = () => {
             </tr>
             <tr className={s.tableRow}>
               <td className={s.checkbox}>
-                <span className={s.title}>
-                  Инфузия
-                </span>
+                <span className={s.title}>Инфузия</span>
               </td>
               <td className={s.tdButton}>
                 <RadioButton

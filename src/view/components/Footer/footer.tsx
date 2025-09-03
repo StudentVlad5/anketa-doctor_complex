@@ -15,7 +15,6 @@ export const Footer = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { pointId, pageId } = useParams();
 
-  console.log(pointId, pageId);
   useMemo(() => {
     if (pointId) {
       const maxLength = listOfPoints.find((it) => it.id === pointId);

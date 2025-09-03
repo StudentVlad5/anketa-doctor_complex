@@ -8,10 +8,12 @@ import {
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const FifthSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [isASK, setIsASK] = useState("");
   const [isClopidogrel, setIsClopidogrel] = useState("");
@@ -30,12 +32,6 @@ export const FifthSectionCodeCardio = () => {
       setIsTLT(quizList?.isTLT ?? "");
     }
   }, [quizList]);
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: { [name]: value },
-    });
-  };
 
   return (
     <div className={s.FifthSection}>

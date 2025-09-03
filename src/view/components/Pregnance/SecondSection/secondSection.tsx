@@ -8,21 +8,15 @@ import {
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
 import { RadioButton } from "../../../ui/RadioButton";
+import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
 export const SecondSectionPregnance = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
   const { quizList } = useAppSelector(QuizState);
+  const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [paritet, setParitet] = useState<string>("");
   const [application, setApplication] = useState<string>("");
-
-  const onBlurHandler = (name: string, value: any) => {
-    addQuizAnswerThunk({
-      params: {
-        [name]: value,
-      },
-    });
-  };
 
   useEffect(() => {
     quizList?.paritet ? setParitet(quizList?.paritet) : setParitet("");
