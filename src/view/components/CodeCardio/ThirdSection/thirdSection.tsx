@@ -7,10 +7,15 @@ import {
 } from "../../../../common/helpers/reduxHook";
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
-import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
+import {
+  RadioButtonFalse,
+  RadioButtonTrue,
+  RadioButtonUnknow,
+} from "../../../ui/RadioButtonWithoutSpan";
 import { InputTime } from "../../../ui/InputTime";
 import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 import { validate } from "../../../../common/helpers/validate";
+import { InputText } from "../../../ui/InputText";
 
 export const ThirdSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
@@ -27,7 +32,9 @@ export const ThirdSectionCodeCardio = () => {
   const [deficit, setDeficit] = useState("");
   const [chdd, setChdd] = useState("");
   const [satO, setSatO] = useState("");
-  const [isSignsOfHF, setIsSignsOfHF] = useState("");
+  const [isSignsOfHF_edema, setIsSignsOfHF_edema] = useState("");
+  const [isSignsOfHF_wheezing, setIsSignsOfHF_wheezing] = useState("");
+  const [physicalExaminationOther, setPhysicalExaminationOther] = useState("");
 
   useEffect(() => {
     if (quizList) {
@@ -41,7 +48,9 @@ export const ThirdSectionCodeCardio = () => {
       setDeficit(quizList?.deficit ?? "");
       setChdd(quizList?.chdd ?? "");
       setSatO(quizList?.satO ?? "");
-      setIsSignsOfHF(quizList?.isSignsOfHF ?? "");
+      setIsSignsOfHF_edema(quizList?.isSignsOfHF_edema ?? "");
+      setIsSignsOfHF_wheezing(quizList?.isSignsOfHF_wheezing ?? "");
+      setPhysicalExaminationOther(quizList?.physicalExaminationOther ?? "");
     }
   }, [quizList]);
 
@@ -165,7 +174,7 @@ export const ThirdSectionCodeCardio = () => {
       </div>
 
       <div className={s.field}>
-        <span className={s.title}>Дефицит</span>
+        <span className={s.title}>Дефицит, разница между ЧСС и пульсом</span>
         <div className={s.inputWrapper}>
           <input
             type="text"
@@ -219,34 +228,91 @@ export const ThirdSectionCodeCardio = () => {
       </div>
 
       <div className={s.field}>
-        <span className={s.title}>Признаки СН (отеки, хрипы)</span>
-        <div className={s.radioGroup}>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="1_1"
-              value="true"
-              onChange={(str) => {
-                setIsSignsOfHF(str);
-                onBlurHandler("isSignsOfHF", str);
-              }}
-              name="isSignsOfHF"
-              currentValue={isSignsOfHF}
-            />
-            <span>да</span>
-          </div>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="1_2"
-              value="false"
-              onChange={(str) => {
-                setIsSignsOfHF(str);
-                onBlurHandler("isSignsOfHF", str);
-              }}
-              name="isSignsOfHF"
-              currentValue={isSignsOfHF}
-            />
-            <span>нет</span>
-          </div>
+        <span className={s.title}>Признаки СН отеки</span>
+        <div className={s.tdButton}>
+          <RadioButtonTrue
+            id={"1_1"}
+            value={"true"}
+            onChange={(str) => {
+              setIsSignsOfHF_edema(str);
+              onBlurHandler("isSignsOfHF_edema", str);
+            }}
+            name={"isSignsOfHF_edema"}
+            currentValue={isSignsOfHF_edema}
+          />
+          <RadioButtonFalse
+            id={"1_2"}
+            value={"false"}
+            onChange={(str) => {
+              setIsSignsOfHF_edema(str);
+              onBlurHandler("isSignsOfHF_edema", str);
+            }}
+            name={"isSignsOfHF_edema"}
+            currentValue={isSignsOfHF_edema}
+          />
+          <RadioButtonUnknow
+            id={"1_3"}
+            value={"unknow"}
+            onChange={(str) => {
+              setIsSignsOfHF_edema(str);
+              onBlurHandler("isSignsOfHF_edema", str);
+            }}
+            name={"isSignsOfHF_edema"}
+            currentValue={isSignsOfHF_edema}
+          />
+        </div>
+      </div>
+
+      <div className={s.field}>
+        <span className={s.title}>Признаки СН хрипы</span>
+        <div className={s.tdButton}>
+          <RadioButtonTrue
+            id={"2_1"}
+            value={"true"}
+            onChange={(str) => {
+              setIsSignsOfHF_wheezing(str);
+              onBlurHandler("isSignsOfHF_wheezing", str);
+            }}
+            name={"isSignsOfHF_wheezing"}
+            currentValue={isSignsOfHF_wheezing}
+          />
+          <RadioButtonFalse
+            id={"2_2"}
+            value={"false"}
+            onChange={(str) => {
+              setIsSignsOfHF_wheezing(str);
+              onBlurHandler("isSignsOfHF_wheezing", str);
+            }}
+            name={"isSignsOfHF_wheezing"}
+            currentValue={isSignsOfHF_wheezing}
+          />
+          <RadioButtonUnknow
+            id={"2_3"}
+            value={"unknow"}
+            onChange={(str) => {
+              setIsSignsOfHF_wheezing(str);
+              onBlurHandler("isSignsOfHF_wheezing", str);
+            }}
+            name={"isSignsOfHF_wheezing"}
+            currentValue={isSignsOfHF_wheezing}
+          />
+        </div>
+      </div>
+
+      <div className={s.field}>
+        <span className={s.title}>Другое:</span>
+        <div className={s.whiteBox}>
+          <InputText
+            className={s.textInputStyle}
+            onChange={(e) => setPhysicalExaminationOther(e.target.value)}
+            value={physicalExaminationOther}
+            onBlur={() =>
+              onBlurHandler(
+                "physicalExaminationOther",
+                physicalExaminationOther
+              )
+            }
+          />
         </div>
       </div>
     </div>

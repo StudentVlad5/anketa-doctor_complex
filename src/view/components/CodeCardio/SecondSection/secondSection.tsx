@@ -7,7 +7,11 @@ import {
 } from "../../../../common/helpers/reduxHook";
 import { QuizThunks } from "../../../../store/thunks/quiz.thunks";
 import { QuizState } from "../../../../store/reducers/quiz.reducer";
-import { RadioButtonTrue } from "../../../ui/RadioButtonWithoutSpan";
+import {
+  RadioButtonFalse,
+  RadioButtonTrue,
+  RadioButtonUnknow,
+} from "../../../ui/RadioButtonWithoutSpan";
 import { InputText } from "../../../ui/InputText";
 import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 
@@ -25,6 +29,7 @@ export const SecondSectionCodeCardio = () => {
   const [isWeakness, setIsWeakness] = useState("");
   const [isNausea, setIsNausea] = useState("");
   const [isLossOfConsciousness, setIsLossOfConsciousness] = useState("");
+  const [clinicalPictureOther, setClinicalPictureOther] = useState("");
 
   useEffect(() => {
     if (quizList) {
@@ -37,6 +42,7 @@ export const SecondSectionCodeCardio = () => {
       setIsWeakness(quizList?.isWeakness ?? "");
       setIsNausea(quizList?.isNausea ?? "");
       setIsLossOfConsciousness(quizList?.isLossOfConsciousness ?? "");
+      setClinicalPictureOther(quizList?.clinicalPictureOther ?? "");
     }
   }, [quizList]);
 
@@ -46,33 +52,37 @@ export const SecondSectionCodeCardio = () => {
 
       <div className={s.field}>
         <span className={s.title}>Боль в груди</span>
-        <div className={s.radioGroup}>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="1_1"
-              value="true"
-              onChange={(str) => {
-                setIsChestPain(str);
-                onBlurHandler("isChestPain", str);
-              }}
-              name="isChestPain"
-              currentValue={isChestPain}
-            />
-            <span>да</span>
-          </div>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="1_2"
-              value="false"
-              onChange={(str) => {
-                setIsChestPain(str);
-                onBlurHandler("isChestPain", str);
-              }}
-              name="isChestPain"
-              currentValue={isChestPain}
-            />
-            <span>нет</span>
-          </div>
+        <div className={s.tdButton}>
+          <RadioButtonTrue
+            id={"1_1"}
+            value={"true"}
+            onChange={(str) => {
+              setIsChestPain(str);
+              onBlurHandler("isChestPain", str);
+            }}
+            name={"isChestPain"}
+            currentValue={isChestPain}
+          />
+          <RadioButtonFalse
+            id={"1_2"}
+            value={"false"}
+            onChange={(str) => {
+              setIsChestPain(str);
+              onBlurHandler("isChestPain", str);
+            }}
+            name={"isChestPain"}
+            currentValue={isChestPain}
+          />
+          <RadioButtonUnknow
+            id={"1_3"}
+            value={"unknow"}
+            onChange={(str) => {
+              setIsChestPain(str);
+              onBlurHandler("isChestPain", str);
+            }}
+            name={"isChestPain"}
+            currentValue={isChestPain}
+          />
         </div>
       </div>
 
@@ -134,129 +144,159 @@ export const SecondSectionCodeCardio = () => {
 
       <div className={s.field}>
         <span className={s.title}>Одышка</span>
-        <div className={s.radioGroup}>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="2_1"
-              value="true"
-              onChange={(str) => {
-                setIsShortnessBreath(str);
-                onBlurHandler("isShortnessBreath", str);
-              }}
-              name="isShortnessBreath"
-              currentValue={isShortnessBreath}
-            />
-            <span>да</span>
-          </div>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="2_2"
-              value="false"
-              onChange={(str) => {
-                setIsShortnessBreath(str);
-                onBlurHandler("isShortnessBreath", str);
-              }}
-              name="isShortnessBreath"
-              currentValue={isShortnessBreath}
-            />
-            <span>нет</span>
-          </div>
+        <div className={s.tdButton}>
+          <RadioButtonTrue
+            id={"2_1"}
+            value={"true"}
+            onChange={(str) => {
+              setIsShortnessBreath(str);
+              onBlurHandler("isShortnessBreath", str);
+            }}
+            name={"isShortnessBreath"}
+            currentValue={isShortnessBreath}
+          />
+          <RadioButtonFalse
+            id={"2_2"}
+            value={"false"}
+            onChange={(str) => {
+              setIsShortnessBreath(str);
+              onBlurHandler("isShortnessBreath", str);
+            }}
+            name={"isShortnessBreath"}
+            currentValue={isShortnessBreath}
+          />
+          <RadioButtonUnknow
+            id={"2_3"}
+            value={"unknow"}
+            onChange={(str) => {
+              setIsShortnessBreath(str);
+              onBlurHandler("isShortnessBreath", str);
+            }}
+            name={"isShortnessBreath"}
+            currentValue={isShortnessBreath}
+          />
         </div>
       </div>
 
       <div className={s.field}>
         <span className={s.title}>Потливость, слабость</span>
-        <div className={s.radioGroup}>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="3_1"
-              value="true"
-              onChange={(str) => {
-                setIsWeakness(str);
-                onBlurHandler("isWeakness", str);
-              }}
-              name="isWeakness"
-              currentValue={isWeakness}
-            />
-            <span>да</span>
-          </div>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="3_2"
-              value="false"
-              onChange={(str) => {
-                setIsWeakness(str);
-                onBlurHandler("isWeakness", str);
-              }}
-              name="isWeakness"
-              currentValue={isWeakness}
-            />
-            <span>нет</span>
-          </div>
+        <div className={s.tdButton}>
+          <RadioButtonTrue
+            id={"3_1"}
+            value={"true"}
+            onChange={(str) => {
+              setIsWeakness(str);
+              onBlurHandler("isWeakness", str);
+            }}
+            name={"isWeakness"}
+            currentValue={isWeakness}
+          />
+          <RadioButtonFalse
+            id={"3_2"}
+            value={"false"}
+            onChange={(str) => {
+              setIsWeakness(str);
+              onBlurHandler("isWeakness", str);
+            }}
+            name={"isWeakness"}
+            currentValue={isWeakness}
+          />
+          <RadioButtonUnknow
+            id={"3_3"}
+            value={"unknow"}
+            onChange={(str) => {
+              setIsWeakness(str);
+              onBlurHandler("isWeakness", str);
+            }}
+            name={"isWeakness"}
+            currentValue={isWeakness}
+          />
         </div>
       </div>
 
       <div className={s.field}>
         <span className={s.title}>Тошнота / рвота</span>
-        <div className={s.radioGroup}>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="4_1"
-              value="true"
-              onChange={(str) => {
-                setIsNausea(str);
-                onBlurHandler("isNausea", str);
-              }}
-              name="isNausea"
-              currentValue={isNausea}
-            />
-            <span>да</span>
-          </div>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="4_2"
-              value="false"
-              onChange={(str) => {
-                setIsNausea(str);
-                onBlurHandler("isNausea", str);
-              }}
-              name="isNausea"
-              currentValue={isNausea}
-            />
-            <span>нет</span>
-          </div>
+        <div className={s.tdButton}>
+          <RadioButtonTrue
+            id={"4_1"}
+            value={"true"}
+            onChange={(str) => {
+              setIsNausea(str);
+              onBlurHandler("isNausea", str);
+            }}
+            name={"isNausea"}
+            currentValue={isNausea}
+          />
+          <RadioButtonFalse
+            id={"4_2"}
+            value={"false"}
+            onChange={(str) => {
+              setIsNausea(str);
+              onBlurHandler("isNausea", str);
+            }}
+            name={"isNausea"}
+            currentValue={isNausea}
+          />
+          <RadioButtonUnknow
+            id={"4_3"}
+            value={"unknow"}
+            onChange={(str) => {
+              setIsNausea(str);
+              onBlurHandler("isNausea", str);
+            }}
+            name={"isNausea"}
+            currentValue={isNausea}
+          />
         </div>
       </div>
 
       <div className={s.field}>
         <span className={s.title}>Потеря сознания / головокружение</span>
-        <div className={s.radioGroup}>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="5_1"
-              value="true"
-              onChange={(str) => {
-                setIsLossOfConsciousness(str);
-                onBlurHandler("isLossOfConsciousness", str);
-              }}
-              name="isLossOfConsciousness"
-              currentValue={isLossOfConsciousness}
-            />
-            <span>да</span>
-          </div>
-          <div className={s.subtitleBn}>
-            <RadioButtonTrue
-              id="5_2"
-              value="false"
-              onChange={(str) => {
-                setIsLossOfConsciousness(str);
-                onBlurHandler("isLossOfConsciousness", str);
-              }}
-              name="isLossOfConsciousness"
-              currentValue={isLossOfConsciousness}
-            />
-            <span>нет</span>
-          </div>
+        <div className={s.tdButton}>
+          <RadioButtonTrue
+            id={"5_1"}
+            value={"true"}
+            onChange={(str) => {
+              setIsLossOfConsciousness(str);
+              onBlurHandler("isLossOfConsciousness", str);
+            }}
+            name={"isLossOfConsciousness"}
+            currentValue={isLossOfConsciousness}
+          />
+          <RadioButtonFalse
+            id={"5_2"}
+            value={"false"}
+            onChange={(str) => {
+              setIsLossOfConsciousness(str);
+              onBlurHandler("isLossOfConsciousness", str);
+            }}
+            name={"isLossOfConsciousness"}
+            currentValue={isLossOfConsciousness}
+          />
+          <RadioButtonUnknow
+            id={"5_3"}
+            value={"unknow"}
+            onChange={(str) => {
+              setIsLossOfConsciousness(str);
+              onBlurHandler("isLossOfConsciousness", str);
+            }}
+            name={"isLossOfConsciousness"}
+            currentValue={isLossOfConsciousness}
+          />
+        </div>
+      </div>
+
+      <div className={s.field}>
+        <span className={s.title}>Другое:</span>
+        <div className={s.whiteBox}>
+          <InputText
+            className={s.textInputStyle}
+            onChange={(e) => setClinicalPictureOther(e.target.value)}
+            value={clinicalPictureOther}
+            onBlur={() =>
+              onBlurHandler("clinicalPictureOther", clinicalPictureOther)
+            }
+          />
         </div>
       </div>
     </div>

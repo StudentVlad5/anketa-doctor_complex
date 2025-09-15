@@ -76,7 +76,7 @@ export const InputTime = ({
             onBlur={onBlurHh}
             {...otherProps}
           />
-          <span className={s.title}>Hour</span>
+          <span className={s.title}>Часы</span>
         </div>
         <div className={s.delimiter}>:</div>
         <div className={classNames(s.hour, s.timeBox)}>
@@ -91,7 +91,7 @@ export const InputTime = ({
             onBlur={onBlurMm}
             {...otherProps}
           />
-          <span className={s.title}>Minute</span>
+          <span className={s.title}>Минуты</span>
         </div>
       </div>
     </div>

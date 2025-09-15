@@ -26,7 +26,11 @@ export const ThirdSectionBurns = () => {
     if (quizList) {
       setSymptomPaleSpots(quizList?.symptomPaleSpots ?? "");
       setLocalizationOfPlaces(quizList?.localizationOfPlaces ?? "");
-      setSelectedZones(quizList?.selectedZones ?? []);
+      setSelectedZones(
+        typeof quizList?.selectedZones === "string"
+          ? quizList?.selectedZones.split(",")
+          : []
+      );
     }
   }, [quizList]);
 

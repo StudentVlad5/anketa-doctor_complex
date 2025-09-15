@@ -1,56 +1,44 @@
 .FourthSection {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 30px;
   padding: 27px 18px;
 
   .field {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 15px;
 
     .title {
       font-size: 28px;
       font-weight: 400;
       color: var(--txt-color-primary);
-      min-width: 450px;
     }
-
-    .radioGroup {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding-left: calc(20%);
-    }
-    .subtitleBn {
-      display: flex;
+  }
+  @media (min-width: 800px) {
+    .field {
       flex-direction: row;
-      flex-wrap: nowrap;
-      align-items: end;
-      min-width: 250px;
-      padding-left: calc(100% / 2 - 40px);
+      align-items: center;
+      justify-content: space-between;
 
-      div {
-        border-radius: 50%;
-      }
-      span {
-        font-size: 18px;
-        color: var(--txt-color-primary);
+      .title {
+        min-width: 250px;
       }
     }
   }
-  @media (max-width: 800px) {
-    .field {
+  .tdButton {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: row;
+    gap: 10px;
+    width: 200px;
+    @media (max-width: 800px) {
       flex-direction: column;
-      .title {
-        font-size: 24px;
-      }
+      width: auto;
     }
   }
 }
 .whiteBox {
-  padding: 15px 28px;
-
-  // background-color: #fff;
-  // border: 1px solid var(--border-input-primary);
+  padding: 15px 0 15px 28px;
 }

@@ -6,37 +6,14 @@
 
   .field {
     display: flex;
-    flex-direction: row;
-    gap: 30px;
+    flex-direction: column;
+    gap: 15px;
 
     .title {
       font-size: 28px;
       font-weight: 400;
       color: var(--txt-color-primary);
-      width: 500px;
-    }
-
-    .radioGroup {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      padding-left: 20%;
-    }
-    .subtitleBn {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-items: end;
-      min-width: 250px;
-      padding-left: calc(50% - 40px);
-
-      div {
-        border-radius: 50%;
-      }
-      span {
-        font-size: 18px;
-        color: var(--txt-color-primary);
-      }
+      min-width: 400px;
     }
     .inputWrapper .columnChange {
       display: flex;
@@ -46,9 +23,11 @@
     }
     .inputWrapper {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
       gap: 20px;
+      // padding-left: calc(25%);
+
       input {
         width: 300px;
         height: 75px;
@@ -60,13 +39,6 @@
         background-color: var(--bg-input-primary);
         border-radius: 11px;
       }
-      label {
-        font-size: 22px;
-      }
-      .name {
-        font-style: italic;
-        font-size: 28px;
-      }
     }
     .inputWrapper > div {
       justify-content: space-between;
@@ -76,33 +48,32 @@
       font-size: 28px;
       font-weight: 700;
       color: var(--txt-color-primary);
+      text-align: center;
     }
   }
-  @media (max-width: 800px) {
+  @media (min-width: 800px) {
     .field {
-      flex-direction: column;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
       .title {
         font-size: 24px;
-        width: 100%;
       }
-      .inputWrapper {
-        input {
-          font-size: 26px;
-          width: 100%;
-        }
-        .name {
-          font-size: 16px;
-        }
-      }
-      .unit {
-        font-size: 24px;
-      }
+    }
+  }
+  .tdButton {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: row;
+    gap: 10px;
+    width: 200px;
+    @media (max-width: 800px) {
+      flex-direction: column;
+      width: auto;
     }
   }
 }
 .whiteBox {
-  padding: 15px 28px;
-
-  // background-color: #fff;
-  // border: 1px solid var(--border-input-primary);
+  padding: 15px 0 15px 28px;
 }
