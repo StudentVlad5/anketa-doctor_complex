@@ -104,17 +104,19 @@ export const Header = () => {
         <div className={s.timeBox}>
           {location.pathname !== "/" && (
             <div className={s.infoCaseWraper}>
-              <div className={s.infoCase}>
-                <p>{pointOfCase}</p>
-                <p>{pointOfHospital}</p>
-              </div>
               <Button classname={s.homeBtn} onClick={() => setIsModal(true)}>
                 ГЕОПОЗИЦИЯ
               </Button>
             </div>
           )}
           <div className={s.title}>
-            <span>Время заполнения:</span>
+            <div className={s.infoCase}>
+              <p>{pointOfCase}</p>
+              <p>{pointOfHospital}</p>
+            </div>
+
+            {/* не удалять - часы для отсчета времени заполнения анкеты */}
+            {/* <span>Время заполнения:</span>
             <div className={s.time}>
               <div className={s.hours}>
                 <span>{differentTime.split(":")[0]}</span>
@@ -125,7 +127,7 @@ export const Header = () => {
                 <span>{differentTime.split(":")[1]}</span>
                 <span className={s.unit}>минут</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

@@ -90,7 +90,7 @@ export const FourthSectionKnifeWounds = () => {
 
   return (
     <div className={s.ThirdSection}>
-      <Title>Раздел 2: Соберите следующую информацию</Title>
+      <Title>Раздел 4: Действия персонала</Title>
 
       <div className={s.inner}>
         <table>

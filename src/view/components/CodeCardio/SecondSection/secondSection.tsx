@@ -120,7 +120,7 @@ export const SecondSectionCodeCardio = () => {
           <InputText
             className={s.textInputStyle}
             onChange={(e) => setIrradiationChestPain(e.target.value)}
-            value={localizationChestPain}
+            value={irradiationChestPain}
             onBlur={() =>
               onBlurHandler("irradiationChestPain", irradiationChestPain)
             }

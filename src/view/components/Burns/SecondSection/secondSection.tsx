@@ -39,7 +39,7 @@ export const SecondSectionBurns = () => {
 
   return (
     <div className={s.SecondSection}>
-      <Title>Раздел 4: Витальные показатели</Title>
+      <Title>Раздел 2: Витальные показатели</Title>
       <div className={s.container}>
         <div className={s.whiteBox}>
           {/* Состояние сознания */}

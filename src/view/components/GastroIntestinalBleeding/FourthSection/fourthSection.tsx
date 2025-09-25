@@ -94,7 +94,7 @@ export const FourthSectionGastroIntestinalBleeding = () => {
 
   return (
     <div className={s.ThirdSection}>
-      <Title>Раздел 2: Соберите следующую информацию</Title>
+      <Title>Раздел 4: Догоспитальное лечение</Title>
 
       <div className={s.inner}>
         <table>
