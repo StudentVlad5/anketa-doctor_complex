@@ -58,3 +58,15 @@
 .whiteBox {
   padding: 15px 0 15px 28px;
 }
+.fieldInVisible {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.fieldVisible {
+  max-height: 500px;
+  opacity: 1;
+  transition: all 0.4s ease;
+}

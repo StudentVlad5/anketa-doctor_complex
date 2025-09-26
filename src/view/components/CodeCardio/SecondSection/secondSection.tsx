@@ -94,7 +94,7 @@ export const SecondSectionCodeCardio = () => {
             onChange={(e) => setNatureChestPain(e.target.value)}
             value={natureChestPain}
             onBlur={() => onBlurHandler("natureChestPain", natureChestPain)}
-            disabled={!isChestPain}
+            // disabled={!isChestPain}
           />
         </div>
       </div>
@@ -109,7 +109,7 @@ export const SecondSectionCodeCardio = () => {
             onBlur={() =>
               onBlurHandler("localizationChestPain", localizationChestPain)
             }
-            disabled={!isChestPain}
+            // disabled={!isChestPain}
           />
         </div>
       </div>
@@ -124,7 +124,7 @@ export const SecondSectionCodeCardio = () => {
             onBlur={() =>
               onBlurHandler("irradiationChestPain", irradiationChestPain)
             }
-            disabled={!isChestPain}
+            // disabled={!isChestPain}
           />
         </div>
       </div>
@@ -137,7 +137,7 @@ export const SecondSectionCodeCardio = () => {
             onChange={(e) => setDurationChestPain(e.target.value)}
             value={durationChestPain}
             onBlur={() => onBlurHandler("durationChestPain", durationChestPain)}
-            disabled={!isChestPain}
+            // disabled={!isChestPain}
           />
         </div>
       </div>

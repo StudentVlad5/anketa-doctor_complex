@@ -1,6 +1,6 @@
 import s from "./index.module.scss";
 import classNames from "classnames";
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useRef } from "react";
 
 type HTMLInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -19,9 +19,21 @@ export const InputDate = ({
   valueDate?: string;
   max?: string;
 } & HTMLInputProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    if (inputRef.current && "showPicker" in inputRef.current) {
+      (inputRef.current as any).showPicker();
+    }
+  };
+
   return (
-    <div className={classNames(s.InputDate, className && className)}>
+    <div
+      className={classNames(s.InputDate, className && className)}
+      onClick={handleClick}
+    >
       <input
+        ref={inputRef}
         className={s.inputDate}
         {...otherProps}
         type="date"

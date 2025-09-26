@@ -16,6 +16,7 @@ import { InputTime } from "../../../ui/InputTime";
 import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 import { validate } from "../../../../common/helpers/validate";
 import { InputText } from "../../../ui/InputText";
+import { InputFloat } from "../../../ui/InputFloat/InputFloat";
 
 export const ThirdSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
@@ -94,23 +95,19 @@ export const ThirdSectionCodeCardio = () => {
         <span className={s.title}>А /Д (на обеих руках)</span>
         <div className={s.inputWrapper}>
           <div className={s.columnChange}>
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
+            <InputFloat
               value={adLeftHand}
-              onChange={(e) => setAdLeftHand(e.target.value)}
+              onChange={setAdLeftHand}
               onBlur={() => onBlurHandler("adLeftHand", adLeftHand)}
-              onKeyPress={validate}
+              validate={(val) => validate(val)}
+              placeholder="Левая рука"
             />
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
+            <InputFloat
               value={adRightHand}
-              onChange={(e) => setAdRightHand(e.target.value)}
+              onChange={setAdRightHand}
               onBlur={() => onBlurHandler("adRightHand", adRightHand)}
-              onKeyPress={validate}
+              validate={(val) => validate(val)}
+              placeholder="Правая рука"
             />
           </div>
           <div className={s.unit}>

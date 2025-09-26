@@ -1,4 +1,4 @@
-export const baseUrl = "http://185.116.194.159:34345/"; // for testing
+export const baseUrl = "http://185.116.194.159:34345"; // for testing
 
 // export const baseUrl = "https://geoback.medsystem.online"; // for production
 export const baseFormUrl = "https://location.medsystem.online";

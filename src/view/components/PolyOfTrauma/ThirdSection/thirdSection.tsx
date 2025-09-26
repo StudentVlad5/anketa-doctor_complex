@@ -70,7 +70,7 @@ export const ThirdSectionPolyOfTrauma = () => {
 
   return (
     <div className={s.ThirdSection}>
-      <Title>Раздел 2: Соберите следующую информацию</Title>
+      <Title>Раздел 3: Информация о состоянии пациента</Title>
 
       <div className={s.inner}>
         <table>

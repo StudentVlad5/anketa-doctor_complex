@@ -36,7 +36,7 @@ export const ThirdSectionBurns = () => {
 
   return (
     <div className={s.ThirdSection}>
-      <Title>Раздел 2: Соберите следующую информацию</Title>
+      <Title>Раздел 3: Соберите следующую информацию</Title>
 
       <div className={s.field}>
         <span className={s.title}>Симптом бледного пятна</span>

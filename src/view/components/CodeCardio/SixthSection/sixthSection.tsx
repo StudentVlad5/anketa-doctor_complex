@@ -16,6 +16,7 @@ import { InputTime } from "../../../ui/InputTime";
 import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 import { validate } from "../../../../common/helpers/validate";
 import { InputText } from "../../../ui/InputText";
+import { InputFloat } from "../../../ui/InputFloat/InputFloat";
 
 export const SixthSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
@@ -194,33 +195,29 @@ export const SixthSectionCodeCardio = () => {
         <span className={s.title}>А /Д (на обеих руках)</span>
         <div className={s.inputWrapper}>
           <div className={s.columnChange}>
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
+            <InputFloat
               value={adLeftHandOfHospitaTransfer}
-              onChange={(e) => setAdLeftHandOfHospitaTransfer(e.target.value)}
+              onChange={setAdLeftHandOfHospitaTransfer}
               onBlur={() =>
                 onBlurHandler(
                   "adLeftHandOfHospitaTransfer",
                   adLeftHandOfHospitaTransfer
                 )
               }
-              onKeyPress={validate}
+              validate={(val) => validate(val)}
+              placeholder="Левая рука"
             />
-            <input
-              type="text"
-              placeholder={"_ _"}
-              inputMode={"numeric"}
+            <InputFloat
               value={adRightHandOfHospitaTransfer}
-              onChange={(e) => setAdRightHandOfHospitaTransfer(e.target.value)}
+              onChange={setAdRightHandOfHospitaTransfer}
               onBlur={() =>
                 onBlurHandler(
                   "adRightHandOfHospitaTransfer",
                   adRightHandOfHospitaTransfer
                 )
               }
-              onKeyPress={validate}
+              validate={(val) => validate(val)}
+              placeholder="Правая рука"
             />
           </div>
           <div className={s.unit}>

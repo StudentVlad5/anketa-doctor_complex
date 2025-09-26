@@ -15,6 +15,7 @@ import {
 import { useOnBlurHandler } from "../../../../common/helpers/useOnBlurHandler";
 import { InputText } from "../../../ui/InputText";
 import { InputDate } from "../../../ui/InputDate";
+import classNames from "classnames";
 
 export const FifthSectionCodeCardio = () => {
   const { addQuizAnswerThunk } = useThunks(QuizThunks);
@@ -266,7 +267,12 @@ export const FifthSectionCodeCardio = () => {
         </div>
       </div>
 
-      <div className={s.field}>
+      <div
+        className={classNames(
+          s.field,
+          isTLT === "true" ? s.fieldVisible : s.fieldInVisible
+        )}
+      >
         <div className={s.tdButtonDate}>
           <span className={s.title}>C: </span>
           <InputDate
@@ -279,9 +285,6 @@ export const FifthSectionCodeCardio = () => {
             disabled={isTLT !== "true"}
           />
         </div>
-      </div>
-
-      <div className={s.field}>
         <div className={s.tdButtonDate}>
           <span className={s.title}>По: </span>
           <InputDate

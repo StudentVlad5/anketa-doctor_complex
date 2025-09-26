@@ -1,0 +1,26 @@
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 8px;
+  font-size: 16px;
+}
+
+.label {
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  color: #999;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.2s ease all;
+}
+
+.labelActive {
+  top: -20px;
+  /* font-size: 12px; */
+  color: #333;
+}

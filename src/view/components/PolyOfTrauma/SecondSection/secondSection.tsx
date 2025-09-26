@@ -71,7 +71,7 @@ export const SecondSectionPolyOfTrauma = () => {
 
   return (
     <div className={s.SecondSection}>
-      <Title>Раздел 2: Соберите следующую информацию</Title>
+      <Title>Раздел 2: Информация о вызове</Title>
       <div className={s.inner}>
         <div className={s.whiteBox}>
           <span className={s.title}>Уровень сознания:</span>
