@@ -28,13 +28,15 @@ export const InputFloat = ({
       <input
         title="floating input"
         inputMode="numeric"
-        type="number"
+        type="text"
         className={s.input}
         value={value}
         onChange={(e) => {
           const val = e.target.value;
-          onChange(val);
-          validate?.(e);
+          if (val === "" || /^[\d/-]*$/.test(val)) {
+            onChange(val);
+            validate?.(e);
+          }
         }}
         onFocus={() => setFocused(true)}
         onBlur={handleBlur}
