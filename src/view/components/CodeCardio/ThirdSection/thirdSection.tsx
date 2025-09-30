@@ -147,7 +147,7 @@ export const ThirdSectionCodeCardio = () => {
             onKeyPress={validate}
           />
           <div className={s.unit}>
-            <span>мин</span>
+            <span>вдохов в мин</span>
           </div>
         </div>
       </div>

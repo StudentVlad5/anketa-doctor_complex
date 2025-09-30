@@ -174,6 +174,12 @@ const BodyModal: React.FC<BodyModalProps> = ({
 
   const handleSave = () => {
     onBlurHandler("selectedZones", selectedZones.join(","));
+
+    const selectedLabels = zones
+      .filter((z) => selectedZones.includes(z.id))
+      .map((z) => z.label);
+
+    onBlurHandler("selectedZonesCyrillic", selectedLabels.join(","));
     onClose();
   };
 

@@ -304,7 +304,7 @@ export const FifthSectionCodeCardio = () => {
         <div className={s.whiteBox}>
           <InputText
             className={s.textInputStyle}
-            onChange={(e) => setFinishTLTDate(e.target.value)}
+            onChange={(e) => setPrehospitalTreatmentOther(e.target.value)}
             value={prehospitalTreatmentOther}
             onBlur={() =>
               onBlurHandler(

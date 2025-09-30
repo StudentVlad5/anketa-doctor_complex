@@ -35,6 +35,8 @@ export const FirstSection = () => {
   const [invalidMessage, setInvalidMessage] = useState("");
   const [sex, setSex] = useState("");
 
+  const [pointOfRouter, setPointOfRouter] = useState("");
+
   useEffect(() => {
     if (!quizList?.userLocation) {
       if (navigator.geolocation) {
@@ -67,11 +69,18 @@ export const FirstSection = () => {
       setHomeAddress(quizList.homeAddress ?? "");
       setComments(quizList.comments ?? "");
       setSex(quizList.sex ?? "");
+      setSex(quizList.birthdayDate ?? "");
+      setPointOfRouter(quizList.pointOfRouter ?? "");
       if (quizList.userLocation) {
         setUserLocation(quizList.userLocation);
       }
     }
   }, [quizList]);
+
+  useEffect(() => {
+    if (pointOfRouter === "pregnancy") setSex("Ж");
+    onBlurHandler("sex", "Ж");
+  }, [pointOfRouter]);
 
   return (
     <div className={s.PatientInformation}>
@@ -131,29 +140,31 @@ export const FirstSection = () => {
           onBlur={() => onBlurHandler("userLocation", userLocation)}
         />
 
-        <div className={s.sexDataContainer}>
-          <span>Пол пациента</span>
-          <RadioButton
-            id={"man"}
-            value={"М"}
-            onChange={(str) => {
-              setSex(str);
-              onBlurHandler("sex", str);
-            }}
-            name={"sex"}
-            currentValue={sex}
-          />
-          <RadioButton
-            id={"woman"}
-            value={"Ж"}
-            onChange={(str) => {
-              setSex(str);
-              onBlurHandler("sex", str);
-            }}
-            name={"sex"}
-            currentValue={sex}
-          />
-        </div>
+        {pointOfRouter !== "pregnancy" && (
+          <div className={s.sexDataContainer}>
+            <span>Пол пациента</span>
+            <RadioButton
+              id={"man"}
+              value={"М"}
+              onChange={(str) => {
+                setSex(str);
+                onBlurHandler("sex", str);
+              }}
+              name={"sex"}
+              currentValue={sex}
+            />
+            <RadioButton
+              id={"woman"}
+              value={"Ж"}
+              onChange={(str) => {
+                setSex(str);
+                onBlurHandler("sex", str);
+              }}
+              name={"sex"}
+              currentValue={sex}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

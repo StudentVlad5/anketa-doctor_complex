@@ -157,6 +157,7 @@ export const ThirdSectionPolyOfTrauma = () => {
                     onChange={(e) => setBloodLoss(e.target.value)}
                     onBlur={() => onBlurHandler("bloodLoss", bloodLoss)}
                     onKeyPress={validate}
+                    disabled={bloodLossCheck !== "да"}
                   />
 
                   <div className={s.unit}>
@@ -184,6 +185,8 @@ export const ThirdSectionPolyOfTrauma = () => {
                   onChange={(str) => {
                     setBloodLossCheck(str);
                     onBlurHandler("bloodLossCheck", str);
+                    setBloodLoss("");
+                    onBlurHandler("bloodLoss", "");
                   }}
                   name={"bloodLossCheck"}
                   currentValue={bloodLossCheck}
