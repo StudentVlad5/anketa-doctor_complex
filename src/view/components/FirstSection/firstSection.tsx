@@ -31,10 +31,11 @@ export const FirstSection = () => {
   const [homeAddress, setHomeAddress] = useState<string>(
     quizList?.homeAddress ? quizList.homeAddress : ""
   );
-  const [userLocation, setUserLocation] = useState("");
+  const [sex, setSex] = useState<string>(quizList?.sex ? quizList.sex : "");
+  const [userLocation, setUserLocation] = useState<string>(
+    quizList?.userLocation ? quizList.userLocation : ""
+  );
   const [invalidMessage, setInvalidMessage] = useState("");
-  const [sex, setSex] = useState("");
-
   const [pointOfRouter, setPointOfRouter] = useState("");
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export const FirstSection = () => {
       setHomeAddress(quizList.homeAddress ?? "");
       setComments(quizList.comments ?? "");
       setSex(quizList.sex ?? "");
-      setSex(quizList.birthdayDate ?? "");
+      setBirthdayDate(quizList.birthdayDate ?? "");
       setPointOfRouter(quizList.pointOfRouter ?? "");
       if (quizList.userLocation) {
         setUserLocation(quizList.userLocation);
@@ -78,8 +79,10 @@ export const FirstSection = () => {
   }, [quizList]);
 
   useEffect(() => {
-    if (pointOfRouter === "pregnancy") setSex("Ж");
-    onBlurHandler("sex", "Ж");
+    if (pointOfRouter === "pregnancy") {
+      setSex("Ж");
+      onBlurHandler("sex", "Ж");
+    }
   }, [pointOfRouter]);
 
   return (
