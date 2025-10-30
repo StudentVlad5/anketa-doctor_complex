@@ -17,26 +17,26 @@ export const FirstSection = () => {
   const { onBlurHandler } = useOnBlurHandler({ addQuizAnswerThunk });
 
   const [patientFullName, setPatientFullName] = useState<string>(
-    quizList?.patientFullName ? quizList.patientFullName : ""
+    quizList?.patientFullName ?? ""
   );
   const [patientINN, setPatientINN] = useState<string>(
-    quizList?.patientINN ? quizList.patientINN : ""
+    quizList?.patientINN ?? ""
   );
   const [birthdayDate, setBirthdayDate] = useState<string>(
     quizList?.birthdayDate ? quizList.birthdayDate : ""
   );
-  const [comments, setComments] = useState<string>(
-    quizList?.comments ? quizList.comments : ""
-  );
+  const [comments, setComments] = useState<string>(quizList?.comments ?? "");
   const [homeAddress, setHomeAddress] = useState<string>(
-    quizList?.homeAddress ? quizList.homeAddress : ""
+    quizList?.homeAddress ?? ""
   );
-  const [sex, setSex] = useState<string>(quizList?.sex ? quizList.sex : "");
+  const [sex, setSex] = useState<string>(quizList?.sex ?? "");
   const [userLocation, setUserLocation] = useState<string>(
     quizList?.userLocation ? quizList.userLocation : ""
   );
+  const [pointOfRouter, setPointOfRouter] = useState(
+    quizList?.pointOfRouter ?? ""
+  );
   const [invalidMessage, setInvalidMessage] = useState("");
-  const [pointOfRouter, setPointOfRouter] = useState("");
 
   useEffect(() => {
     if (!quizList?.userLocation) {
@@ -57,26 +57,11 @@ export const FirstSection = () => {
     }
   }, [quizList?.userLocation]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (patientINN && patientINN.length !== 12)
       setInvalidMessage("Длинна ИИН - 12 символов");
     else setInvalidMessage("");
   }, [patientINN]);
-
-  useMemo(() => {
-    if (quizList) {
-      setPatientFullName(quizList.patientFullName ?? "");
-      setPatientINN(quizList.patientINN ?? "");
-      setHomeAddress(quizList.homeAddress ?? "");
-      setComments(quizList.comments ?? "");
-      setSex(quizList.sex ?? "");
-      setBirthdayDate(quizList.birthdayDate ?? "");
-      setPointOfRouter(quizList.pointOfRouter ?? "");
-      if (quizList.userLocation) {
-        setUserLocation(quizList.userLocation);
-      }
-    }
-  }, [quizList]);
 
   useEffect(() => {
     if (pointOfRouter === "pregnancy") {
@@ -84,6 +69,26 @@ export const FirstSection = () => {
       onBlurHandler("sex", "Ж");
     }
   }, [pointOfRouter]);
+
+  useMemo(() => {
+    if (quizList) {
+      setPatientFullName(quizList?.patientFullName ?? "");
+      setPatientINN(quizList?.patientINN ?? "");
+      setHomeAddress(quizList?.homeAddress ?? "");
+      setComments(quizList?.comments ?? "");
+      setSex(quizList?.sex ?? "");
+      setBirthdayDate(quizList?.birthdayDate ?? "");
+      setPointOfRouter(quizList?.pointOfRouter ?? "");
+      if (quizList?.userLocation) {
+        setUserLocation(quizList.userLocation);
+      }
+    }
+  }, [quizList]);
+
+  const handleSexChange = (newSex: string) => {
+    setSex(newSex);
+    onBlurHandler("sex", newSex);
+  };
 
   return (
     <div className={s.PatientInformation}>
@@ -149,20 +154,14 @@ export const FirstSection = () => {
             <RadioButton
               id={"man"}
               value={"М"}
-              onChange={(str) => {
-                setSex(str);
-                onBlurHandler("sex", str);
-              }}
+              onChange={handleSexChange}
               name={"sex"}
               currentValue={sex}
             />
             <RadioButton
               id={"woman"}
               value={"Ж"}
-              onChange={(str) => {
-                setSex(str);
-                onBlurHandler("sex", str);
-              }}
+              onChange={handleSexChange}
               name={"sex"}
               currentValue={sex}
             />
